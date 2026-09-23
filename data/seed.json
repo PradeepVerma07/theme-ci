@@ -1,0 +1,1865 @@
+{
+ "services": [
+  {
+   "title": "Strategic Storytelling & Brand Strategy",
+   "slug": "strategic-storytelling",
+   "group": "Strategy",
+   "number": "01",
+   "short": "Strategic storytelling.",
+   "summary": "Building powerful brand narratives that create relevance, meaningful connections, and lasting recall.",
+   "body": "We turn business objectives into compelling brand narratives through strategic storytelling, brand positioning, communication strategy, audience insights, and integrated marketing strategy. Every story is built to differentiate the brand, connect with the right audience, and support measurable business goals.",
+   "tags": [
+    "Strategic storytelling",
+    "Brand positioning",
+    "Communication strategy",
+    "Audience insights",
+    "Integrated marketing strategy"
+   ],
+   "headline": "A story worth standing for.",
+   "image": "studio",
+   "tone": "orange",
+   "visual": "strategy",
+   "shape": "orbit",
+   "visual_images": [],
+   "steps": [
+    {
+     "title": "Listen before prescribing",
+     "text": "Every successful partnership begins with listening. We take the time to understand your business, your audience, and your aspirations to uncover what makes your brand unique."
+    },
+    {
+     "title": "Find the positioning",
+     "text": "We transform insights into a compelling brand narrative that shapes every communication, strengthens identity, and creates meaningful audience connections."
+    },
+    {
+     "title": "Build one connected narrative",
+     "text": "We continuously refine campaigns, content, and digital experiences to maximize engagement, improve performance, and enhance customer experiences."
+    }
+   ]
+  },
+  {
+   "title": "Branding & Design",
+   "slug": "branding-design",
+   "group": "Creative",
+   "number": "02",
+   "short": "Branding & design.",
+   "summary": "Building distinctive brand identities through strategy, logo design, visual language, typography, and integrated brand communication.",
+   "body": "We build distinctive brands through brand identity design, logo design, visual identity, brand guidelines, packaging, graphic design, and marketing collaterals. Our branding solutions create a consistent visual language that strengthens recognition, differentiation, and recall.",
+   "tags": [
+    "Brand identity",
+    "Logo design",
+    "Visual identity",
+    "Brand guidelines",
+    "Packaging",
+    "Graphic design",
+    "Marketing collaterals"
+   ],
+   "headline": "Distinctive by design.",
+   "image": "crave-family",
+   "tone": "pink",
+   "visual": "branding",
+   "shape": "flower",
+   "visual_images": [],
+   "steps": [
+    {
+     "title": "Shape the identity",
+     "text": "Every successful partnership begins with listening. We take the time to understand your business, your audience, and your aspirations to uncover what makes your brand unique."
+    },
+    {
+     "title": "Define the visual language",
+     "text": "We transform insights into a compelling brand narrative that shapes every communication, strengthens identity, and creates meaningful audience connections."
+    },
+    {
+     "title": "Bring consistency to every touchpoint",
+     "text": "We continuously refine campaigns, content, and digital experiences to maximize engagement, improve performance, and enhance customer experiences."
+    }
+   ]
+  },
+  {
+   "title": "Website & Digital Experiences",
+   "slug": "websites-digital-experiences",
+   "group": "Technology",
+   "number": "03",
+   "short": "Digital experiences.",
+   "summary": "Creating high-performance websites, e-commerce platforms, microsites, and UI/UX experiences designed around users and business objectives.",
+   "body": "We design and develop responsive websites, WordPress websites, e-commerce platforms, microsites, landing pages, and UI/UX experiences built around both users and business goals. Our approach combines intuitive design, functionality, content, SEO readiness, and conversion-focused customer journeys.",
+   "tags": [
+    "Responsive websites",
+    "WordPress",
+    "E-commerce",
+    "Microsites",
+    "Landing pages",
+    "UI/UX",
+    "SEO readiness"
+   ],
+   "headline": "Good design. Great journeys.",
+   "image": "museum-web",
+   "tone": "lilac",
+   "visual": "website",
+   "shape": "portal",
+   "visual_images": [
+    "museum-web",
+    "crave-family"
+   ],
+   "steps": [
+    {
+     "title": "Understand your users",
+     "text": "Every successful partnership begins with listening. We take the time to understand your business, your audience, and your aspirations to uncover what makes your brand unique."
+    },
+    {
+     "title": "Design the experience",
+     "text": "We transform insights into a compelling brand narrative that shapes every communication, strengthens identity, and creates meaningful audience connections."
+    },
+    {
+     "title": "Build for the business",
+     "text": "We continuously refine campaigns, content, and digital experiences to maximize engagement, improve performance, and enhance customer experiences."
+    }
+   ]
+  },
+  {
+   "title": "Social Media Marketing",
+   "slug": "social-media-marketing",
+   "group": "Digital",
+   "number": "04",
+   "short": "Social & community.",
+   "summary": "Creating platform-led strategies and content that spark conversations, build communities, and strengthen brand engagement.",
+   "body": "We build and manage brand presence across Instagram, Facebook, LinkedIn, YouTube, and other social media platforms through strategy-led content, community management, and campaigns. Our social media marketing focuses on increasing visibility, engagement, brand recall, and meaningful audience connections.",
+   "tags": [
+    "Instagram",
+    "Facebook",
+    "LinkedIn",
+    "YouTube",
+    "Content strategy",
+    "Community management",
+    "Campaigns"
+   ],
+   "headline": "Not just seen. Remembered.",
+   "image": "crave-play",
+   "tone": "yellow",
+   "visual": "social",
+   "shape": "wave",
+   "visual_images": [
+    "crave-family",
+    "crave-play"
+   ],
+   "steps": [
+    {
+     "title": "Define the platform strategy",
+     "text": "Every successful partnership begins with listening. We take the time to understand your business, your audience, and your aspirations to uncover what makes your brand unique."
+    },
+    {
+     "title": "Create with purpose",
+     "text": "We transform insights into a compelling brand narrative that shapes every communication, strengthens identity, and creates meaningful audience connections."
+    },
+    {
+     "title": "Nurture your community",
+     "text": "We continuously refine campaigns, content, and digital experiences to maximize engagement, improve performance, and enhance customer experiences."
+    }
+   ]
+  },
+  {
+   "title": "Performance Marketing",
+   "slug": "performance-marketing",
+   "group": "Growth",
+   "number": "05",
+   "short": "Performance marketing.",
+   "summary": "Driving measurable growth through Google Ads, Meta Ads, paid media, lead generation, retargeting, and conversion-focused campaigns.",
+   "body": "We plan, execute, and optimize Google Ads, Meta Ads, LinkedIn Ads, PPC, lead generation, remarketing, and paid media campaigns. Every performance marketing campaign is driven by data, conversion tracking, and continuous optimization to maximize leads, conversions, and ROI.",
+   "tags": [
+    "Google Ads",
+    "Meta Ads",
+    "LinkedIn Ads",
+    "PPC",
+    "Lead generation",
+    "Remarketing",
+    "Conversion tracking"
+   ],
+   "headline": "Creative thinking. Measurable intent.",
+   "image": "station",
+   "tone": "mint",
+   "visual": "performance",
+   "shape": "steps",
+   "visual_images": [
+    "station"
+   ],
+   "steps": [
+    {
+     "title": "Set the objective",
+     "text": "Every successful partnership begins with listening. We take the time to understand your business, your audience, and your aspirations to uncover what makes your brand unique."
+    },
+    {
+     "title": "Connect creative and media",
+     "text": "We transform insights into a compelling brand narrative that shapes every communication, strengthens identity, and creates meaningful audience connections."
+    },
+    {
+     "title": "Measure and refine",
+     "text": "We continuously refine campaigns, content, and digital experiences to maximize engagement, improve performance, and enhance customer experiences."
+    }
+   ]
+  },
+  {
+   "title": "SEO, AI Search & Local Visibility",
+   "slug": "seo-ai-local-visibility",
+   "group": "Growth",
+   "number": "06",
+   "short": "Search. AI. Visibility.",
+   "summary": "Helping brands get discovered through SEO, AEO, GEO, Local SEO, and Google Business Profile optimization across traditional, local, and AI-powered search.",
+   "body": "We improve brand discoverability through SEO, AEO, GEO, Local SEO, Google Business Profile optimization, technical SEO, and content optimization. Our approach helps businesses strengthen visibility across Google Search, local discovery, answer engines, and emerging AI-powered search experiences.",
+   "tags": [
+    "SEO",
+    "AEO",
+    "GEO",
+    "Local SEO",
+    "Google Business Profile",
+    "Technical SEO",
+    "Content optimization"
+   ],
+   "headline": "Be the answer they find.",
+   "image": "studio-detail",
+   "tone": "blue",
+   "visual": "search",
+   "shape": "orbit",
+   "visual_images": [],
+   "steps": [
+    {
+     "title": "Understand search intent",
+     "text": "Every successful partnership begins with listening. We take the time to understand your business, your audience, and your aspirations to uncover what makes your brand unique."
+    },
+    {
+     "title": "Strengthen your foundations",
+     "text": "We transform insights into a compelling brand narrative that shapes every communication, strengthens identity, and creates meaningful audience connections."
+    },
+    {
+     "title": "Make your expertise discoverable",
+     "text": "We continuously refine campaigns, content, and digital experiences to maximize engagement, improve performance, and enhance customer experiences."
+    }
+   ]
+  },
+  {
+   "title": "Content & Creative",
+   "slug": "content-creative",
+   "group": "Creative",
+   "number": "07",
+   "short": "Content that connects.",
+   "summary": "Creating compelling content, campaigns, videos, reels, animation, and communication designed to inform, engage, and inspire action.",
+   "body": "We create strategic, platform-specific website content, blogs, social media content, campaign copy, reels, videos, animations, and branded communication. Our content marketing approach combines storytelling, creativity, and search intent to engage audiences and strengthen brand authority.",
+   "tags": [
+    "Website content",
+    "Blogs",
+    "Social content",
+    "Campaign copy",
+    "Reels",
+    "Videos",
+    "Animation"
+   ],
+   "headline": "Ideas that earn attention.",
+   "image": "crave-family",
+   "tone": "orange",
+   "visual": "creative",
+   "shape": "flower",
+   "visual_images": [
+    "crave-family",
+    "crave-play"
+   ],
+   "steps": [
+    {
+     "title": "Find the human insight",
+     "text": "Every successful partnership begins with listening. We take the time to understand your business, your audience, and your aspirations to uncover what makes your brand unique."
+    },
+    {
+     "title": "Build the creative idea",
+     "text": "We transform insights into a compelling brand narrative that shapes every communication, strengthens identity, and creates meaningful audience connections."
+    },
+    {
+     "title": "Adapt it to each format",
+     "text": "We continuously refine campaigns, content, and digital experiences to maximize engagement, improve performance, and enhance customer experiences."
+    }
+   ]
+  },
+  {
+   "title": "Podcast Production & Marketing",
+   "slug": "podcast-production",
+   "group": "Creative",
+   "number": "08",
+   "short": "Conversations amplified.",
+   "summary": "Taking ideas and conversations further through podcast strategy, production, editing, distribution, promotion, and audience building.",
+   "body": "We manage the complete podcast journey through podcast strategy, audio and video podcast shoots, recording, editing, branding, distribution, and podcast marketing. Long-form conversations can also be transformed into short-form clips and reels.",
+   "tags": [
+    "Podcast strategy",
+    "Audio & video shoots",
+    "Recording",
+    "Editing",
+    "Branding",
+    "Distribution",
+    "Podcast marketing",
+    "Clips & reels"
+   ],
+   "headline": "Conversations with a longer life.",
+   "image": "studio",
+   "tone": "pink",
+   "visual": "podcast",
+   "shape": "wave",
+   "visual_images": [],
+   "steps": [
+    {
+     "title": "Shape the conversation",
+     "text": "Every successful partnership begins with listening. We take the time to understand your business, your audience, and your aspirations to uncover what makes your brand unique."
+    },
+    {
+     "title": "Produce the experience",
+     "text": "We transform insights into a compelling brand narrative that shapes every communication, strengthens identity, and creates meaningful audience connections."
+    },
+    {
+     "title": "Take the story further",
+     "text": "We continuously refine campaigns, content, and digital experiences to maximize engagement, improve performance, and enhance customer experiences."
+    }
+   ]
+  },
+  {
+   "title": "Photography & Video Production",
+   "slug": "photography-video",
+   "group": "Creative",
+   "number": "09",
+   "short": "Stories in motion.",
+   "summary": "From concept and shoot to editing and post-production.",
+   "body": "End-to-end corporate videography, product photography, brand shoots, event coverage, lifestyle photography, reels, and video production, from concept and shoot to editing and post-production.",
+   "tags": [
+    "Corporate videography",
+    "Product photography",
+    "Brand shoots",
+    "Event coverage",
+    "Lifestyle photography",
+    "Reels",
+    "Post-production"
+   ],
+   "headline": "Every frame has a purpose.",
+   "image": "movement",
+   "tone": "lilac",
+   "visual": "film",
+   "shape": "portal",
+   "visual_images": [],
+   "steps": [
+    {
+     "title": "Find the story",
+     "text": "Every successful partnership begins with listening. We take the time to understand your business, your audience, and your aspirations to uncover what makes your brand unique."
+    },
+    {
+     "title": "Plan the shoot",
+     "text": "We transform insights into a compelling brand narrative that shapes every communication, strengthens identity, and creates meaningful audience connections."
+    },
+    {
+     "title": "Craft the final frame",
+     "text": "We continuously refine campaigns, content, and digital experiences to maximize engagement, improve performance, and enhance customer experiences."
+    }
+   ]
+  },
+  {
+   "title": "Digital Outreach & CRM",
+   "slug": "digital-outreach-crm",
+   "group": "Digital",
+   "number": "10",
+   "short": "Make every connection count.",
+   "summary": "Personalized interactions across the customer lifecycle.",
+   "body": "Email marketing, WhatsApp marketing, SMS campaigns, CRM marketing, marketing automation, and lead nurturing designed to turn customer data into personalized interactions across the customer lifecycle.",
+   "tags": [
+    "Email marketing",
+    "WhatsApp marketing",
+    "SMS campaigns",
+    "CRM marketing",
+    "Marketing automation",
+    "Lead nurturing"
+   ],
+   "headline": "Make every connection count.",
+   "image": "studio-detail",
+   "tone": "mint",
+   "visual": "crm",
+   "shape": "orbit",
+   "visual_images": [],
+   "steps": [
+    {
+     "title": "Understand the customer journey",
+     "text": "Every successful partnership begins with listening. We take the time to understand your business, your audience, and your aspirations to uncover what makes your brand unique."
+    },
+    {
+     "title": "Connect the touchpoints",
+     "text": "We transform insights into a compelling brand narrative that shapes every communication, strengthens identity, and creates meaningful audience connections."
+    },
+    {
+     "title": "Keep communication relevant",
+     "text": "We continuously refine campaigns, content, and digital experiences to maximize engagement, improve performance, and enhance customer experiences."
+    }
+   ]
+  },
+  {
+   "title": "Campaigns, Media & Experiences",
+   "slug": "campaigns-media-experiences",
+   "group": "Strategy",
+   "number": "11",
+   "short": "Ideas beyond the screen.",
+   "summary": "Connecting strategy, storytelling, creative, media, and onground experiences.",
+   "body": "Integrated marketing campaigns, digital campaigns, OOH advertising, public awareness campaigns, media planning, events, experiential marketing, and brand launches, connecting strategy, storytelling, creative, media, and onground experiences.",
+   "tags": [
+    "Integrated campaigns",
+    "Digital campaigns",
+    "OOH advertising",
+    "Public awareness",
+    "Media planning",
+    "Events",
+    "Experiential marketing",
+    "Brand launches"
+   ],
+   "headline": "Big ideas. Beyond the screen.",
+   "image": "event",
+   "tone": "yellow",
+   "visual": "campaign",
+   "shape": "steps",
+   "visual_images": [
+    "event"
+   ],
+   "steps": [
+    {
+     "title": "Align the brief",
+     "text": "Every successful partnership begins with listening. We take the time to understand your business, your audience, and your aspirations to uncover what makes your brand unique."
+    },
+    {
+     "title": "Connect creative and media",
+     "text": "We transform insights into a compelling brand narrative that shapes every communication, strengthens identity, and creates meaningful audience connections."
+    },
+    {
+     "title": "Bring the experience to life",
+     "text": "We continuously refine campaigns, content, and digital experiences to maximize engagement, improve performance, and enhance customer experiences."
+    }
+   ]
+  },
+  {
+   "title": "Analytics & Optimization",
+   "slug": "analytics-optimization",
+   "group": "Growth",
+   "number": "12",
+   "short": "Insights into action.",
+   "summary": "Understand what is working and where opportunities exist.",
+   "body": "Marketing analytics, website analytics, social media insights, conversion tracking, search analytics, and campaign performance data are used to understand what is working and where opportunities exist. Continuous analysis and optimization help improve effectiveness, engagement, conversions, and ROI.",
+   "tags": [
+    "Marketing analytics",
+    "Website analytics",
+    "Social media insights",
+    "Conversion tracking",
+    "Search analytics",
+    "Campaign performance"
+   ],
+   "headline": "A clearer view of what is next.",
+   "image": "studio",
+   "tone": "blue",
+   "visual": "analytics",
+   "shape": "wave",
+   "visual_images": [],
+   "steps": [
+    {
+     "title": "Define useful measures",
+     "text": "Every successful partnership begins with listening. We take the time to understand your business, your audience, and your aspirations to uncover what makes your brand unique."
+    },
+    {
+     "title": "Connect the evidence",
+     "text": "We transform insights into a compelling brand narrative that shapes every communication, strengthens identity, and creates meaningful audience connections."
+    },
+    {
+     "title": "Learn and optimize",
+     "text": "We continuously refine campaigns, content, and digital experiences to maximize engagement, improve performance, and enhance customer experiences."
+    }
+   ]
+  }
+ ],
+ "projects": [
+  {
+   "title": "Highline by AG",
+   "slug": "highline-by-ag",
+   "category": "Real Estate",
+   "image": "architecture",
+   "tone": "mint",
+   "headline": "A place is more than a plan.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "architecture",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Zelu Energy Drink",
+   "slug": "zelu-energy-drink",
+   "category": "FMCG",
+   "image": "story",
+   "tone": "orange",
+   "headline": "From product to everyday ritual.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "story",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Station Satcom",
+   "slug": "station-satcom",
+   "category": "Satcom",
+   "image": "station",
+   "tone": "blue",
+   "headline": "A connected world needs a connected story.",
+   "summary": "A visual language for connectivity across land, sea and air.",
+   "gallery": [
+    "station",
+    "station-series"
+   ],
+   "type": "case",
+   "note": "Selected creative from previously supplied project files.",
+   "featured": 2,
+   "scene": "station",
+   "scene_front": "station",
+   "scene_side": "",
+   "scene_caption": "CONNECTING<br>EVERY POSSIBILITY.",
+   "disclosure": "Adapted from CI360's <a href=\"https://ci360degrees.com/case-study/station-satcom/\" target=\"_blank\" rel=\"noopener noreferrer\">published Station Satcom case study</a>. No numerical results have been added.",
+   "case_sections": [
+    {
+     "title": "The brief",
+     "text": "Station Satcom needed an identity and digital presence that better reflected its technical depth across land, sea and air. The published case study describes fragmented communication and an outdated visual language."
+    },
+    {
+     "title": "The connected approach",
+     "text": "CI360 approached the work through brand discovery, identity, digital content and experiential design. The brandmark connected natural terrain with signal geometry; the visual system extended across social channels, search-focused content and exhibition environments."
+    },
+    {
+     "title": "One story, across touchpoints",
+     "text": "The published account describes a more unified presence across digital and physical platforms. It does not provide quantified performance results, so none are asserted here."
+    }
+   ]
+  },
+  {
+   "title": "Times Passion Trails",
+   "slug": "times-passion-trails",
+   "category": "Media",
+   "image": "museum",
+   "tone": "yellow",
+   "headline": "A clear story. A connected experience.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "museum",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Boatclub Software",
+   "slug": "boatclub-software",
+   "category": "Technology",
+   "image": "connectivity",
+   "tone": "blue",
+   "headline": "A clear story. A connected experience.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "connectivity",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Infinity Yacht Sales",
+   "slug": "infinity-yacht-sales",
+   "category": "Hospitality",
+   "image": "connectivity",
+   "tone": "lilac",
+   "headline": "A clear story. A connected experience.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "connectivity",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Burlington English",
+   "slug": "burlington-english",
+   "category": "Education",
+   "image": "studio",
+   "tone": "yellow",
+   "headline": "Let curiosity lead the story.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "studio",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Manipal Fintech",
+   "slug": "manipal-fintech",
+   "category": "Financial Services",
+   "image": "studio-detail",
+   "tone": "mint",
+   "headline": "A clear story. A connected experience.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "studio-detail",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Kish",
+   "slug": "kish",
+   "category": "Beauty",
+   "image": "story",
+   "tone": "pink",
+   "headline": "A clear story. A connected experience.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "story",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Cybersathi",
+   "slug": "cybersathi",
+   "category": "Government",
+   "image": "studio-detail",
+   "tone": "blue",
+   "headline": "A clear story. A connected experience.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "studio-detail",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "IFB",
+   "slug": "ifb",
+   "category": "Consumer Durables",
+   "image": "garden",
+   "tone": "lilac",
+   "headline": "A clear story. A connected experience.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "garden",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "GTTSI",
+   "slug": "gttsi",
+   "category": "Technology",
+   "image": "studio-detail",
+   "tone": "orange",
+   "headline": "A clear story. A connected experience.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "studio-detail",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Panchamurt by Shree Sava",
+   "slug": "panchamurt-shree-sava",
+   "category": "FMCG",
+   "image": "story",
+   "tone": "yellow",
+   "headline": "From product to everyday ritual.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "story",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "VARDĀN",
+   "slug": "vardan",
+   "category": "Health",
+   "image": "vardan-sport",
+   "tone": "mint",
+   "headline": "Movement is a story you can see.",
+   "summary": "Human-centred communication that makes movement, care and everyday function the focus.",
+   "gallery": [
+    "vardan-sport",
+    "vardan-care"
+   ],
+   "type": "gallery",
+   "note": "Selected creative from previously supplied project files.",
+   "featured": 3,
+   "scene": "vardan",
+   "scene_front": "vardan-sport",
+   "scene_side": "vardan-care",
+   "scene_caption": "MOVE.",
+   "disclosure": "The imagery is a creative selection from supplied files. This page describes the visual direction, not measured client outcomes.",
+   "case_sections": []
+  },
+  {
+   "title": "iSAT Africa",
+   "slug": "isat-africa",
+   "category": "Satcom",
+   "image": "connectivity",
+   "tone": "mint",
+   "headline": "Make technical depth feel clear.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "connectivity",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Eutelsat OneWeb",
+   "slug": "eutelsat-oneweb",
+   "category": "Satcom",
+   "image": "connectivity",
+   "tone": "blue",
+   "headline": "Make technical depth feel clear.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "connectivity",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Leoz Art of Ambiance",
+   "slug": "leoz-art-of-ambiance",
+   "category": "Interior",
+   "image": "garden",
+   "tone": "lilac",
+   "headline": "A clear story. A connected experience.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "garden",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Global Healthcare Unity Summit - COVIDUNITY",
+   "slug": "covidunity-summit",
+   "category": "Events",
+   "image": "care",
+   "tone": "pink",
+   "headline": "A clear story. A connected experience.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "care",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Gaudiya Mission, Baghbazar",
+   "slug": "gaudiya-mission",
+   "category": "Spiritual",
+   "image": "museum-web",
+   "tone": "yellow",
+   "headline": "Timeless stories. A new way to experience them.",
+   "summary": "A digital setting for heritage, learning and cultural connection.",
+   "gallery": [
+    "museum-web",
+    "museum"
+   ],
+   "type": "gallery",
+   "note": "Selected creative from previously supplied project files.",
+   "featured": 0,
+   "scene": "museum",
+   "scene_front": "museum-web",
+   "scene_side": "museum",
+   "scene_caption": "",
+   "disclosure": "The imagery is a creative selection from supplied files. This page describes the visual direction, not measured client outcomes.",
+   "case_sections": []
+  },
+  {
+   "title": "Airtel",
+   "slug": "airtel",
+   "category": "Telecom",
+   "image": "connectivity",
+   "tone": "orange",
+   "headline": "A clear story. A connected experience.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "connectivity",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Peanutji",
+   "slug": "peanutji",
+   "category": "FMCG",
+   "image": "story",
+   "tone": "yellow",
+   "headline": "From product to everyday ritual.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "story",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Zebein India",
+   "slug": "zebein-india",
+   "category": "Fashion",
+   "image": "studio-detail",
+   "tone": "pink",
+   "headline": "A clear story. A connected experience.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "studio-detail",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Chaitanya School, Gandhinagar",
+   "slug": "chaitanya-school",
+   "category": "Education",
+   "image": "school",
+   "tone": "orange",
+   "headline": "Curiosity belongs at the centre.",
+   "summary": "An expressive visual world around learning, culture and a childhood full of possibility.",
+   "gallery": [
+    "school"
+   ],
+   "type": "gallery",
+   "note": "Selected creative from previously supplied project files.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "school",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "The imagery is a creative selection from supplied files. This page describes the visual direction, not measured client outcomes.",
+   "case_sections": []
+  },
+  {
+   "title": "Savvy Greens",
+   "slug": "savvy-greens",
+   "category": "Sustainability",
+   "image": "garden",
+   "tone": "mint",
+   "headline": "A clear story. A connected experience.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "garden",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Ananta Centre & Ananta Aspen Centre",
+   "slug": "ananta-centre",
+   "category": "Knowledge Centre",
+   "image": "studio",
+   "tone": "lilac",
+   "headline": "A clear story. A connected experience.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "studio",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Crave Eatables",
+   "slug": "crave-eatables",
+   "category": "FMCG",
+   "image": "crave-family",
+   "tone": "yellow",
+   "headline": "Everyday sweetness. Extraordinary stories.",
+   "summary": "A warm, character-led visual world where family, familiar rituals and little moments take centre stage.",
+   "gallery": [
+    "crave-family",
+    "crave-play"
+   ],
+   "type": "gallery",
+   "note": "Selected creative from previously supplied project files.",
+   "featured": 1,
+   "scene": "crave",
+   "scene_front": "crave-family",
+   "scene_side": "crave-play",
+   "scene_caption": "",
+   "disclosure": "The imagery is a creative selection from supplied files. This page describes the visual direction, not measured client outcomes.",
+   "case_sections": []
+  },
+  {
+   "title": "PIV Realty | Ayaan",
+   "slug": "piv-ayaan",
+   "category": "Real Estate",
+   "image": "ayaan",
+   "tone": "lilac",
+   "headline": "An address with a point of view.",
+   "summary": "Architecture, atmosphere and a sense of place brought into one considered visual story.",
+   "gallery": [
+    "ayaan",
+    "architecture",
+    "garden"
+   ],
+   "type": "gallery",
+   "note": "Selected creative from previously supplied project files.",
+   "featured": 4,
+   "scene": "ayaan",
+   "scene_front": "architecture",
+   "scene_side": "",
+   "scene_caption": "AYAAN<small>A SENSE OF PLACE.</small>",
+   "disclosure": "The imagery is a creative selection from supplied files. This page describes the visual direction, not measured client outcomes.",
+   "case_sections": []
+  },
+  {
+   "title": "Shatayu - The Gift of Life",
+   "slug": "shatayu",
+   "category": "NGO",
+   "image": "care",
+   "tone": "mint",
+   "headline": "A clear story. A connected experience.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "care",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "TOLVV Signs",
+   "slug": "tolvv-signs",
+   "category": "Design",
+   "image": "architecture",
+   "tone": "orange",
+   "headline": "A clear story. A connected experience.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "architecture",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Hilton Ahmedabad",
+   "slug": "hilton-ahmedabad",
+   "category": "Hospitality",
+   "image": "garden",
+   "tone": "pink",
+   "headline": "A clear story. A connected experience.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "garden",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  },
+  {
+   "title": "Times Internet Limited",
+   "slug": "times-internet-limited",
+   "category": "Media",
+   "image": "event",
+   "tone": "pink",
+   "headline": "Stories with a wider stage.",
+   "summary": "A portfolio perspective on communication, culture and experiences.",
+   "gallery": [
+    "event"
+   ],
+   "type": "gallery",
+   "note": "Selected creative from previously supplied project files.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "event",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "The imagery is a creative selection from supplied files. This page describes the visual direction, not measured client outcomes.",
+   "case_sections": []
+  },
+  {
+   "title": "Kensville Golf Living",
+   "slug": "kensville-golf-living",
+   "category": "Real Estate",
+   "image": "garden",
+   "tone": "mint",
+   "headline": "A place is more than a plan.",
+   "summary": "A brand in the CI360 portfolio. Explore the sector perspective and the capabilities that connect our work.",
+   "gallery": [],
+   "type": "perspective",
+   "note": "Editorial sector imagery; not a photograph of this client's project.",
+   "featured": 0,
+   "scene": "default",
+   "scene_front": "garden",
+   "scene_side": "",
+   "scene_caption": "",
+   "disclosure": "This brand is listed in the supplied CI360 portfolio. The sector perspective is new editorial copy, not a retrospective account of services delivered or results achieved.",
+   "case_sections": []
+  }
+ ],
+ "categories": [
+  {
+   "name": "Real Estate",
+   "headline": "A place is more than a plan.",
+   "p1": "Our real-estate lens connects architecture with the experience of a place. Visual storytelling should give form to a location, an atmosphere and the details that make an address distinctive.",
+   "p2": "From the first creative impression to the digital enquiry journey, consistency helps the audience understand what makes a development different.",
+   "in_filter": true,
+   "order": 4
+  },
+  {
+   "name": "FMCG",
+   "headline": "From product to everyday ritual.",
+   "p1": "Our creative lens starts with the role a product plays in people's lives: the occasion, the feeling and the reason to choose it. A distinct identity gives each story a recognisable home.",
+   "p2": "Across packaging, content and digital experiences, the objective is to keep the brand recognisable without making every message identical.",
+   "in_filter": true,
+   "order": 1
+  },
+  {
+   "name": "Satcom",
+   "headline": "Make technical depth feel clear.",
+   "p1": "Connectivity is a technical subject with a very human purpose. Our lens brings the operational context and the people relying on it into the same story.",
+   "p2": "A joined-up approach can connect a clear visual identity, audience-specific content, useful search experiences and the next conversation.",
+   "in_filter": true,
+   "order": 2
+  },
+  {
+   "name": "Media",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "Technology",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "Hospitality",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "Education",
+   "headline": "Let curiosity lead the story.",
+   "p1": "An education brand has many audiences and one shared purpose. Our lens brings learning, culture and community into a coherent narrative.",
+   "p2": "The digital journey should help families find useful information, experience the character of an institution and take a clear next step.",
+   "in_filter": true,
+   "order": 5
+  },
+  {
+   "name": "Financial Services",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "Beauty",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "Government",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "Consumer Durables",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "Health",
+   "headline": "Start with people, not promises.",
+   "p1": "Our communication lens for health and wellness is clarity, care and relevance. The experience should help people understand the service without overstating an outcome.",
+   "p2": "A considered identity, accessible website and useful content can connect specialist expertise with the questions an audience actually has.",
+   "in_filter": true,
+   "order": 3
+  },
+  {
+   "name": "Interior",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "Events",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "Spiritual",
+   "headline": "Preserve the meaning. Open the experience.",
+   "p1": "Heritage communication calls for respect as well as imagination. Our lens is to retain the depth of a story while making it accessible through thoughtful digital experiences.",
+   "p2": "Content, imagery and navigation can work together to welcome a new visitor without losing the context that makes the institution meaningful.",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "Telecom",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "Fashion",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "Sustainability",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "Knowledge Centre",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "NGO",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "Design",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "FPO",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "NBFC",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  },
+  {
+   "name": "Reality",
+   "headline": "",
+   "p1": "",
+   "p2": "",
+   "in_filter": false,
+   "order": 0
+  }
+ ],
+ "insights": [
+  {
+   "title": "AI-Powered Digital Transformation",
+   "slug": "ai-powered-digital-transformation",
+   "kicker": "Technology & thinking",
+   "image": "studio",
+   "tone": "lilac",
+   "read": "4 min",
+   "intro": "Before asking what AI can do, ask what your business actually needs to change.",
+   "sections": [
+    {
+     "title": "Start with the work, not the tool.",
+     "text": "A useful transformation begins with a specific challenge. Where does a customer get stuck? Which task absorbs time without adding value? What information would help a team make a better decision? These questions are a stronger starting point than a list of technologies.\n\nAt CI360, the supplied mission puts creativity, technology and communication in the same conversation. The important word is integrate: technology should reinforce a clear business purpose, not sit beside it as a separate initiative."
+    },
+    {
+     "title": "Keep a human point of view.",
+     "text": "A brand still needs to know what it stands for, who it is speaking to and which claims it can support. A tool can help a team explore and produce. The responsibility for judgement, accuracy and the final experience remains with the people publishing the work.\n\nBefore introducing a new workflow, decide which steps require a human review. Make space for context that a brief, a spreadsheet or an automated process might miss."
+    },
+    {
+     "title": "Make one connected change.",
+     "text": "Choose a manageable journey: enquiry to conversation, draft to approval, or content discovery to next step. Understand how it works today, define the intended improvement and agree how you will review it.\n\nA thoughtful pilot can become a working system. An impressive demo without ownership, review or a clear purpose is much harder to turn into everyday value."
+    },
+    {
+     "title": "A question worth taking into your next meeting.",
+     "text": "Which part of your customer or team experience would you improve first, even if no new tool were available? Begin there. Then decide whether technology makes the solution more useful."
+    }
+   ]
+  },
+  {
+   "title": "Beyond the Clone Wars",
+   "slug": "beyond-the-clone-wars",
+   "kicker": "Brand strategy",
+   "image": "crave-family",
+   "tone": "orange",
+   "read": "4 min",
+   "intro": "A distinctive brand is not simply a different-looking version of the same idea.",
+   "sections": [
+    {
+     "title": "Difference starts before design.",
+     "text": "It is tempting to begin with a new colour, a louder headline or a format that appears to be working for another brand. But visual difference is only part of the story. The stronger starting point is the truth that makes the business itself worth paying attention to.\n\nWhat does the audience value? What can the organisation genuinely deliver? What does it believe about its category that is worth making clear? These are positioning questions, not decoration questions."
+    },
+    {
+     "title": "Build a recognisable point of view.",
+     "text": "A brand narrative gives separate activities something to share. A website, a short film and a social post do not need to look identical. They do need to feel as though they come from the same understanding of the brand.\n\nThe supplied CI360 approach places strategic storytelling at the centre of that connection. The story helps decide what belongs in the communication, and what is simply noise."
+    },
+    {
+     "title": "Give creativity a useful constraint.",
+     "text": "A defined audience, a clear purpose and a specific response can make an idea stronger. They give the team something meaningful to solve, rather than asking every execution to be everything at once.\n\nAsk whether a creative choice helps the audience understand or remember the brand. Novelty can start a conversation; relevance gives it somewhere to go."
+    },
+    {
+     "title": "Try the name-off test.",
+     "text": "Look at a piece of your communication without its logo. Which parts still feel like you? The answer can reveal where your identity is strong and where the next piece of strategic work should begin."
+    }
+   ]
+  },
+  {
+   "title": "AI Doesn't Replace Agencies",
+   "slug": "ai-doesnt-replace-agencies",
+   "kicker": "Creativity & technology",
+   "image": "studio-detail",
+   "tone": "mint",
+   "read": "3 min",
+   "intro": "A useful point of view: tools can change the work without removing the need for judgement.",
+   "sections": [
+    {
+     "title": "The brief is still a business question.",
+     "text": "An agency engagement should begin with the problem, not the production method. A brand may need clearer positioning, a more useful website, stronger audience relationships or a more connected marketing approach. Choosing a tool does not, by itself, answer that question.\n\nThe title is a perspective on the value an agency should bring, not a prediction about jobs or the future of the industry."
+    },
+    {
+     "title": "Connect what would otherwise stay separate.",
+     "text": "Strategy, content, design, technology and performance can each produce useful work. The challenge is to make them reinforce one another. Someone has to preserve the original intent as an idea moves between people, formats and channels.\n\nThat is the integrated approach described in CI360's supplied content: one business challenge, connected capabilities and an ongoing commitment to improve."
+    },
+    {
+     "title": "Make accountability visible.",
+     "text": "Agree who checks a claim, who approves an image and who owns the final experience. Document the intended outcome before production begins. Technology can be part of that process, but it should not make responsibility harder to find.\n\nA stronger agency relationship makes decisions clearer. It brings context to a brief, care to execution and a willingness to learn from what actually happens."
+    },
+    {
+     "title": "Ask the better question.",
+     "text": "Rather than asking which tool will replace a team, ask what that team should be accountable for. Then use the tools that help it deliver that responsibility well."
+    }
+   ]
+  },
+  {
+   "title": "Digital Media",
+   "slug": "digital-media",
+   "kicker": "Integrated marketing",
+   "image": "station",
+   "tone": "blue",
+   "read": "3 min",
+   "intro": "One brand story. Different channels. A more considered experience at every step.",
+   "sections": [
+    {
+     "title": "Begin with the audience journey.",
+     "text": "A person may discover a brand through one channel and decide to make contact through another. Plan the experience across those moments rather than treating each platform as an isolated task.\n\nThe first question is not simply where to post. It is what the audience needs to understand, feel or do at that point in the journey."
+    },
+    {
+     "title": "Adapt the expression, keep the meaning.",
+     "text": "A short video, a search page, a podcast and an email have different jobs. Give each format a clear role while preserving a consistent narrative and visual language.\n\nThe same core idea can be expressed in a way that suits the channel, without repeating the same creative everywhere."
+    },
+    {
+     "title": "Connect creative with the next step.",
+     "text": "Attention is useful when the next experience makes sense. Review the relationship between a campaign promise and the page, conversation or action it leads to.\n\nIs the information clear? Is the call to action appropriate? Does the destination keep the story the creative started? These practical questions help align communication with the business objective."
+    },
+    {
+     "title": "Make learning part of delivery.",
+     "text": "Choose measures that fit the role of each activity. Review the whole journey as well as individual channels. Use what you learn to decide what to improve, rather than treating a report as the final step."
+    }
+   ]
+  }
+ ],
+ "team": [
+  {
+   "title": "Pramit Ghosh",
+   "role": "CEO | Founder",
+   "is_founder": true,
+   "founder_role": "Founder & CEO",
+   "initials": "PG",
+   "lens": "The story. The audience. The purpose.",
+   "quote": "The most successful brands don’t just communicate - they connect. Every campaign, every interaction, and every customer experience should begin with a story rooted in purpose. At CI360, strategic storytelling is about saying what truly matters. When brands communicate with authenticity and clarity, they don’t just gain attention - they earn trust, inspire action, and create relationships that last.",
+   "portrait_url": "https://ci360degrees.com/wp-content/uploads/2024/03/122A0148.webp",
+   "tone": "orange"
+  },
+  {
+   "title": "Aashit Shah",
+   "role": "Director | Co-Founder",
+   "is_founder": true,
+   "founder_role": "Co-Founder & Director",
+   "initials": "AS",
+   "lens": "The idea. The execution. The impact.",
+   "quote": "Great marketing is only valuable when it solves real business challenges. Every strategy is designed with execution, scalability, and measurable outcomes in mind. CI360 believes creativity and technology must work together with operational excellence to deliver solutions that create long-term value.",
+   "portrait_url": "https://ci360degrees.com/wp-content/uploads/2025/09/Aashit-.jpg",
+   "tone": "lilac"
+  },
+  {
+   "title": "Urna Banerji",
+   "role": "COO"
+  },
+  {
+   "title": "Bhumi Chabbra",
+   "role": "Director, US"
+  },
+  {
+   "title": "John Seaman",
+   "role": "Head of Technology"
+  },
+  {
+   "title": "Mansi Bagdai",
+   "role": "Strategy and Growth Lead"
+  },
+  {
+   "title": "Manan Dhingra",
+   "role": "Creative Lead"
+  },
+  {
+   "title": "Arushi Singh",
+   "role": "Social Media Manager"
+  },
+  {
+   "title": "Maryanne deSousa",
+   "role": "Graphic Designer and Video Editor"
+  },
+  {
+   "title": "Dhaval Vyas",
+   "role": "Head - Films"
+  },
+  {
+   "title": "Harshada",
+   "role": "SEO Lead"
+  },
+  {
+   "title": "Aarya Parsodkar",
+   "role": "Graphic Designer"
+  },
+  {
+   "title": "Meshwa Kadia",
+   "role": "Web Developer"
+  },
+  {
+   "title": "Pradeep Verma",
+   "role": "Executive Web Developer"
+  },
+  {
+   "title": "Aadhya Bhidodiya",
+   "role": "Graphic Designer"
+  },
+  {
+   "title": "Ajay Shankar",
+   "role": "Video editor and Motion designer"
+  },
+  {
+   "title": "Chitra Kirthana S",
+   "role": "Strategy Lead - Digital & OOH"
+  }
+ ],
+ "testimonials": [
+  {
+   "name": "Terry Lease",
+   "company": "Boat Club Software",
+   "quote": "CI360 handled the entire project with great care, attention to detail, and a strong client-focused approach. Their team was highly responsive throughout the process, understood the requirements well, and delivered the website quicker than expected. Their professional approach, commitment to quality, and reliable support made the overall experience very positive."
+  },
+  {
+   "name": "Preethi Das",
+   "company": "",
+   "quote": "The team @ CI360 took complete charge of our project from day one - from content writing to creating fabulous creatives to crafting a website design that perfectly captures what we do, as an organization. The experience with CI360 has been delightful - they provide full support until project completion and beyond."
+  },
+  {
+   "name": "Arjun Kumar",
+   "company": "General Manager, TOI",
+   "quote": "I have found it a pleasure to work with the agency - the team is passionate, hands-on, and are both full of strategic insights that adds value to the brand/campaign and also very creative. I look forward to working with them in the future as well, across brands."
+  },
+  {
+   "name": "Ruchi Gandhi",
+   "company": "Savvy Greens",
+   "quote": "CI360’s team has always been client-oriented and involved to ensure their clients succeed. They have a whole lot of offering and an array of expertise from social media marketing, website-building, SEO, to running campaigns with great success. The digital newsletters and articles they make for us have always been appreciated by our clients too. Wishing CI360 my best!"
+  },
+  {
+   "name": "Manil Agarwal",
+   "company": "Sustenable.co",
+   "quote": "CI360 ensures that they go the extra mile to bring finesse in their work."
+  },
+  {
+   "name": "Rahul Sharma",
+   "company": "Skywood",
+   "quote": "An awesome experience working with the team at CI360. The social media management, campaign management, suggestions related to feedback forms, and brochures for corporates, have helped overhaul our brand digitally. Definitely will recommend them!"
+  },
+  {
+   "name": "Dr Santosh Kumar",
+   "company": "NDIIT",
+   "quote": "CI360’s team has always been client-oriented and involved to ensure their clients succeed. They have a whole lot of offering and an array of expertise from social media marketing, website-building, SEO, to running campaigns with great success. Wishing CI360 my best!"
+  }
+ ],
+ "faqs": {
+  "home": [
+   [
+    "What does CI360 Degrees do?",
+    "CI360 Degrees is an integrated digital marketing and strategic communication agency helping businesses build stronger brands and drive measurable growth. Services include strategic storytelling, social media marketing, performance marketing, SEO, AEO, GEO, local visibility, branding and design, website development, content and campaigns, and podcast production and marketing."
+   ],
+   [
+    "What makes CI360 different from other digital marketing agencies?",
+    "CI360 begins with the business challenge, not the marketing channel. Strategic storytelling sits at the core of its approach, bringing together strategy, creativity, technology, digital marketing, and performance to create connected brand experiences rather than isolated marketing activities."
+   ],
+   [
+    "Does CI360 provide complete digital marketing services?",
+    "Yes. CI360 works as an integrated digital marketing partner across social media, performance marketing, content and creative campaigns, branding, websites, SEO, AEO, GEO, local search visibility, podcasts, and digital communication. Clients can engage for individual services or an integrated marketing mandate."
+   ],
+   [
+    "Can CI360 help brands improve visibility on Google and AI-powered search?",
+    "Yes. CI360 combines SEO, AEO, GEO, Local SEO, and Google Business Profile optimization to strengthen brand discoverability across traditional search, answer engines, local search, and emerging AI-powered search experiences."
+   ],
+   [
+    "What industries does CI360 work with?",
+    "CI360 works across satellite communications, healthcare and wellness, FMCG, fashion, real estate, financial services, education, hospitality, government, media, sustainability, spirituality, and knowledge organisations."
+   ]
+  ],
+  "contact": [
+   [
+    "What should I include in my enquiry?",
+    "Share the business goal, current challenge, important deadlines, internal team involved and any known budget range. A rough brief is fine."
+   ],
+   [
+    "Do you work on one-time projects?",
+    "Yes. CI360 supports focused consulting, brand and website projects, campaigns, technology builds and longer integrated retainers."
+   ],
+   [
+    "Can you collaborate with our in-house team?",
+    "Yes. CI360 frequently works as a strategic or specialist extension of internal marketing, technology and leadership teams."
+   ],
+   [
+    "How soon will someone respond?",
+    "A formal response time has not yet been published. For time-sensitive enquiries, please use the direct contact details above."
+   ]
+  ]
+ },
+ "options": {
+  "offices": [
+   {
+    "city": "Ahmedabad",
+    "country_code": "IN",
+    "zone": "Asia/Kolkata",
+    "address": "204 - 205, Dev Ashish Complex, Nr. Hotel Kalssic Gold, Off. C.G Road, Ahmedabad, India 380019",
+    "email": "pramit.ghosh@ci360degrees.com",
+    "phone": "+91 97118 09099"
+   },
+   {
+    "city": "Delhi",
+    "country_code": "IN",
+    "zone": "Asia/Kolkata",
+    "address": "",
+    "email": "pramit.ghosh@ci360degrees.com",
+    "phone": "+91 97118 09099"
+   },
+   {
+    "city": "Greenville",
+    "country_code": "US",
+    "zone": "America/New_York",
+    "address": "",
+    "email": "bhumi@ci360degrees.com",
+    "phone": "+1 (864) 990-5354"
+   }
+  ],
+  "socials": [
+   {
+    "label": "Instagram",
+    "url": "https://www.instagram.com/ci360degrees/"
+   },
+   {
+    "label": "LinkedIn",
+    "url": "https://www.linkedin.com/company/ci360degrees/"
+   }
+  ],
+  "clients": [
+   {
+    "name": "VARDĀN"
+   },
+   {
+    "name": "Eutelsat OneWeb"
+   },
+   {
+    "name": "Crave"
+   },
+   {
+    "name": "IFB"
+   },
+   {
+    "name": "THE TIMES OF INDIA"
+   },
+   {
+    "name": "Shatayu"
+   },
+   {
+    "name": "Air Canada"
+   },
+   {
+    "name": "Chaitanya School"
+   }
+  ],
+  "process_steps": [
+   {
+    "title": "Listen",
+    "text": "Every successful partnership begins with listening. We take the time to understand your business, your audience, and your aspirations to uncover what makes your brand unique."
+   },
+   {
+    "title": "Strategic Storytelling",
+    "text": "We transform insights into a compelling brand narrative that shapes every communication, strengthens identity, and creates meaningful audience connections."
+   },
+   {
+    "title": "Create & Execute",
+    "text": "From branding and websites to content, social media, SEO, AEO, and performance marketing, we bring the story to life through integrated marketing solutions."
+   },
+   {
+    "title": "Optimize",
+    "text": "We continuously refine campaigns, content, and digital experiences to maximize engagement, improve performance, and enhance customer experiences."
+   },
+   {
+    "title": "Analytics",
+    "text": "We track performance, measure outcomes, and turn data-driven insights into smarter decisions that fuel continuous growth."
+   }
+  ]
+ },
+ "home": {
+  "collage": [
+   {
+    "project": "vardan",
+    "image": "vardan-sport",
+    "caption": "VARDAN / MOVEMENT",
+    "alt": "Explore VARDAN creative"
+   },
+   {
+    "project": "crave-eatables",
+    "image": "crave-family",
+    "caption": "CRAVE / EVERYDAY STORIES",
+    "alt": "Explore Crave Eatables creative"
+   },
+   {
+    "project": "station-satcom",
+    "image": "station",
+    "caption": "STATION SATCOM / CONNECTIONS",
+    "alt": "Explore Station Satcom creative"
+   }
+  ]
+ },
+ "about": {
+  "values": [
+   "Strategic Storytelling",
+   "Innovation & Excellence",
+   "Integrity & Transparency",
+   "Client-Centric Approach",
+   "Collaboration & Growth"
+  ],
+  "timeline": [
+   {
+    "year": "2017",
+    "title": "Foundation",
+    "text": "We began by listening before prescribing. CI360 started with a belief that useful work begins with a precise understanding of the business problem, not a preselected channel or format."
+   },
+   {
+    "year": "2019",
+    "title": "Expansion",
+    "text": "Ideas became connected brand experiences. Work expanded across identity, content and digital experience while remaining anchored to one integrated strategic direction."
+   },
+   {
+    "year": "2020",
+    "title": "Momentum",
+    "text": "New challenges sharpened the focus. Strategy, creativity and digital delivery were brought closer together to help clients move with clarity through rapid change."
+   },
+   {
+    "year": "2021",
+    "title": "Integration",
+    "text": "Creative thinking connected with technology. Platforms, automation and measurement brought discipline to execution, making ambitious ideas easier to scale and account for."
+   },
+   {
+    "year": "2023",
+    "title": "Maturity",
+    "text": "Thinking and delivery became one operating model. Consulting, storytelling, technology and performance began moving together, preserving strategic intent from first decision to final outcome."
+   },
+   {
+    "year": "Today",
+    "title": "Meaningful growth",
+    "text": "An integrated partner for meaningful growth. Every capability serves the same purpose: sharper decisions, stronger experiences and measurable progress against the problems that matter."
+   }
+  ],
+  "industries": [
+   "Satellite Communications",
+   "Health & Wellness",
+   "FMCG & Beverages",
+   "Fashion",
+   "Beauty",
+   "Real Estate",
+   "Spirituality",
+   "NBFC & Financial Services",
+   "Knowledge Centres & NGOs",
+   "Education",
+   "Government",
+   "Consumer Durables",
+   "Hospitality",
+   "Media & OOH",
+   "FPO"
+  ],
+  "belief": "CI360 stands at the forefront of the digital revolution, embodying the spirited curiosity of the current times. In this era where digital landscapes shift with the wind, our agency emerges as a beacon of integrated marketing services, dedicated to the art of focused attention.\n\nAt CI360, the mission is to seamlessly integrate cutting-edge technologies like AI, VR, AR, and the Metaverse with traditional forms of communication, crafting engaging narratives that revolutionize digital marketing.\n\nNavigating the digital realm with a splash of creativity and a dash of strategic magic. CI360 believes in the transformative power of digital and pledges to remain learners and innovators, forever evolving, while understanding the nuance and specificity that make stories and campaigns stick."
+ },
+ "founders": {
+  "belief": "CI360 was founded on a simple belief that great marketing begins long before the first campaign. It begins with listening, understanding the business, the people behind it, and the challenges they face. Strategic storytelling becomes the foundation for meaningful connections between brands and audiences.\n\nThe mission is to help brands grow by combining creativity, technology, and strategy into integrated marketing solutions. Solutions span branding, websites, social media, performance marketing, SEO, GEO, local search optimization, Google Business Profile management, content strategy, and emerging technologies.\n\nWhile marketing continues to evolve through AI, automation, and immersive digital experiences, one principle remains constant: brands that communicate with purpose are the ones people remember."
+ },
+ "insights_topics": [
+  "Strategic storytelling",
+  "Digital marketing",
+  "AI in marketing",
+  "SEO, AEO & GEO",
+  "Performance marketing",
+  "Brand strategy",
+  "Content marketing",
+  "Podcasting",
+  "Consumer behaviour"
+ ],
+ "contact_blocks": [
+  {
+   "label": "INDIA",
+   "email": "pramit.ghosh@ci360degrees.com",
+   "phone": "+91 97118 09099"
+  },
+  {
+   "label": "UNITED STATES",
+   "email": "bhumi@ci360degrees.com",
+   "phone": "+1 (864) 990-5354"
+  }
+ ],
+ "legal": {
+  "privacy-policy": {
+   "title": "Privacy policy",
+   "intro": "A clear view of how this website handles your information.",
+   "sections": [
+    {
+     "title": "About this draft",
+     "text": "This is a website-specific policy draft for CI360 review before launch. It describes the supplied website implementation, not a verified audit of CI360's wider systems. The final website owner should confirm the operational details and obtain appropriate legal review before publishing."
+    },
+    {
+     "title": "Information you choose to provide",
+     "text": "The enquiry form asks for your name, email, phone number, company, country, service of interest and message. Required fields are marked. Please provide only the information needed to discuss your project, and do not submit passwords, payment credentials or sensitive personal information."
+    },
+    {
+     "title": "What happens when you make an enquiry",
+     "text": "In the default email-draft mode, form details remain in the current page until you choose to open an email draft. Your email application then handles the message, and it is sent only when you send it there. The website does not claim to have received that message before it is sent. If the site owner enables server delivery, this policy must identify the relevant email or CRM providers and their processing arrangements."
+    },
+    {
+     "title": "Local preferences and external services",
+     "text": "The website may store your motion preference in your browser's local storage so that it can remember whether animations are enabled. This build does not include advertising pixels or third-party analytics scripts. Poppins is requested from Google Fonts, and the founders page can request portrait images from CI360's existing website; those requests are handled by the respective providers and may include normal connection information. The host may also maintain access and security logs."
+    },
+    {
+     "title": "Use, access and retention",
+     "text": "Enquiry information is intended to help CI360 understand and respond to your request. The organisation should define and publish its actual access controls, service providers, retention periods and deletion procedure before enabling server-side form delivery. This draft does not invent a retention period or promise a technical control that has not been verified."
+    },
+    {
+     "title": "Questions or requests",
+     "text": "For questions about an enquiry or this draft, contact pramit.ghosh@ci360degrees.com. Include enough context to identify your request, but do not include unnecessary sensitive information. Any formal rights request should be handled under the law and processes applicable to the organisation and the request."
+    },
+    {
+     "title": "Updates",
+     "text": "The owner should review this policy whenever hosting, analytics, forms, advertising, integrations or data handling changes. Publish an accurate effective date when the final version is approved."
+    }
+   ]
+  },
+  "terms-and-conditions": {
+   "title": "Terms & conditions",
+   "intro": "A clear starting point for using this website and beginning a conversation.",
+   "sections": [
+    {
+     "title": "Status and scope",
+     "text": "These are draft website terms for CI360 review before launch. They are not an executed client agreement and do not set the commercial terms of a project. The final site owner should review this text with appropriate legal support and publish an approved effective date."
+    },
+    {
+     "title": "Website information",
+     "text": "The website introduces CI360, its capabilities and a portfolio of named brands. Service descriptions are general introductions. A particular engagement, deliverable, schedule, fee or performance objective must be set out in an agreed proposal or contract."
+    },
+    {
+     "title": "Making an enquiry",
+     "text": "Submitting or preparing an enquiry does not create a service contract or reserve a delivery date. In the default mode, the form prepares an email draft that you must send using your own email application. A project begins only through a separately agreed engagement process."
+    },
+    {
+     "title": "Portfolio, imagery and editorial notes",
+     "text": "Brand names and supplied creative are shown to present the portfolio. Some archive pages contain labelled editorial sector imagery rather than photographs of a specific client project. Newly written studio notes and policy drafts are labelled for review. No numerical campaign result or case-study outcome should be inferred from decorative charts or visual compositions."
+    },
+    {
+     "title": "Intellectual property and permitted use",
+     "text": "Website content, creative assets, brand names and marks may be protected by rights held by CI360, its clients or other owners. Viewing the website does not itself grant a licence to reuse campaign work, logos or other protected material. Obtain permission from the appropriate rights holder before reuse."
+    },
+    {
+     "title": "External links and availability",
+     "text": "Links to other websites or email applications may be provided for convenience. Their availability, content and processing are controlled by their respective operators. The final approved terms should address availability and any applicable limitations in a way appropriate to the actual service and relevant law."
+    },
+    {
+     "title": "Contact and project agreements",
+     "text": "For website questions, contact pramit.ghosh@ci360degrees.com. Matters such as project scope, payment, confidentiality, ownership, approvals, timelines and dispute resolution belong in the applicable signed project agreement, rather than being assumed from this website draft."
+    }
+   ]
+  }
+ },
+ "alts": {
+  "architecture": "Illustrative architectural image selected for the Ayaan presentation",
+  "ayaan": "Ayaan architecture creative",
+  "care": "Editorial care imagery",
+  "connectivity": "Editorial connectivity imagery",
+  "crave-family": "Crave Eatables family storytelling creative",
+  "crave-play": "Crave Eatables childhood campaign",
+  "event": "Times Internet event campaign creative",
+  "garden": "Editorial garden imagery",
+  "movement": "Editorial movement imagery",
+  "museum-web": "Sri Chaitanya Mahaprabhu Museum website creative",
+  "museum": "Museum architecture",
+  "school": "Chaitanya School creative",
+  "station-series": "Station Satcom creative series",
+  "station": "Station Satcom network-control campaign",
+  "story": "Editorial story imagery",
+  "studio-detail": "Creative studio detail",
+  "studio": "Creative team working together in the supplied office photograph",
+  "vardan-care": "VARDAN rehabilitation creative",
+  "vardan-sport": "VARDAN badminton movement creative"
+ }
+}

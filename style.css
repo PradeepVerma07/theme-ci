@@ -1,0 +1,11 @@
+/*
+Theme Name: CI360 Degrees
+Theme URI: https://ci360degrees.com
+Author: CI360 Degrees
+Description: Custom theme built from the CI360 V5 prototype. Every page is driven by Custom Post Types and ACF / Secure Custom Fields. Activate, then go to Appearance > CI360 Setup to import all content.
+Version: 1.0.0
+Requires at least: 6.4
+Requires PHP: 7.4
+Text Domain: ci360
+*/
+/* Design styles live in assets/css/main.css (copied unchanged from the prototype). */
