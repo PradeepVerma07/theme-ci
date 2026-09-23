@@ -286,7 +286,19 @@ function ci_brand_strip() {
 		}
 		$sets .= '</div>';
 	}
-	return '<section class="brand-strip" aria-label="Selected client brands"><span class="small-label">' . ci_e( ci_opt( 'opt_clients_label' ) ) . '</span><div class="brand-marquee"><div class="marquee-track">' . $sets . '</div></div></section>';
+	$client_grid_img = get_template_directory_uri() . '/assets/images/Asset-2365.jpg';
+
+	return '<section class="brand-strip" aria-label="Selected client brands">' .
+		'<span class="small-label">' . ci_e( ci_opt( 'opt_clients_label' ) ) . '</span>' .
+		'<div class="brand-marquee"><div class="marquee-track">' . $sets . '</div></div>' .
+		'<div class="client-logos-banner wrap" data-reveal style="margin-top: 40px; text-align: center;">' .
+			'<img src="' . esc_url( $client_grid_img ) . '" alt="We Partner with Clients Worldwide" style="max-width: 100%; height: auto; border-radius: 12px; display: block; margin: 0 auto 20px;" />' .
+			'<div class="client-logos-caption" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 16px; color: var(--navy, #0617a7);">' .
+				'<span class="globe-icon" style="font-size: 20px;">🌐</span>' .
+				'<span>We Partner with Clients Worldwide.</span>' .
+			'</div>' .
+		'</div>' .
+	'</section>';
 }
 
 /** Hidden service visuals for the home capability hover preview. */

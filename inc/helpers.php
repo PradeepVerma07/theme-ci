@@ -79,18 +79,29 @@ function ci_links( $html ) {
 }
 
 function ci_img( $id, $alt = null, $cls = '', $eager = false ) {
-	$id = (int) $id;
-	if ( ! $id ) {
-		return '';
+	if ( is_string( $id ) && '' !== $id ) {
+		if ( false !== strpos( $id, '/' ) ) {
+			$src = ci_url( $id );
+		} else {
+			$src = get_template_directory_uri() . '/assets/images/' . $id;
+		}
+		if ( null === $alt ) {
+			$alt = pathinfo( $id, PATHINFO_FILENAME );
+		}
+	} else {
+		$id = (int) $id;
+		if ( ! $id ) {
+			return '';
+		}
+		$src = wp_get_attachment_image_url( $id, 'full' );
+		if ( ! $src ) {
+			return '';
+		}
+		if ( null === $alt ) {
+			$alt = get_post_meta( $id, '_wp_attachment_image_alt', true );
+		}
 	}
-	$src = wp_get_attachment_image_url( $id, 'full' );
-	if ( ! $src ) {
-		return '';
-	}
-	if ( null === $alt ) {
-		$alt = get_post_meta( $id, '_wp_attachment_image_alt', true );
-	}
-	return '<img class="' . esc_attr( $cls ) . '" src="' . esc_url( $src ) . '" alt="' . esc_attr( $alt ) . '" loading="' . ( $eager ? 'eager' : 'lazy' ) . '" decoding="async" ' . ( $eager ? 'fetchpriority="high"' : '' ) . '>';
+	return '<img class="' . esc_attr( $cls ) . '" src="' . esc_url( $src ) . '" alt="' . esc_attr( $alt ?? '' ) . '" loading="' . ( $eager ? 'eager' : 'lazy' ) . '" decoding="async" ' . ( $eager ? 'fetchpriority="high"' : '' ) . '>';
 }
 function ci_arrow( $dir = 'ne' ) {
 	return '<svg class="icon arrow-' . $dir . '" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
