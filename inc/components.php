@@ -277,26 +277,46 @@ function ci_compact_cta( $text = '' ) {
 }
 
 function ci_brand_strip() {
-	$names = wp_list_pluck( ci_rows( 'opt_clients', 'option' ), 'name' );
-	$sets  = '';
-	foreach ( array( 0, 1 ) as $n ) {
-		$sets .= '<div class="brand-set" ' . ( $n ? 'aria-hidden="true"' : '' ) . '>';
-		foreach ( $names as $i => $t ) {
-			$sets .= '<span class="client-name client-' . ( $i % 8 ) . '">' . ci_e( $t ) . '</span>';
-		}
-		$sets .= '</div>';
+	$logo_dir = get_template_directory_uri() . '/assets/images/logos/';
+	$logos = array(
+		array( 'file' => 'logo_r1_0.png', 'alt' => 'SH' ),
+		array( 'file' => 'logo_r1_1.png', 'alt' => 'ISAT Africa' ),
+		array( 'file' => 'logo_r1_2.png', 'alt' => 'Air Canada Foundation' ),
+		array( 'file' => 'logo_r1_3.png', 'alt' => 'University Emblem' ),
+		array( 'file' => 'logo_r1_4.png', 'alt' => 'Eutelsat OneWeb' ),
+		array( 'file' => 'logo_r1_5.png', 'alt' => 'Shatayu' ),
+		array( 'file' => 'logo_r1_6.png', 'alt' => 'Media Buzz' ),
+		array( 'file' => 'logo_r1_7.png', 'alt' => 'Crave' ),
+		array( 'file' => 'logo_r2_0.png', 'alt' => 'Dilbunny' ),
+		array( 'file' => 'logo_r2_1.png', 'alt' => 'PIV Group' ),
+		array( 'file' => 'logo_r2_2.png', 'alt' => 'GauSeva' ),
+		array( 'file' => 'logo_r2_3.png', 'alt' => 'Samunnati' ),
+		array( 'file' => 'logo_r2_4.png', 'alt' => 'MMCF' ),
+		array( 'file' => 'logo_r2_5.png', 'alt' => 'Station Satcom' ),
+		array( 'file' => 'logo_r2_6.png', 'alt' => 'IFB' ),
+	);
+
+	$brand_items = '';
+	foreach ( $logos as $l ) {
+		$brand_items .= '<img class="brand-logo-img" src="' . esc_url( $logo_dir . $l['file'] ) . '" alt="' . esc_attr( $l['alt'] ) . '" loading="lazy" />';
 	}
+
+	$sets = '';
+	foreach ( array( 0, 1 ) as $n ) {
+		$sets .= '<div class="brand-set" ' . ( $n ? 'aria-hidden="true"' : '' ) . '>' . $brand_items . '</div>';
+	}
+
 	$client_grid_img = get_template_directory_uri() . '/assets/images/Asset-2365.jpg';
 
 	return '<section class="brand-strip" aria-label="Selected client brands">' .
 		'<span class="small-label">' . ci_e( ci_opt( 'opt_clients_label' ) ) . '</span>' .
 		'<div class="brand-marquee"><div class="marquee-track">' . $sets . '</div></div>' .
-		'<div class="client-logos-banner wrap" data-reveal style="margin-top: 40px; text-align: center;">' .
-			'<img src="' . esc_url( $client_grid_img ) . '" alt="We Partner with Clients Worldwide" style="max-width: 100%; height: auto; border-radius: 12px; display: block; margin: 0 auto 20px;" />' .
-			'<div class="client-logos-caption" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 16px; color: var(--navy, #0617a7);">' .
-				'<span class="globe-icon" style="font-size: 20px;">🌐</span>' .
-				'<span>We Partner with Clients Worldwide.</span>' .
-			'</div>' .
+	'</section>' .
+	'<section class="client-logos-banner wrap" data-reveal style="padding: 40px var(--gutter, 4vw); text-align: center;">' .
+		'<img src="' . esc_url( $client_grid_img ) . '" alt="We Partner with Clients Worldwide" style="max-width: 100%; height: auto; border-radius: 12px; display: block; margin: 0 auto 20px;" />' .
+		'<div class="client-logos-caption" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 16px; color: var(--navy, #0617a7);">' .
+			'<span class="globe-icon" style="font-size: 20px;">🌐</span>' .
+			'<span>We Partner with Clients Worldwide.</span>' .
 		'</div>' .
 	'</section>';
 }
