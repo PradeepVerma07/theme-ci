@@ -277,28 +277,35 @@ function ci_compact_cta( $text = '' ) {
 }
 
 function ci_brand_strip() {
-	$logo_dir = get_template_directory_uri() . '/assets/images/logos/';
+	$logo_dir = get_template_directory_uri() . '/assets/images/brand-logos/';
 	$logos = array(
-		array( 'file' => 'logo_r1_0.png', 'alt' => 'SH' ),
-		array( 'file' => 'logo_r1_1.png', 'alt' => 'ISAT Africa' ),
-		array( 'file' => 'logo_r1_2.png', 'alt' => 'Air Canada Foundation' ),
-		array( 'file' => 'logo_r1_3.png', 'alt' => 'University Emblem' ),
-		array( 'file' => 'logo_r1_4.png', 'alt' => 'Eutelsat OneWeb' ),
-		array( 'file' => 'logo_r1_5.png', 'alt' => 'Shatayu' ),
-		array( 'file' => 'logo_r1_6.png', 'alt' => 'Media Buzz' ),
-		array( 'file' => 'logo_r1_7.png', 'alt' => 'Crave' ),
-		array( 'file' => 'logo_r2_0.png', 'alt' => 'Dilbunny' ),
-		array( 'file' => 'logo_r2_1.png', 'alt' => 'PIV Group' ),
-		array( 'file' => 'logo_r2_2.png', 'alt' => 'GauSeva' ),
-		array( 'file' => 'logo_r2_3.png', 'alt' => 'Samunnati' ),
-		array( 'file' => 'logo_r2_4.png', 'alt' => 'MMCF' ),
-		array( 'file' => 'logo_r2_5.png', 'alt' => 'Station Satcom' ),
-		array( 'file' => 'logo_r2_6.png', 'alt' => 'IFB' ),
+		array( 'file' => 'Vardan-logo1.png', 'alt' => 'Vardān' ),
+		array( 'file' => 'eutelsat-oneweb.webp', 'alt' => 'Eutelsat OneWeb' ),
+		array( 'file' => 'Crave-Logo.jpg-1.jpeg', 'alt' => 'Crave' ),
+		array( 'file' => 'ifb-logo.png', 'alt' => 'IFB' ),
+		array( 'file' => 'times-logo.png', 'alt' => 'The Times of India' ),
+		array( 'file' => 'Shatayu-Logo-1.png', 'alt' => 'Shatayu' ),
+		array( 'file' => 'Air-canada.webp', 'alt' => 'Air Canada' ),
+		array( 'file' => 'chaitanya-school-scaled.png', 'alt' => 'Chaitanya School' ),
+		array( 'file' => 'MB-LOGO.png', 'alt' => 'Media Buzz' ),
+		array( 'file' => 'SHREE-SAVA-PANCHANMRUT-LOGO.png', 'alt' => 'Shree Sava Panchanmrut' ),
+		array( 'file' => 'isat-africa.webp', 'alt' => 'ISAT Africa' ),
+		array( 'file' => 'piv.png', 'alt' => 'PIV Group' ),
+		array( 'file' => 'samunnati-colored-logo.png', 'alt' => 'Samunnati' ),
+		array( 'file' => 'MMCF-Logo-2-scaled.png', 'alt' => 'MMCF' ),
+		array( 'file' => 'Terrainless-connectivity-Logo-scaled.png', 'alt' => 'Station Satcom' ),
+		array( 'file' => 'Gaudiya-Mission-logo.png', 'alt' => 'Gaudiya Mission' ),
+		array( 'file' => 'kish_logo.png', 'alt' => 'Kish' ),
+		array( 'file' => 'TOLVV_Monochrome-Logo_0226-03-05-scaled.png', 'alt' => 'TOLVV' ),
+		array( 'file' => 'VNA-logo-usage-2-01-scaled.png', 'alt' => 'VNA' ),
+		array( 'file' => 'TIL-LOGO.png', 'alt' => 'TIL' ),
+		array( 'file' => 'times-language-logo1.png', 'alt' => 'Times Language' ),
+		array( 'file' => 'final-logo-png.png', 'alt' => 'SH' ),
 	);
 
 	$brand_items = '';
 	foreach ( $logos as $l ) {
-		$brand_items .= '<img class="brand-logo-img" src="' . esc_url( $logo_dir . $l['file'] ) . '" alt="' . esc_attr( $l['alt'] ) . '" loading="lazy" />';
+		$brand_items .= '<span class="brand-logo-wrap"><img class="brand-logo-img" src="' . esc_url( $logo_dir . $l['file'] ) . '" alt="' . esc_attr( $l['alt'] ) . '" loading="lazy" /></span>';
 	}
 
 	$sets = '';
