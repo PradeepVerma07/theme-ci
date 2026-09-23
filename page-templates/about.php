@@ -20,9 +20,74 @@ foreach ( $timeline as $i => $r ) {
 	$tabs .= '<button role="tab" id="year-' . $i . '" aria-controls="timeline-panel" aria-selected="' . ( $i ? 'false' : 'true' ) . '" data-year="' . $i . '">' . ci_e( $r['year'] ) . '<span></span></button>';
 }
 $first = $timeline ? $timeline[0] : array( 'year' => '', 'title' => '', 'text' => '' );
-$team  = '';
-foreach ( ci_posts( 'ci_team' ) as $i => $m ) {
-	$team .= '<div class="team-member" data-reveal><span class="team-index">' . ci_pad( $i + 1 ) . '</span><h3>' . ci_e( ci_title( $m ) ) . '</h3><p>' . ci_e( ci_get( 'team_role', $m->ID ) ) . '</p></div>';
+$team_data = array(
+	array( 'name' => 'Pramit Ghosh', 'role' => 'CEO | Founder', 'photo' => '122A0148.webp' ),
+	array( 'name' => 'Aashit Shah', 'role' => 'Director | Co-Founder', 'photo' => 'Aashit-.jpg' ),
+	array( 'name' => 'Urna Banerji', 'role' => 'COO', 'photo' => 'Urna.jpeg' ),
+	array( 'name' => 'Bhumi Chabbra', 'role' => 'Director, US', 'photo' => 'Bn.png' ),
+	array( 'name' => 'John Seaman', 'role' => 'Head of Technology', 'photo' => 'John-Seaman.jpg' ),
+	array( 'name' => 'Mansi Bagdai', 'role' => 'Strategy and Growth Lead', 'photo' => 'Mansi.jpg' ),
+	array( 'name' => 'Manan Dhingra', 'role' => 'Creative Lead', 'photo' => 'Manan-Dhingra.jpg' ),
+	array( 'name' => 'Aneri Shah', 'role' => 'Creative Lead', 'photo' => 'AS.jpeg' ),
+	array( 'name' => 'Maryanne deSousa', 'role' => 'Graphic Designer and Video Editor', 'photo' => 'MD.jpeg' ),
+	array( 'name' => 'Aarya Parsodkar', 'role' => 'Graphic Designer', 'photo' => 'Aarya.jpg' ),
+	array( 'name' => 'Pratik Hemani', 'role' => 'Strategy Lead – Digital & OOH', 'photo' => 'pratik.jpeg' ),
+	array( 'name' => 'Meshwa Kadia', 'role' => 'Web Developer', 'photo' => 'mmk.jpeg' ),
+	array( 'name' => 'Ajay Shankar', 'role' => 'Video Editor and Motion Designer', 'photo' => 'as-e1785923665718.jpeg' ),
+	array( 'name' => 'Pradeep Verma', 'role' => 'Executive Web Developer', 'photo' => '65794823924813429381189938331.jpg' ),
+	array( 'name' => 'Harshada', 'role' => 'SEO Lead', 'photo' => 'H.jpg' ),
+	array( 'name' => 'Aadhya Bhidodiya', 'role' => 'Graphic Designer', 'photo' => 'AB-rotated.jpeg' ),
+	array( 'name' => 'Arushi Singh', 'role' => 'Social Media Manager', 'photo' => 'Arushi_SM.jpg' ),
+);
+
+$team_dir = get_template_directory_uri() . '/assets/images/team/';
+$team = '';
+$db_posts = ci_posts( 'ci_team' );
+
+if ( ! empty( $db_posts ) ) {
+	foreach ( $db_posts as $i => $m ) {
+		$name = ci_title( $m );
+		$role = ci_get( 'team_role', $m->ID );
+		$img_id = (int) ci_get( 'founder_portrait', $m->ID );
+		if ( ! $img_id ) {
+			$img_id = get_post_thumbnail_id( $m->ID );
+		}
+		$photo_html = '';
+		if ( $img_id ) {
+			$photo_html = '<img class="team-member-photo" src="' . esc_url( wp_get_attachment_image_url( $img_id, 'medium_large' ) ) . '" alt="' . esc_attr( $name ) . '" loading="lazy" />';
+		} else {
+			foreach ( $team_data as $td ) {
+				if ( strcasecmp( $td['name'], $name ) === 0 || strcasecmp( strtok( $td['name'], ' ' ), strtok( $name, ' ' ) ) === 0 ) {
+					$photo_html = '<img class="team-member-photo" src="' . esc_url( $team_dir . $td['photo'] ) . '" alt="' . esc_attr( $name ) . '" loading="lazy" />';
+					break;
+				}
+			}
+		}
+		if ( empty( $photo_html ) ) {
+			$photo_html = '<div class="team-photo-fallback"><span>' . esc_html( mb_substr( $name, 0, 2 ) ) . '</span></div>';
+		}
+		$team .= '<div class="team-member-card" data-reveal>' .
+			'<div class="team-member-photo-wrap">' . $photo_html . '</div>' .
+			'<div class="team-member-info">' .
+				'<span class="team-index">' . ci_pad( $i + 1 ) . '</span>' .
+				'<h3>' . ci_e( $name ) . '</h3>' .
+				'<p>' . ci_e( $role ) . '</p>' .
+			'</div>' .
+		'</div>';
+	}
+} else {
+	foreach ( $team_data as $i => $td ) {
+		$team .= '<div class="team-member-card" data-reveal>' .
+			'<div class="team-member-photo-wrap">' .
+				'<img class="team-member-photo" src="' . esc_url( $team_dir . $td['photo'] ) . '" alt="' . esc_attr( $td['name'] ) . '" loading="lazy" />' .
+			'</div>' .
+			'<div class="team-member-info">' .
+				'<span class="team-index">' . ci_pad( $i + 1 ) . '</span>' .
+				'<h3>' . ci_e( $td['name'] ) . '</h3>' .
+				'<p>' . ci_e( $td['role'] ) . '</p>' .
+			'</div>' .
+		'</div>';
+	}
 }
 $industries = '';
 foreach ( ci_rows( 'about_industries_list', $id ) as $i => $r ) {
