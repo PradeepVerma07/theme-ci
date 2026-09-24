@@ -14,12 +14,131 @@ $values = '';
 foreach ( ci_rows( 'about_values', $id ) as $r ) {
 	$values .= '<li>' . ci_e( $r['value'] ) . '</li>';
 }
-$timeline = ci_rows( 'about_timeline', $id );
-$tabs     = '';
-foreach ( $timeline as $i => $r ) {
-	$tabs .= '<button role="tab" id="year-' . $i . '" aria-controls="timeline-panel" aria-selected="' . ( $i ? 'false' : 'true' ) . '" data-year="' . $i . '">' . ci_e( $r['year'] ) . '<span></span></button>';
+$journey_heading = $g( 'about_journey_heading' );
+if ( empty( trim( strip_tags( (string) $journey_heading ) ) ) ) {
+	$journey_heading = 'Built one <em>meaningful</em><br>business problem at a time.';
 }
-$first = $timeline ? $timeline[0] : array( 'year' => '', 'title' => '', 'text' => '' );
+
+$db_timeline_rows   = ci_rows( 'about_timeline', $id );
+$default_milestones = array(
+	array(
+		'year'  => '2017',
+		'title' => 'Founded by a veteran of <br/>18 years in core <br/>marketing functions.',
+		'desc'  => 'We started by getting closer to businesses, their audiences, and the challenges that truly mattered.',
+		'tags'  => array( 'Strategy', 'Research', 'Clarity' ),
+		'img'   => '/wp-content/uploads/2026/08/bg7.jpeg',
+		'glow'  => 'rgba(59,130,246,0.22), rgba(6,182,212,0.08)',
+	),
+	array(
+		'year'  => '2018',
+		'title' => 'Launched digital <br/>marketing services <br/>in the US.',
+		'desc'  => 'Launched digital marketing services in the US, expanding our reach into new markets.',
+		'tags'  => array( 'Digital', 'Expansion', 'US Market' ),
+		'img'   => '/wp-content/uploads/2026/09/Creative.jpg',
+		'glow'  => 'rgba(59,130,246,0.22), rgba(99,102,241,0.08)',
+	),
+	array(
+		'year'  => '2019',
+		'title' => 'Ideas Became <br/>Connected Brand <br/>Experiences.',
+		'desc'  => 'Our canvas widened as we began shaping brands across multiple communication touchpoints.',
+		'tags'  => array( 'Brand', 'Content', 'Digital' ),
+		'img'   => '/wp-content/uploads/2026/08/bg2.jpeg',
+		'glow'  => 'rgba(99,102,241,0.22), rgba(59,130,246,0.08)',
+	),
+	array(
+		'year'  => '2020',
+		'title' => 'Growing fast in Ahmedabad, Delhi, Mumbai & the US — focused on SMEs.',
+		'desc'  => 'New realities pushed us to rethink faster, respond smarter, and help brands navigate uncertainty.',
+		'tags'  => array( 'Agility', 'Focus', 'Momentum' ),
+		'img'   => '/wp-content/uploads/2026/08/bg3.jpeg',
+		'glow'  => 'rgba(251,191,36,0.16), rgba(239,68,68,0.07)',
+	),
+	array(
+		'year'  => '2021',
+		'title' => 'Expanded US operations in digital marketing and custom software development.',
+		'desc'  => 'Ideas gained greater scale and precision as new tools reshaped how we brought them to life.',
+		'tags'  => array( 'Technology', 'Automation', 'Performance' ),
+		'img'   => '/wp-content/uploads/2026/08/bg4.jpeg',
+		'glow'  => 'rgba(16,185,129,0.16), rgba(6,182,212,0.08)',
+	),
+	array(
+		'year'  => '2023',
+		'title' => 'Expanded horizons — introduced business consultancy to the portfolio.',
+		'desc'  => 'A single narrative approach began guiding every interaction, from the first idea to the final customer experience.',
+		'tags'  => array( 'Consulting', 'Storytelling', 'Delivery' ),
+		'img'   => '/wp-content/uploads/2026/08/bg5.jpeg',
+		'glow'  => 'rgba(6,182,212,0.22), rgba(59,130,246,0.08)',
+	),
+	array(
+		'year'  => '2024',
+		'title' => 'Pioneering AI, <br/>forging a path toward <br/>transformative growth.',
+		'desc'  => 'Pioneering AI, forging a path toward transformative growth across every service line.',
+		'tags'  => array( 'AI', 'Innovation', 'Growth' ),
+		'img'   => '/wp-content/uploads/2026/09/WI.jpg',
+		'glow'  => 'rgba(16,185,129,0.20), rgba(99,102,241,0.08)',
+	),
+	array(
+		'year'  => '2025',
+		'title' => 'Expansion and hiring <br/>of talent across <br/>segments.',
+		'desc'  => 'Expansion and hiring of talent across segments, strengthening our capabilities nationwide.',
+		'tags'  => array( 'Expansion', 'Talent', 'Scale' ),
+		'img'   => '/wp-content/uploads/2026/09/PI.jpg',
+		'glow'  => 'rgba(6,182,212,0.20), rgba(37,99,235,0.10)',
+	),
+	array(
+		'year'  => 'NOW',
+		'title' => 'One Integrated Partner<br/> for Meaningful<br/> Growth.',
+		'desc'  => 'We now solve business challenges through connected thinking that turns opportunities into measurable outcomes.',
+		'tags'  => array( 'Intelligence', 'Judgement', 'Impact' ),
+		'img'   => '/wp-content/uploads/2026/08/bg_1.jpeg',
+		'glow'  => 'rgba(99,102,241,0.22), rgba(6,182,212,0.10)',
+	),
+);
+
+$milestones_data = array();
+if ( ! empty( $db_timeline_rows ) ) {
+	foreach ( $db_timeline_rows as $idx => $r ) {
+		$def   = isset( $default_milestones[ $idx ] ) ? $default_milestones[ $idx ] : $default_milestones[ count( $default_milestones ) - 1 ];
+		$year  = ! empty( $r['year'] ) ? $r['year'] : $def['year'];
+		$title = ! empty( $r['title'] ) ? $r['title'] : $def['title'];
+		$desc  = ! empty( $r['text'] ) ? $r['text'] : ( ! empty( $r['desc'] ) ? $r['desc'] : $def['desc'] );
+
+		$img_url = '';
+		if ( ! empty( $r['image'] ) ) {
+			if ( is_numeric( $r['image'] ) ) {
+				$img_url = wp_get_attachment_image_url( (int) $r['image'], 'full' );
+			} elseif ( is_string( $r['image'] ) ) {
+				$img_url = $r['image'];
+			}
+		}
+		if ( empty( $img_url ) ) {
+			$img_url = $def['img'];
+		}
+
+		$tags = array();
+		if ( ! empty( $r['tags'] ) ) {
+			if ( is_array( $r['tags'] ) ) {
+				$tags = $r['tags'];
+			} else {
+				$tags = array_map( 'trim', explode( ',', (string) $r['tags'] ) );
+			}
+		} else {
+			$tags = $def['tags'];
+		}
+
+		$milestones_data[] = array(
+			'year'  => $year,
+			'title' => $title,
+			'desc'  => $desc,
+			'tags'  => $tags,
+			'img'   => $img_url,
+			'glow'  => $def['glow'],
+		);
+	}
+} else {
+	$milestones_data = $default_milestones;
+}
+
 $team_data = array(
 	array( 'name' => 'Pramit Ghosh', 'role' => 'CEO | Founder', 'photo' => '122A0148.webp' ),
 	array( 'name' => 'Aashit Shah', 'role' => 'Director | Co-Founder', 'photo' => 'Aashit-.jpg' ),
@@ -479,8 +598,7 @@ foreach ( ci_rows( 'about_industries_list', $id ) as $i => $r ) {
     <div class="tl-heading-wrap">
       <?php echo ci_sec_label( 'about_journey', $id ); ?>
       <h2 class="tl-main-heading">
-        Built one <em>meaningful</em><br>
-        business problem at a time.
+        <?php echo ci_html( $journey_heading ); ?>
       </h2>
     </div>
     <div class="tl-track-wrap">
@@ -498,80 +616,7 @@ foreach ( ci_rows( 'about_industries_list', $id ) as $i => $r ) {
 <script>
 (function () {
   var fallbackImg = "<?php echo esc_url( get_template_directory_uri() . '/assets/images/Asset-2365.jpg' ); ?>";
-  var milestones = [
-    {
-      year: "2017",
-      title: "Founded by a veteran of <br/>18 years in core <br/>marketing functions.",
-      desc: "We started by getting closer to businesses, their audiences, and the challenges that truly mattered.",
-      tags: ["Strategy", "Research", "Clarity"],
-      img:  "/wp-content/uploads/2026/08/bg7.jpeg",
-      glow: "rgba(59,130,246,0.22), rgba(6,182,212,0.08)"
-    },
-    {
-      year: "2018",
-      title: "Launched digital <br/>marketing services <br/>in the US.",
-      desc: "Launched digital marketing services in the US, expanding our reach into new markets.",
-      tags: ["Digital", "Expansion", "US Market"],
-      img:  "/wp-content/uploads/2026/09/Creative.jpg",
-      glow: "rgba(59,130,246,0.22), rgba(99,102,241,0.08)"
-    },
-    {
-      year: "2019",
-      title: "Ideas Became <br/>Connected Brand <br/>Experiences.",
-      desc: "Our canvas widened as we began shaping brands across multiple communication touchpoints.",
-      tags: ["Brand", "Content", "Digital"],
-      img:  "/wp-content/uploads/2026/08/bg2.jpeg",
-      glow: "rgba(99,102,241,0.22), rgba(59,130,246,0.08)"
-    },
-    {
-      year: "2020",
-      title: "Growing fast in Ahmedabad, Delhi, Mumbai & the US — focused on SMEs.",
-      desc: "New realities pushed us to rethink faster, respond smarter, and help brands navigate uncertainty.",
-      tags: ["Agility", "Focus", "Momentum"],
-      img:  "/wp-content/uploads/2026/08/bg3.jpeg",
-      glow: "rgba(251,191,36,0.16), rgba(239,68,68,0.07)"
-    },
-    {
-      year: "2021",
-      title: "Expanded US operations in digital marketing and custom software development.",
-      desc: "Ideas gained greater scale and precision as new tools reshaped how we brought them to life.",
-      tags: ["Technology", "Automation", "Performance"],
-      img:  "/wp-content/uploads/2026/08/bg4.jpeg",
-      glow: "rgba(16,185,129,0.16), rgba(6,182,212,0.08)"
-    },
-    {
-      year: "2023",
-      title: "Expanded horizons — introduced business consultancy to the portfolio.",
-      desc: "A single narrative approach began guiding every interaction, from the first idea to the final customer experience.",
-      tags: ["Consulting", "Storytelling", "Delivery"],
-      img:  "/wp-content/uploads/2026/08/bg5.jpeg",
-      glow: "rgba(6,182,212,0.22), rgba(59,130,246,0.08)"
-    },
-    {
-      year: "2024",
-      title: "Pioneering AI, <br/>forging a path toward <br/>transformative growth.",
-      desc: "Pioneering AI, forging a path toward transformative growth across every service line.",
-      tags: ["AI", "Innovation", "Growth"],
-      img:  "/wp-content/uploads/2026/09/WI.jpg",
-      glow: "rgba(16,185,129,0.20), rgba(99,102,241,0.08)"
-    },
-    {
-      year: "2025",
-      title: "Expansion and hiring <br/>of talent across <br/>segments.",
-      desc: "Expansion and hiring of talent across segments, strengthening our capabilities nationwide.",
-      tags: ["Expansion", "Talent", "Scale"],
-      img:  "/wp-content/uploads/2026/09/PI.jpg",
-      glow: "rgba(6,182,212,0.20), rgba(37,99,235,0.10)"
-    },
-    {
-      year: "NOW",
-      title: "One Integrated Partner<br/> for Meaningful<br/> Growth.",
-      desc: "We now solve business challenges through connected thinking that turns opportunities into measurable outcomes.",
-      tags: ["Intelligence", "Judgement", "Impact"],
-      img:  "/wp-content/uploads/2026/08/bg_1.jpeg",
-      glow: "rgba(99,102,241,0.22), rgba(6,182,212,0.10)"
-    }
-  ];
+  var milestones = <?php echo wp_json_encode( $milestones_data ); ?>;
 
   var SVG = {
     flame:  '<svg viewBox="0 0 24 24" width="18" height="18"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>',

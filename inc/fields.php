@@ -375,7 +375,7 @@ function ci_register_fields() {
 			),
 			ci_sec( 'about_journey', 'Timeline', 'THE JOURNEY', '2017 TO TODAY', 'Always in<br><em>forward motion.</em>' ),
 			array(
-				ci_rep( 'about_timeline', 'Timeline', array( ci_t( 'year', 'Year' ), ci_t( 'title', 'Title' ), ci_ta( 'text', 'Text' ) ) ),
+				ci_rep( 'about_timeline', 'Timeline', array( ci_t( 'year', 'Year' ), ci_t( 'title', 'Title' ), ci_ta( 'text', 'Text' ), ci_f( 'image', 'image', 'Image' ), ci_t( 'tags', 'Tags (comma separated)' ) ) ),
 				ci_tab( 'Team & industries' ),
 			),
 			ci_sec( 'about_team', 'Team (members come from Team)', 'THE PEOPLE', 'DIFFERENT MINDS. SHARED PURPOSE.', 'The thinking<br><em>behind the work.</em>', 'A multidisciplinary team connecting strategy, creative, technology and delivery.' ),
