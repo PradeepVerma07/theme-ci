@@ -122,7 +122,7 @@ function ci_render_header() {
 foreach ( ci_menu( 'desktop' ) as $ci_item ) {
 	echo '<a href="' . esc_url( $ci_item[0] ) . '" ' . ( ci_is_current( $ci_item[0] ) ? 'aria-current="page"' : '' ) . '>' . ci_e( $ci_item[1] ) . '</a>';
 }
-?></nav><div class="nav-right"><a class="nav-contact" href="<?php echo esc_url( ci_url( ci_opt( 'opt_header_cta_link' ) ) ); ?>"><?php echo ci_html( ci_opt( 'opt_header_cta' ) ); ?> <span><?php echo ci_arrow(); ?></span></a><button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="menu-dialog"><span></span><span></span></button></div></header><div class="scroll-progress" aria-hidden="true"></div><dialog class="menu-dialog" id="menu-dialog"><div class="menu-top"><span class="small-label"><?php echo ci_e( ci_opt( 'opt_menu_label' ) ); ?></span><button class="menu-close" aria-label="Close navigation">Close <span>&times;</span></button></div><div class="menu-layout"><nav aria-label="Expanded navigation"><?php
+?></nav><div class="nav-right"><button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="menu-dialog"><span></span><span></span></button></div></header><div class="scroll-progress" aria-hidden="true"></div><dialog class="menu-dialog" id="menu-dialog"><div class="menu-top"><span class="small-label"><?php echo ci_e( ci_opt( 'opt_menu_label' ) ); ?></span><button class="menu-close" aria-label="Close navigation">Close <span>&times;</span></button></div><div class="menu-layout"><nav aria-label="Expanded navigation"><?php
 foreach ( ci_menu( 'overlay' ) as $ci_i => $ci_item ) {
 	echo '<a href="' . esc_url( $ci_item[0] ) . '"><small>' . ci_pad( $ci_i + 1 ) . '</small>' . ci_e( $ci_item[1] ) . '<span>' . ci_arrow() . '</span></a>';
 }
@@ -161,19 +161,19 @@ function ci_render_footer() {
 		$sticker = ci_opt( 'opt_footer_sticker' );
 	}
 
-	$about         = ci_opt( 'opt_footer_about' );
-	$explore_label = ci_opt( 'opt_footer_explore' );
-	if ( empty( $explore_label ) ) {
-		$explore_label = 'EXPLORE';
+	$about = ci_opt( 'opt_footer_about' );
+	if ( empty( $about ) ) {
+		$about = 'CI360 Degrees is an integrated digital marketing and strategic communication agency built around the power of strategic storytelling.';
 	}
 
-	$offices_label = ci_opt( 'opt_footer_offices' );
-	if ( empty( $offices_label ) ) {
-		$offices_label = 'THREE LOCATIONS. ONE CONNECTED TEAM.';
+	$ci_email  = ci_opt( 'opt_email' );
+	$ci_email2 = ci_opt( 'opt_email_2' );
+	if ( empty( $ci_email2 ) ) {
+		$ci_email2 = 'aashit.shah@ci360degrees.com';
 	}
-
-	$ci_email = ci_opt( 'opt_email' );
-	$ci_phone = ci_opt( 'opt_phone' );
+	if ( empty( $ci_email ) ) {
+		$ci_email = 'pramit.ghosh@ci360degrees.com';
+	}
 
 	$back_top_label = ci_opt( 'opt_footer_back_top_label' );
 	if ( empty( $back_top_label ) ) {
@@ -182,7 +182,7 @@ function ci_render_footer() {
 
 	ob_start();
 	?>
-	<footer class="footer">
+	<footer class="footer ci360-new-footer">
 		<?php if ( ! $hide_cta && ( $heading || $label_1 || $label_2 ) ) : ?>
 			<div class="footer-cta wrap">
 				<div>
@@ -201,36 +201,108 @@ function ci_render_footer() {
 			</div>
 		<?php endif; ?>
 
-		<div class="footer-lower wrap">
-			<div class="footer-brand">
-				<?php echo ci_site_logo( 'footer' ); ?>
-				<?php if ( $about ) : ?>
-					<p><?php echo ci_e( $about ); ?></p>
-				<?php endif; ?>
-				<?php if ( $ci_email ) : ?>
-					<a class="text-link" href="mailto:<?php echo esc_attr( $ci_email ); ?>"><?php echo ci_e( $ci_email ); ?> <?php echo ci_arrow(); ?></a>
-				<?php endif; ?>
+		<div class="footer-lower wrap ci360-footer-grid">
+			<!-- Col 1: Brand & Bio -->
+			<div class="ci360-fcol ci360-fcol-brand">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="ci360-footer-logo" aria-label="Home">
+					<svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="50" cy="50" r="42" stroke="url(#ci360_grad)" stroke-width="8" stroke-linecap="round"/>
+						<line x1="50" y1="50" x2="80" y2="20" stroke="url(#ci360_grad)" stroke-width="8" stroke-linecap="round"/>
+						<defs>
+							<linearGradient id="ci360_grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+								<stop stop-color="#3b82f6"/>
+								<stop offset="1" stop-color="#22d3ee"/>
+							</linearGradient>
+						</defs>
+					</svg>
+				</a>
+				<p class="ci360-footer-about"><?php echo ci_e( $about ); ?></p>
 			</div>
 
-			<div class="footer-links">
-				<span class="small-label"><?php echo ci_e( $explore_label ); ?></span>
-				<?php
-				foreach ( ci_menu( 'footer' ) as $ci_item ) {
-					echo '<a href="' . esc_url( $ci_item[0] ) . '">' . ci_e( $ci_item[1] ) . '</a>';
-				}
-				?>
+			<!-- Col 2: Navigation -->
+			<div class="ci360-fcol ci360-fcol-nav">
+				<h4 class="ci360-fhead">Navigation</h4>
+				<ul class="ci360-flist">
+					<li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">ABOUT</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/founders/' ) ); ?>">FOUNDERS</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/services/' ) ); ?>">SERVICES</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/work/' ) ); ?>">STORIES</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/insights/' ) ); ?>">BLOG</a></li>
+				</ul>
 			</div>
 
-			<div class="footer-offices">
-				<span class="small-label"><?php echo ci_e( $offices_label ); ?></span>
-				<?php
-				foreach ( ci_rows( 'opt_offices', 'option' ) as $ci_o ) {
-					echo '<div><span>' . ci_e( $ci_o['city'] ) . ' <small>' . ci_e( $ci_o['country_code'] ) . '</small></span><time data-zone="' . esc_attr( $ci_o['zone'] ) . '" aria-label="Current time in ' . esc_attr( $ci_o['city'] ) . '">--:--</time></div>';
-				}
-				?>
-				<?php if ( $ci_phone ) : ?>
-					<a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $ci_phone ) ); ?>"><?php echo ci_e( $ci_phone ); ?></a>
-				<?php endif; ?>
+			<!-- Col 3: Key Capabilities -->
+			<div class="ci360-fcol ci360-fcol-caps">
+				<h4 class="ci360-fhead">Key Capabilities</h4>
+				<ul class="ci360-flist">
+					<li>Strategic Storytelling</li>
+					<li>Social Media Marketing</li>
+					<li>Performance Marketing</li>
+					<li>SEO, AI Search</li>
+					<li>Local Visibility</li>
+					<li>Content, Creative</li>
+					<li>Campaigns</li>
+					<li>Branding</li>
+					<li>Design</li>
+					<li>Websites</li>
+					<li>Digital Experiences</li>
+					<li>Podcast Production</li>
+					<li>Marketing</li>
+				</ul>
+			</div>
+
+			<!-- Col 4: Locations -->
+			<div class="ci360-fcol ci360-fcol-locs">
+				<h4 class="ci360-fhead">Locations</h4>
+				<div class="ci360-loc-group">
+					<span class="ci360-flag-head">🇮🇳 <strong>India</strong></span>
+					<div class="ci360-loc-block">
+						<strong>Ahmedabad</strong>
+						<p>203 – 204, Devashish Complex, Nr. Hotel Kalssic Gold, Off. C.G Road, Ahmedabad, India 380009</p>
+					</div>
+					<div class="ci360-loc-block" style="margin-top:6px;">
+						<strong>Delhi</strong>
+					</div>
+				</div>
+				<div class="ci360-loc-group" style="margin-top:16px;">
+					<span class="ci360-flag-head">🇺🇸 <strong>International</strong></span>
+					<div class="ci360-loc-block">
+						<strong>Greenville, USA</strong>
+					</div>
+				</div>
+			</div>
+
+			<!-- Col 5: Direct Contact -->
+			<div class="ci360-fcol ci360-fcol-contact">
+				<h4 class="ci360-fhead">Direct Contact</h4>
+				<ul class="ci360-contact-list">
+					<li>
+						<a href="mailto:<?php echo esc_attr( $ci_email ); ?>">
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+							<?php echo ci_e( $ci_email ); ?>
+						</a>
+					</li>
+					<li>
+						<a href="mailto:<?php echo esc_attr( $ci_email2 ); ?>">
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+							<?php echo ci_e( $ci_email2 ); ?>
+						</a>
+					</li>
+				</ul>
+				<div class="ci360-social-icons">
+					<a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+						<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+					</a>
+					<a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
+						<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+					</a>
+					<a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+						<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+					</a>
+					<a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube">
+						<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#060f26"/></svg>
+					</a>
+				</div>
 			</div>
 		</div>
 

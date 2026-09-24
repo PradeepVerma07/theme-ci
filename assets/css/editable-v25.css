@@ -477,3 +477,187 @@
   .services-hero .services-hero-art .service-visual{border-radius:15px!important}
   .services-hero .hero-art-badge{width:86px;height:86px;font-size:28px}
 }
+
+/* ---------- 1. Showcase Headline & Title Under Card Fix ---------- */
+.showcase-headline {
+  font-size: clamp(16px, 1.8vw, 22px) !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6) !important;
+  padding: 14px 22px !important;
+  border-radius: 14px !important;
+  line-height: 1.4 !important;
+  margin-top: 18px !important;
+  display: block !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  box-shadow: 0 4px 15px rgba(29, 78, 216, 0.2) !important;
+}
+
+/* ---------- 2. Full-Width Brand Logo Marquee Slider (No side label text) ---------- */
+.brand-strip > .small-label {
+  display: none !important;
+}
+.brand-strip {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-inline: 0 !important;
+}
+.brand-marquee {
+  width: 100% !important;
+  flex: 1 1 100% !important;
+  min-width: 100% !important;
+}
+
+/* ---------- 3. Header "Let's talk" Button Removal ---------- */
+a.nav-contact,
+.site-header .nav-contact {
+  display: none !important;
+}
+
+/* ---------- 4. Phone View: Hero Section Image First (Order Top) ---------- */
+@media (max-width: 767px) {
+  .hero,
+  .services-hero-grid,
+  .service-detail-grid,
+  .about-teaser,
+  .founder-studio,
+  .capability-layout {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .hero-collage,
+  .hero-art,
+  .services-hero-art,
+  .service-detail-art,
+  .about-wide-image,
+  .studio-photo,
+  .project-hero-visual,
+  .capability-preview,
+  .founder-photo {
+    order: -1 !important;
+    width: 100% !important;
+    margin-bottom: 24px !important;
+  }
+}
+
+/* ---------- 5. New 5-Column Footer Design Styling ---------- */
+.ci360-new-footer {
+  background: #040a1f !important;
+  color: #ffffff !important;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+.ci360-footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr 1.1fr 1.3fr 1.1fr;
+  gap: 40px 30px;
+  padding-block: 50px 40px;
+}
+@media (max-width: 1024px) {
+  .ci360-footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px 24px;
+  }
+}
+@media (max-width: 640px) {
+  .ci360-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+.ci360-fcol-brand .ci360-footer-about {
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.65;
+  margin-top: 20px;
+  max-width: 280px;
+}
+.ci360-fhead {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 18px;
+  letter-spacing: -0.01em;
+}
+.ci360-flist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ci360-flist li {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.ci360-flist a {
+  color: #cbd5e1;
+  transition: color 0.25s;
+}
+.ci360-flist a:hover {
+  color: #22d3ee;
+}
+.ci360-loc-group {
+  font-size: 13px;
+  color: #94a3b8;
+}
+.ci360-flag-head {
+  display: block;
+  color: #f1f5f9;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.ci360-loc-block {
+  margin-bottom: 8px;
+}
+.ci360-loc-block strong {
+  color: #e2e8f0;
+  display: block;
+  font-size: 13px;
+}
+.ci360-loc-block p {
+  color: #94a3b8;
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.ci360-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+}
+.ci360-contact-list li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #cbd5e1;
+  font-size: 13px;
+  margin-bottom: 12px;
+  transition: color 0.25s;
+}
+.ci360-contact-list li a:hover {
+  color: #22d3ee;
+}
+.ci360-social-icons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.ci360-social-icons a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #060f26;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s, background 0.25s, color 0.25s;
+}
+.ci360-social-icons a:hover {
+  transform: translateY(-3px);
+  background: #22d3ee;
+  color: #040a1f;
+}
