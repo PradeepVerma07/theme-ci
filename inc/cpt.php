@@ -41,7 +41,7 @@ function ci_register_content_types() {
 				'hierarchical'       => false,
 				'menu_icon'          => $icon,
 				'menu_position'      => 21,
-				'supports'           => array( 'title', 'page-attributes', 'revisions' ),
+				'supports'           => array( 'title', 'thumbnail', 'page-attributes', 'revisions' ),
 				'rewrite'            => $public ? array( 'slug' => $slug, 'with_front' => false ) : false,
 			)
 		);

@@ -16,7 +16,13 @@ foreach ( $founders as $i => $f ) {
 	$fid      = $f->ID;
 	$name     = ci_title( $f );
 	$role     = ci_get( 'founder_role', $fid );
-	$portrait = (int) ci_get( 'founder_portrait', $fid );
+	$portrait = (int) ci_get( 'team_photo', $fid );
+	if ( ! $portrait ) {
+		$portrait = (int) ci_get( 'founder_portrait', $fid );
+	}
+	if ( ! $portrait ) {
+		$portrait = get_post_thumbnail_id( $fid );
+	}
 	$profiles .= '<article class="founder-profile" data-reveal><div class="founder-photo tone-' . esc_attr( ci_get( 'founder_tone', $fid ) ) . '"><div class="founder-fallback">' . ci_img( $g( 'founders_fallback_image' ), 'Creative studio environment' ) . '<div><span>' . ci_e( ci_get( 'founder_initials', $fid ) ) . '</span><p>' . ci_e( ci_get( 'founder_lens', $fid ) ) . '</p></div></div>'
 		. ( $portrait ? '<img class="founder-portrait" src="' . esc_url( wp_get_attachment_image_url( $portrait, 'full' ) ) . '" alt="' . esc_attr( $name ) . ' - portrait" loading="lazy" data-external-portrait>' : '' )
 		. '<span class="founder-photo-label">0' . ( $i + 1 ) . ' / ' . ci_e( mb_strtoupper( $role ) ) . '</span></div><div class="founder-body"><span class="small-label">' . ci_e( $role ) . '</span><h2>' . ci_e( $name ) . '</h2><blockquote>' . ci_e( ci_get( 'founder_quote', $fid ) ) . '</blockquote></div></article>';

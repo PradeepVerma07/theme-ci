@@ -48,7 +48,10 @@ if ( ! empty( $db_posts ) ) {
 	foreach ( $db_posts as $i => $m ) {
 		$name = ci_title( $m );
 		$role = ci_get( 'team_role', $m->ID );
-		$img_id = (int) ci_get( 'founder_portrait', $m->ID );
+		$img_id = (int) ci_get( 'team_photo', $m->ID );
+		if ( ! $img_id ) {
+			$img_id = (int) ci_get( 'founder_portrait', $m->ID );
+		}
 		if ( ! $img_id ) {
 			$img_id = get_post_thumbnail_id( $m->ID );
 		}

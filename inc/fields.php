@@ -113,7 +113,7 @@ function ci_group( $key, $title, $fields, $location, $extra = array() ) {
 				'position'              => 'acf_after_title',
 				'style'                 => 'default',
 				'label_placement'       => 'top',
-				'hide_on_screen'        => array( 'the_content', 'excerpt', 'discussion', 'comments', 'featured_image' ),
+				'hide_on_screen'        => array( 'the_content', 'excerpt', 'discussion', 'comments' ),
 			),
 			$extra
 		)
@@ -637,12 +637,13 @@ function ci_register_fields() {
 		'Team member',
 		array(
 			ci_t( 'team_role', 'Role' ),
+			ci_f( 'image', 'team_photo', 'Member photo / portrait' ),
 			ci_f( 'true_false', 'team_is_founder', 'Is a founder (shown on Founders page)', 0 ),
 			ci_t( 'founder_role', 'Founder title', '', array( 'conditional_logic' => array( array( array( 'field' => 'field_ci_team_is_founder', 'operator' => '==', 'value' => '1' ) ) ) ) ),
 			ci_t( 'founder_initials', 'Initials', '', array( 'conditional_logic' => array( array( array( 'field' => 'field_ci_team_is_founder', 'operator' => '==', 'value' => '1' ) ) ) ) ),
 			ci_t( 'founder_lens', 'Lens line', '', array( 'conditional_logic' => array( array( array( 'field' => 'field_ci_team_is_founder', 'operator' => '==', 'value' => '1' ) ) ) ) ),
 			ci_ta( 'founder_quote', 'Quote', '', array( 'rows' => 5, 'conditional_logic' => array( array( array( 'field' => 'field_ci_team_is_founder', 'operator' => '==', 'value' => '1' ) ) ) ) ),
-			ci_f( 'image', 'founder_portrait', 'Portrait', null, array( 'conditional_logic' => array( array( array( 'field' => 'field_ci_team_is_founder', 'operator' => '==', 'value' => '1' ) ) ) ) ),
+			ci_f( 'image', 'founder_portrait', 'Founder portrait (optional fallback)', null, array( 'conditional_logic' => array( array( array( 'field' => 'field_ci_team_is_founder', 'operator' => '==', 'value' => '1' ) ) ) ) ),
 			ci_sel( 'founder_tone', 'Photo tone', ci_tones(), 'orange' ),
 		),
 		ci_loc_type( 'ci_team' )
