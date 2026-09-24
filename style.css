@@ -1,11 +1,12 @@
 /*
-Theme Name: CI360 Degrees
+Theme Name: CI360 Degrees – Hello Elementor Child
 Theme URI: https://ci360degrees.com
+Description: CI360 Degrees design as a Hello Elementor child theme. Every section is an Elementor widget (panel category “CI360 Sections”), every page ships as an Elementor template, and a one-click demo import rebuilds the full site. Content comes from Custom Post Types and Secure Custom Fields / ACF.
 Author: CI360 Degrees
-Description: Custom theme built from the CI360 V5 prototype. Every page is driven by Custom Post Types and ACF / Secure Custom Fields. Activate, then go to Appearance > CI360 Setup to import all content.
-Version: 1.0.0
+Template: hello-elementor
+Version: 2.5.1
 Requires at least: 6.4
 Requires PHP: 7.4
 Text Domain: ci360
 */
-/* Design styles live in assets/css/main.css (copied unchanged from the prototype). */
+/* Design styles: assets/css/main.css (CI360 design) + assets/css/elementor.css (Elementor integration). */

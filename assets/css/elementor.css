@@ -1,0 +1,33 @@
+/* CI360 × Elementor: sections run edge to edge; Elementor rows add no spacing of their own. */
+.ci-elementor-main>.elementor{width:100%}
+.elementor .e-con.ci360-row{--padding-top:0px;--padding-right:0px;--padding-bottom:0px;--padding-left:0px;--padding-block-start:0px;--padding-block-end:0px;--padding-inline-start:0px;--padding-inline-end:0px;--gap:0px;--row-gap:0px;--column-gap:0px;--margin-top:0px;--margin-bottom:0px;--content-width:100%;--width:100%;--container-max-width:none;padding:0;gap:0}
+.elementor .e-con.ci360-row>.e-con-inner{max-width:none;padding:0;gap:0}
+.elementor .elementor-section.ci360-row>.elementor-container{max-width:none}
+.elementor .elementor-section.ci360-row .elementor-column>.elementor-widget-wrap{padding:0}
+.elementor-widget[class*="elementor-widget-ci360-"]{width:100%;max-width:100%;margin:0;--kit-widget-spacing:0px}
+.elementor-widget[class*="elementor-widget-ci360-"]:not(:last-child){margin-bottom:0}
+.elementor-widget[class*="elementor-widget-ci360-"]>.elementor-widget-container{margin:0;padding:0}
+/* Elementor's link/heading defaults must not change the design. */
+.elementor-widget[class*="elementor-widget-ci360-"] a{box-shadow:none}
+/* Editor: keep the sticky project stack and reveal content visible while editing. */
+.elementor-editor-active [data-reveal]{opacity:1!important;transform:none!important}
+/* Generated: CI360 image rules re-stated with higher specificity so Elementor's global
+   `.elementor img{height:auto;max-width:100%;border:none;border-radius:0;box-shadow:none}`
+   cannot override the design inside CI360 widgets. Order and values match assets/css/main.css. */
+.elementor-widget[class*="elementor-widget-ci360-"] img{height:100%}
+.elementor-widget[class*="elementor-widget-ci360-"] .collage-frame>img{height:auto}
+.elementor-widget[class*="elementor-widget-ci360-"] .poster{max-width:57%;height:83%;box-shadow:9px 16px 25px #22221f26}
+.elementor-widget[class*="elementor-widget-ci360-"] .side-poster{height:73%}
+.elementor-widget[class*="elementor-widget-ci360-"] .architecture-img{height:100%}
+.elementor-widget[class*="elementor-widget-ci360-"] .browser-frame img{height:auto}
+.elementor-widget[class*="elementor-widget-ci360-"] .museum-cut{height:43%;border:7px solid #fff;box-shadow:0 12px 20px #0003}
+.elementor-widget[class*="elementor-widget-ci360-"] .device-browser>img{height:auto}
+.elementor-widget[class*="elementor-widget-ci360-"] .film-photo .service-photo{height:100%}
+.elementor-widget[class*="elementor-widget-ci360-"] .project-hero-visual .poster{height:82%}
+.elementor-widget[class*="elementor-widget-ci360-"] .project-hero-visual .side-poster{height:74%}
+.elementor-widget[class*="elementor-widget-ci360-"] .project-hero-visual .museum-cut{height:45%}
+.elementor-widget[class*="elementor-widget-ci360-"] .menu-art>img{height:330px}
+@media (max-width:800px){.elementor-widget[class*="elementor-widget-ci360-"] .menu-art>img{height:280px}}
+@media (max-width:600px){.elementor-widget[class*="elementor-widget-ci360-"] .project-hero-visual .poster{height:76%;max-width:58%}.elementor-widget[class*="elementor-widget-ci360-"] .project-hero-visual .side-poster{height:68%}.elementor-widget[class*="elementor-widget-ci360-"] .project-hero-visual .museum-cut{height:38%}}
+.elementor-widget[class*="elementor-widget-ci360-"] .brand-logo-img{max-height:42px;max-width:130px;height:auto}
+.elementor-widget[class*="elementor-widget-ci360-"] .team-member-photo{height:100%}

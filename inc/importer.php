@@ -44,7 +44,7 @@ function ci_setup_page() {
 	if ( $done ) {
 		echo '<div class="notice notice-success"><p>' . esc_html( $done ) . '</p></div>';
 	}
-	echo '<p>This imports every service, project, insight, testimonial, team member, FAQ, page, menu and image from the CI360 design, and sets the Home page as the front page.</p>';
+	echo '<p>This imports every service, project, insight, testimonial, team member, FAQ, image and menu from the CI360 demo, builds all 9 pages with the CI360 Elementor sections, adds every page and section to <em>Templates › Saved Templates</em>, and sets Home as the front page.</p>';
 	echo '<p>Running it again re-imports the original services, projects, insights, team, FAQs, lists, images and menus (posts you added yourself are left alone). Single text fields you have edited on pages and in CI360 Settings are kept.</p>';
 	echo '<form method="post">';
 	wp_nonce_field( 'ci360_import' );
@@ -172,9 +172,11 @@ function ci_import() {
 			$u( 'founder_lens', $t['lens'], $id );
 			$u( 'founder_quote', $t['quote'], $id );
 			$u( 'founder_tone', $t['tone'], $id );
-			if ( ! get_field( 'founder_portrait', $id ) ) {
-				$u( 'founder_portrait', ci_import_remote_image( $t['portrait_url'], $t['title'] ), $id );
-			}
+		}
+		// Member photo from the photos bundled in assets/images/team/.
+		$photos = ci_team_fallback_photos();
+		if ( isset( $photos[ $t['title'] ] ) && ! get_post_meta( $id, 'team_photo', true ) ) {
+			$u( 'team_photo', $m( 'team/' . pathinfo( $photos[ $t['title'] ], PATHINFO_FILENAME ) ), $id );
 		}
 	}
 	foreach ( $seed['faqs'] as $group => $items ) {
@@ -195,75 +197,24 @@ function ci_import() {
 	$u( 'opt_404_image', $m( 'crave-play' ), $o );
 
 	/* Pages */
-	$pages = array(
-		'home'                 => array( 'Home', 'default', '' ),
-		'about'                => array( 'About CI360', 'about.php', 'about' ),
-		'founders'             => array( 'Our Founders', 'founders.php', 'founders' ),
-		'services'             => array( 'Our Services', 'services.php', 'services' ),
-		'work'                 => array( 'Selected Work', 'work.php', 'work' ),
-		'insights'             => array( 'Insights & Perspectives', 'insights.php', 'insights' ),
-		'contact'              => array( 'Start a Conversation', 'contact.php', 'contact' ),
-		'privacy-policy'       => array( 'Privacy policy', 'legal.php', 'privacy-policy' ),
-		'terms-and-conditions' => array( 'Terms & conditions', 'legal.php', 'terms-and-conditions' ),
-	);
 	$page_ids = array();
-	foreach ( $pages as $key => $pg ) {
-		$slug             = $pg[2] ? $pg[2] : 'home';
-		$id               = ci_import_page( $key, $slug, $pg[0] );
-		$page_ids[ $key ] = $id;
-		update_post_meta( $id, '_wp_page_template', 'default' === $pg[1] ? 'default' : 'page-templates/' . $pg[1] );
+	foreach ( ci_demo_pages() as $key => $pg ) {
+		$page_ids[ $key ] = ci_import_page( $key, 'home' === $key ? 'home' : $key, $pg['title'] );
 	}
 	update_option( 'ci360_pages', $page_ids );
 	update_option( 'wp_page_for_privacy_policy', $page_ids['privacy-policy'] );
 	update_option( 'show_on_front', 'page' );
 	update_option( 'page_on_front', $page_ids['home'] );
 
-	$h = $page_ids['home'];
-	$u( 'home_collage', array_map( function ( $r ) use ( $project_ids, $m ) {
-		return array( 'project' => $project_ids[ $r['project'] ] ?? '', 'image' => $m( $r['image'] ), 'caption' => $r['caption'] );
-	}, $seed['home']['collage'] ), $h );
-	$u( 'home_about_image', $m( 'studio' ), $h );
-	$u( 'home_faq_group', $faq_groups['home'], $h );
-
-	$a = $page_ids['about'];
-	$u( 'about_image', $m( 'studio' ), $a );
-	$u( 'about_values', array_map( function ( $v ) {
-		return array( 'value' => $v );
-	}, $seed['about']['values'] ), $a );
-	$u( 'about_belief_text', $seed['about']['belief'], $a );
-	$u( 'about_timeline', $seed['about']['timeline'], $a );
-	$u( 'about_industries_list', array_map( function ( $v ) {
-		return array( 'name' => $v );
-	}, $seed['about']['industries'] ), $a );
-
-	$f = $page_ids['founders'];
-	$u( 'founders_fallback_image', $m( 'studio' ), $f );
-	$u( 'founders_studio_image', $m( 'studio' ), $f );
-	$u( 'founders_belief_text', $seed['founders']['belief'], $f );
-
-	$sv = $page_ids['services'];
-	$u( 'services_hero_service', $service_ids['websites-digital-experiences'] ?? '', $sv );
-	$u( 'services_faq_group', $faq_groups['contact'], $sv );
-
-	$u( 'insights_topic_list', array_map( function ( $v ) {
-		return array( 'topic' => $v );
-	}, $seed['insights_topics'] ), $page_ids['insights'] );
-
-	$c = $page_ids['contact'];
-	$u( 'contact_blocks', $seed['contact_blocks'], $c );
-	$u( 'contact_image', $m( 'studio' ), $c );
-	$u( 'contact_faq_group', $faq_groups['contact'], $c );
-
-	foreach ( $seed['legal'] as $key => $l ) {
-		$u( 'legal_intro', $l['intro'], $page_ids[ $key ] );
-		$u( 'legal_sections', $l['sections'], $page_ids[ $key ] );
-	}
+	// Page content: CI360 sections (as Elementor widgets when Elementor is active).
+	ci_demo_build_pages( $page_ids, $media );
+	ci_demo_build_library( $media );
 
 	/* Menus */
 	$nav = array(
 		'desktop' => array( 'about' => 'About', 'founders' => 'Founders', 'services' => 'Services', 'work' => 'Work', 'insights' => 'Insights' ),
-		'overlay' => array( 'home' => 'Home', 'about' => 'About', 'founders' => 'Founders', 'services' => 'Services', 'work' => 'Work', 'insights' => 'Insights', 'contact' => 'Contact' ),
-		'footer'  => array( 'about' => 'About', 'founders' => 'Founders', 'services' => 'Services', 'work' => 'Work', 'insights' => 'Insights', 'contact' => 'Contact' ),
+		'overlay' => array( 'home' => 'Home', 'about' => 'About', 'founders' => 'Founders', 'services' => 'Services', 'work' => 'Work', 'insights' => 'Insights', 'blogs' => 'Blog', 'contact' => 'Contact' ),
+		'footer'  => array( 'about' => 'About', 'founders' => 'Founders', 'services' => 'Services', 'work' => 'Work', 'insights' => 'Insights', 'blogs' => 'Blog', 'contact' => 'Contact' ),
 		'legal'   => array( 'privacy-policy' => 'Privacy policy', 'terms-and-conditions' => 'Terms & conditions' ),
 	);
 	$names     = array( 'desktop' => 'CI360 Header', 'overlay' => 'CI360 Full-screen menu', 'footer' => 'CI360 Footer', 'legal' => 'CI360 Legal' );
@@ -305,7 +256,7 @@ function ci_import() {
 	flush_rewrite_rules();
 	update_option( 'ci360_imported', time() );
 
-	return sprintf( 'Imported %d services, %d projects, %d insights, %d testimonials, %d team members, %d images, pages and menus.', count( $seed['services'] ), count( $seed['projects'] ), count( $seed['insights'] ), count( $seed['testimonials'] ), count( $seed['team'] ), count( $media ) );
+	return sprintf( 'Imported %d services, %d projects, %d insights, %d testimonials, %d team members, %d images, pages and menus.', count( $seed['services'] ), count( $seed['projects'] ), count( $seed['insights'] ), count( $seed['testimonials'] ), count( $seed['team'] ), count( array_unique( $media ) ) );
 }
 
 /** Create or update a post identified by type + slug. */
@@ -358,26 +309,60 @@ function ci_import_term( $name, $tax, $slug = '' ) {
 
 /** Copies the theme's bundled images into the media library (once). */
 function ci_import_media( $alts ) {
-	$map = array();
-	foreach ( glob( CI360_DIR . '/assets/images/*.{webp,jpg,jpeg,png}', GLOB_BRACE ) as $file ) {
-		$key      = pathinfo( $file, PATHINFO_FILENAME );
+	$map  = array();
+	$base = CI360_DIR . '/assets/images/';
+	$it   = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $base, FilesystemIterator::SKIP_DOTS ) );
+	$files = array();
+	foreach ( $it as $f ) {
+		if ( preg_match( '/\.(webp|jpe?g|png|gif|svg)$/i', $f->getFilename() ) ) {
+			$files[] = $f->getPathname();
+		}
+	}
+	sort( $files );
+	foreach ( $files as $file ) {
+		$rel = ltrim( str_replace( '\\', '/', substr( $file, strlen( $base ) ) ), '/' );
+		$dir = dirname( $rel );
+		$key = ( '.' === $dir ? '' : $dir . '/' ) . pathinfo( $file, PATHINFO_FILENAME );
+		$alt = $alts[ $key ] ?? ci_import_alt( $key );
 		$existing = get_posts( array( 'post_type' => 'attachment', 'meta_key' => '_ci360_key', 'meta_value' => $key, 'numberposts' => 1, 'post_status' => 'any' ) );
 		if ( $existing ) {
-			$map[ $key ] = $existing[0]->ID;
+			update_post_meta( $existing[0]->ID, '_ci360_rel', $rel );
+			$map[ $key ] = $map[ $rel ] = $existing[0]->ID;
 			continue;
 		}
 		$tmp = wp_tempnam( basename( $file ) );
 		copy( $file, $tmp );
-		$id = media_handle_sideload( array( 'name' => basename( $file ), 'tmp_name' => $tmp ), 0, $alts[ $key ] ?? $key );
+		$id = media_handle_sideload( array( 'name' => basename( $file ), 'tmp_name' => $tmp ), 0, $alt );
 		if ( is_wp_error( $id ) ) {
 			@unlink( $tmp ); // phpcs:ignore
 			continue;
 		}
 		update_post_meta( $id, '_ci360_key', $key );
-		update_post_meta( $id, '_wp_attachment_image_alt', $alts[ $key ] ?? '' );
-		$map[ $key ] = $id;
+		update_post_meta( $id, '_ci360_rel', $rel );
+		update_post_meta( $id, '_wp_attachment_image_alt', $alt );
+		$map[ $key ] = $map[ $rel ] = $id;
 	}
 	return $map;
+}
+
+/** Readable alt text for bundled logos and team photos. */
+function ci_import_alt( $key ) {
+	if ( 0 === strpos( $key, 'brand-logos/' ) ) {
+		foreach ( ci_default_logos() as $l ) {
+			if ( pathinfo( $l['image'], PATHINFO_DIRNAME ) . '/' . pathinfo( $l['image'], PATHINFO_FILENAME ) === $key ) {
+				return $l['alt'] . ' logo';
+			}
+		}
+	}
+	if ( 0 === strpos( $key, 'team/' ) ) {
+		$name = array_search( basename( $key ), array_map( function ( $f ) {
+			return pathinfo( $f, PATHINFO_FILENAME );
+		}, ci_team_fallback_photos() ), true );
+		if ( $name ) {
+			return $name;
+		}
+	}
+	return ucwords( trim( preg_replace( '/[-_]+/', ' ', basename( $key ) ) ) );
 }
 
 function ci_import_remote_image( $url, $name ) {

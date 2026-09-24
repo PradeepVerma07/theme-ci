@@ -42,6 +42,35 @@ function ci_rows( $name, $post_id = null ) {
 function ci_e( $s ) {
 	return esc_html( (string) $s );
 }
+
+/** Render an editable site logo. Header/footer-specific uploads override the native Custom Logo. */
+function ci_site_logo( $context = 'header' ) {
+	$context = 'footer' === $context ? 'footer' : 'header';
+	$field   = 'footer' === $context ? 'opt_footer_logo' : 'opt_header_logo';
+	$width_f = 'footer' === $context ? 'opt_footer_logo_width' : 'opt_header_logo_width';
+	$logo_id = (int) ci_opt( $field );
+	if ( ! $logo_id && 'footer' === $context ) {
+		$logo_id = (int) ci_opt( 'opt_header_logo' );
+	}
+	if ( ! $logo_id ) {
+		$logo_id = (int) get_theme_mod( 'custom_logo' );
+	}
+
+	$home      = home_url( '/' );
+	$brand     = ci_opt( 'opt_brand' );
+	$width_raw = (int) ci_opt( $width_f );
+	$width     = $width_raw ? max( 60, min( 360, $width_raw ) ) : ( 'footer' === $context ? 160 : 142 );
+
+	if ( $logo_id ) {
+		$img = wp_get_attachment_image( $logo_id, 'full', false, array( 'class' => 'ci360-logo-img', 'loading' => 'eager', 'decoding' => 'async', 'alt' => $brand ) );
+		if ( $img ) {
+			return '<a href="' . esc_url( $home ) . '" class="logo logo--image logo--' . esc_attr( $context ) . '" aria-label="' . esc_attr( $brand ) . ' home" style="--ci-logo-width:' . (int) $width . 'px">' . $img . '</a>';
+		}
+	}
+
+	return '<a href="' . esc_url( $home ) . '" class="logo logo--text logo--' . esc_attr( $context ) . '" aria-label="' . esc_attr( $brand ) . ' home">'
+		. ci_e( ci_opt( 'opt_logo_text' ) ) . '<span class="degree">&deg;</span><small>' . ci_e( ci_opt( 'opt_logo_small' ) ) . '</small></a>';
+}
 /** Short rich text: line breaks, italic accents, small, strong and links. */
 function ci_html( $s ) {
 	return wp_kses(
@@ -78,12 +107,18 @@ function ci_links( $html ) {
 	);
 }
 
-function ci_img( $id, $alt = null, $cls = '', $eager = false ) {
+function ci_img( $id, $alt = null, $cls = '', $eager = false, $size = 'full' ) {
+	if ( is_array( $id ) ) {
+		$id = ci_media( $id );
+	}
+	if ( is_numeric( $id ) ) {
+		$id = (int) $id;
+	}
 	if ( is_string( $id ) && '' !== $id ) {
-		if ( false !== strpos( $id, '/' ) ) {
+		if ( preg_match( '#^(https?:)?//|^/|^data:#', $id ) ) {
 			$src = ci_url( $id );
 		} else {
-			$src = get_template_directory_uri() . '/assets/images/' . $id;
+			$src = CI360_URI . '/assets/images/' . $id;
 		}
 		if ( null === $alt ) {
 			$alt = pathinfo( $id, PATHINFO_FILENAME );
@@ -93,7 +128,10 @@ function ci_img( $id, $alt = null, $cls = '', $eager = false ) {
 		if ( ! $id ) {
 			return '';
 		}
-		$src = wp_get_attachment_image_url( $id, 'full' );
+		$src = wp_get_attachment_image_url( $id, $size );
+		if ( ! $src && 'full' !== $size ) {
+			$src = wp_get_attachment_image_url( $id, 'full' );
+		}
 		if ( ! $src ) {
 			return '';
 		}
@@ -183,4 +221,26 @@ function ci_page_id( $key ) {
 /** Raw post title (no smart-quote formatting, matching the design copy). */
 function ci_title( $post ) {
 	return (string) get_post_field( 'post_title', $post );
+}
+
+/** Elementor media value (array with id/url), attachment id or asset path → id or URL string. */
+function ci_media( $v ) {
+	if ( is_array( $v ) ) {
+		if ( ! empty( $v['id'] ) ) {
+			return (int) $v['id'];
+		}
+		return isset( $v['url'] ) ? (string) $v['url'] : '';
+	}
+	return $v;
+}
+/** Image URL for any image value. */
+function ci_img_url( $v ) {
+	$v = ci_media( $v );
+	if ( is_numeric( $v ) ) {
+		return (string) wp_get_attachment_image_url( (int) $v, 'full' );
+	}
+	if ( '' === (string) $v ) {
+		return '';
+	}
+	return preg_match( '#^(https?:)?//|^/|^data:#', $v ) ? ci_url( $v ) : CI360_URI . '/assets/images/' . $v;
 }

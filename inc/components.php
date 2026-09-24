@@ -41,6 +41,7 @@ function ci_service( $post ) {
 		'tone'     => ci_get( 'service_tone', $id ),
 		'visual'   => ci_get( 'service_visual', $id ),
 		'image'    => (int) ci_get( 'service_image', $id ),
+		'card_image' => (int) ci_get( 'service_card_image', $id ),
 		'images'   => array_values( array_filter( array_map( 'intval', (array) ci_get( 'service_visual_images', $id ) ) ) ),
 	);
 }
@@ -205,6 +206,38 @@ function ci_service_card( $s ) {
 	return '<article class="service-card" data-reveal><a href="' . esc_url( $s['url'] ) . '" class="service-card-media" data-cursor="Discover">' . ci_service_visual( $s ) . '<span class="media-arrow">' . ci_arrow() . '</span></a><div class="service-card-body"><span class="small-label">' . ci_e( $s['number'] ) . ' / ' . ci_e( mb_strtoupper( $s['group'] ) ) . '</span><h3><a href="' . esc_url( $s['url'] ) . '">' . ci_e( $s['title'] ) . '</a></h3><p>' . ci_e( $s['summary'] ) . '</p></div></article>';
 }
 
+/** Premium, fully editable card used by the Services page grid. */
+function ci_service_grid_card( $s, $settings = array() ) {
+	$layout       = $settings['layout'] ?? 'editorial';
+	$show_summary = ( 'yes' === ( $settings['show_summary'] ?? 'yes' ) || true === ( $settings['show_summary'] ?? true ) );
+	$show_tags    = ( 'yes' === ( $settings['show_tags'] ?? 'yes' ) || true === ( $settings['show_tags'] ?? true ) );
+	$button       = trim( (string) ( $settings['button_label'] ?? 'Explore service' ) );
+
+	if ( 'classic' === $layout ) {
+		return ci_service_card( $s );
+	}
+
+	$group = $s['group'] ? mb_strtoupper( $s['group'] ) : 'CAPABILITY';
+	$media = $s['card_image']
+		? ci_img( $s['card_image'], $s['title'], 'ci360-service-card-photo' )
+		: ci_service_visual( $s );
+	$tags = '';
+	if ( $show_tags && ! empty( $s['tags'] ) ) {
+		$tags = '<span class="ci360-service-card-tags">';
+		foreach ( array_slice( array_filter( (array) $s['tags'] ), 0, 3 ) as $tag ) {
+			$tags .= '<span>' . ci_e( $tag ) . '</span>';
+		}
+		$tags .= '</span>';
+	}
+	$summary = $show_summary && $s['summary'] ? '<p>' . ci_e( $s['summary'] ) . '</p>' : '';
+	$cta     = $button ? '<a class="ci360-service-card-link" href="' . esc_url( $s['url'] ) . '" aria-label="' . esc_attr( $button . ': ' . $s['title'] ) . '"><span class="ci360-service-card-cta">' . ci_e( $button ) . ' ' . ci_arrow() . '</span></a>' : '';
+
+	return '<article class="ci360-service-card ci360-service-card--' . esc_attr( $layout ) . '" data-reveal>'
+		. '<a class="ci360-service-card-media" href="' . esc_url( $s['url'] ) . '" data-cursor="Discover"><span class="ci360-service-card-visual">' . $media . '</span><span class="ci360-service-card-index">' . ci_e( $s['number'] ) . '</span></a>'
+		. '<div class="ci360-service-card-content"><span class="ci360-service-card-kicker">' . ci_e( $group ) . '</span><h3><a href="' . esc_url( $s['url'] ) . '">' . ci_e( $s['title'] ) . '</a></h3>' . $summary . $tags . $cta . '</div>'
+		. '</article>';
+}
+
 /* ------------------------------------------------------------------ Insights */
 
 function ci_article_card( $a, $i ) {
@@ -276,45 +309,61 @@ function ci_compact_cta( $text = '' ) {
 	return '<section class="compact-cta wrap" data-reveal><h2>' . ci_html( $text ) . '</h2>' . ci_btn( ci_opt( 'opt_cta_button' ), ci_opt( 'opt_cta_link' ) ) . '</section>';
 }
 
-function ci_brand_strip() {
-	$logo_dir = get_template_directory_uri() . '/assets/images/brand-logos/';
+/** Logos bundled with the theme (default content of the Client Logo Strip). */
+function ci_default_logos() {
 	$logos = array(
-		array( 'file' => 'Vardan-logo1.png', 'alt' => 'Vardān' ),
-		array( 'file' => 'eutelsat-oneweb.webp', 'alt' => 'Eutelsat OneWeb' ),
-		array( 'file' => 'Crave-Logo.jpg-1.jpeg', 'alt' => 'Crave' ),
-		array( 'file' => 'ifb-logo.png', 'alt' => 'IFB' ),
-		array( 'file' => 'times-logo.png', 'alt' => 'The Times of India' ),
-		array( 'file' => 'Shatayu-Logo-1.png', 'alt' => 'Shatayu' ),
-		array( 'file' => 'Air-canada.webp', 'alt' => 'Air Canada' ),
-		array( 'file' => 'chaitanya-school-scaled.png', 'alt' => 'Chaitanya School' ),
-		array( 'file' => 'MB-LOGO.png', 'alt' => 'Media Buzz' ),
-		array( 'file' => 'SHREE-SAVA-PANCHANMRUT-LOGO.png', 'alt' => 'Shree Sava Panchanmrut' ),
-		array( 'file' => 'isat-africa.webp', 'alt' => 'ISAT Africa' ),
-		array( 'file' => 'piv.png', 'alt' => 'PIV Group' ),
-		array( 'file' => 'samunnati-colored-logo.png', 'alt' => 'Samunnati' ),
-		array( 'file' => 'MMCF-Logo-2-scaled.png', 'alt' => 'MMCF' ),
-		array( 'file' => 'Terrainless-connectivity-Logo-scaled.png', 'alt' => 'Station Satcom' ),
-		array( 'file' => 'Gaudiya-Mission-logo.png', 'alt' => 'Gaudiya Mission' ),
-		array( 'file' => 'kish_logo.png', 'alt' => 'Kish' ),
-		array( 'file' => 'TOLVV_Monochrome-Logo_0226-03-05-scaled.png', 'alt' => 'TOLVV' ),
-		array( 'file' => 'VNA-logo-usage-2-01-scaled.png', 'alt' => 'VNA' ),
-		array( 'file' => 'TIL-LOGO.png', 'alt' => 'TIL' ),
-		array( 'file' => 'times-language-logo1.png', 'alt' => 'Times Language' ),
-		array( 'file' => 'final-logo-png.png', 'alt' => 'SH' ),
+		array( 'Vardan-logo1.png', 'Vardān' ),
+		array( 'eutelsat-oneweb.webp', 'Eutelsat OneWeb' ),
+		array( 'Crave-Logo.jpg-1.jpeg', 'Crave' ),
+		array( 'ifb-logo.png', 'IFB' ),
+		array( 'times-logo.png', 'The Times of India' ),
+		array( 'Shatayu-Logo-1.png', 'Shatayu' ),
+		array( 'Air-canada.webp', 'Air Canada' ),
+		array( 'chaitanya-school-scaled.png', 'Chaitanya School' ),
+		array( 'MB-LOGO.png', 'Media Buzz' ),
+		array( 'SHREE-SAVA-PANCHANMRUT-LOGO.png', 'Shree Sava Panchanmrut' ),
+		array( 'isat-africa.webp', 'ISAT Africa' ),
+		array( 'piv.png', 'PIV Group' ),
+		array( 'samunnati-colored-logo.png', 'Samunnati' ),
+		array( 'MMCF-Logo-2-scaled.png', 'MMCF' ),
+		array( 'Terrainless-connectivity-Logo-scaled.png', 'Station Satcom' ),
+		array( 'Gaudiya-Mission-logo.png', 'Gaudiya Mission' ),
+		array( 'kish_logo.png', 'Kish' ),
+		array( 'TOLVV_Monochrome-Logo_0226-03-05-scaled.png', 'TOLVV' ),
+		array( 'VNA-logo-usage-2-01-scaled.png', 'VNA' ),
+		array( 'TIL-LOGO.png', 'TIL' ),
+		array( 'times-language-logo1.png', 'Times Language' ),
+		array( 'final-logo-png.png', 'SH' ),
 	);
+	$out = array();
+	foreach ( $logos as $l ) {
+		$out[] = array( 'image' => 'brand-logos/' . $l[0], 'alt' => $l[1] );
+	}
+	return $out;
+}
 
+/** Client logo marquee. $logos: rows of image + alt. */
+function ci_brand_strip( $label = null, $logos = null ) {
+	if ( null === $label ) {
+		$label = ci_opt( 'opt_clients_label' );
+	}
+	if ( null === $logos ) {
+		$logos = ci_default_logos();
+	}
 	$brand_items = '';
 	foreach ( $logos as $l ) {
-		$brand_items .= '<span class="brand-logo-wrap"><img class="brand-logo-img" src="' . esc_url( $logo_dir . $l['file'] ) . '" alt="' . esc_attr( $l['alt'] ) . '" loading="lazy" /></span>';
+		$src = ci_img_url( $l['image'] ?? '' );
+		if ( $src ) {
+			$brand_items .= '<span class="brand-logo-wrap"><img class="brand-logo-img" src="' . esc_url( $src ) . '" alt="' . esc_attr( $l['alt'] ?? '' ) . '" loading="lazy" /></span>';
+		}
 	}
-
 	$sets = '';
 	foreach ( array( 0, 1 ) as $n ) {
 		$sets .= '<div class="brand-set" ' . ( $n ? 'aria-hidden="true"' : '' ) . '>' . $brand_items . '</div>';
 	}
 
 	return '<section class="brand-strip" aria-label="Selected client brands">' .
-		'<span class="small-label">' . ci_e( ci_opt( 'opt_clients_label' ) ) . '</span>' .
+		'<span class="small-label">' . ci_e( $label ) . '</span>' .
 		'<div class="brand-marquee"><div class="marquee-track">' . $sets . '</div></div>' .
 	'</section>';
 }
