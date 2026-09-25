@@ -120,16 +120,20 @@ function ci_group( $key, $title, $fields, $location, $extra = array() ) {
 	);
 }
 
-add_action( 'acf/init', 'ci_register_options_pages' );
+add_action( 'init', 'ci_register_options_pages', 5 );
+add_action( 'acf/init', 'ci_register_options_pages', 5 );
 function ci_register_options_pages() {
-	if ( ! function_exists( 'acf_add_options_page' ) ) {
+	static $registered = false;
+	if ( $registered || ! function_exists( 'acf_add_options_page' ) ) {
 		return;
 	}
+	$registered = true;
 	acf_add_options_page(
 		array(
 			'page_title' => 'CI360 Site Settings',
 			'menu_title' => 'CI360 Settings',
 			'menu_slug'  => 'ci360-settings',
+			'capability' => 'edit_posts',
 			'icon_url'   => 'dashicons-admin-site-alt3',
 			'position'   => 3,
 			'redirect'   => false,
