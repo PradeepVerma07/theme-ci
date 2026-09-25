@@ -38,3 +38,8 @@ function ci_is_elementor( $post_id ) {
 	$doc = \Elementor\Plugin::$instance->documents->get( $post_id );
 	return $doc && $doc->is_built_with_elementor();
 }
+
+/** Register Elementor Theme Builder header and footer locations. */
+add_action( 'elementor/theme/register_locations', function ( $elementor_theme_manager ) {
+	$elementor_theme_manager->register_all_core_location();
+} );
