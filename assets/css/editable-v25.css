@@ -726,4 +726,137 @@ a.nav-contact,
   }
 }
 
+/* ================================================================
+   REUSABLE BLUE RADIAL GLOW CONTAINER BACKGROUND CLASS (.ci360-blue-glow-bg)
+   ================================================================ */
+.ci360-blue-glow-bg,
+.ci360-navy-glow-bg,
+.ci360-glow-bg,
+.dark-section {
+  position: relative !important;
+  background-color: #030a38 !important;
+  background-image: radial-gradient(ellipse 110% 90% at 85% 25%, rgba(13, 71, 226, 0.5) 0%, transparent 68%),
+                    linear-gradient(135deg, #020617 0%, #061899 55%, #040e56 100%) !important;
+  color: #ffffff !important;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Outer & inner glowing radial arc circles in background */
+.ci360-blue-glow-bg::before,
+.ci360-navy-glow-bg::before,
+.ci360-glow-bg::before,
+.dark-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -10%;
+  transform: translateY(-50%);
+  width: 900px;
+  height: 900px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(59, 130, 246, 0.18);
+  box-shadow: 0 0 120px rgba(37, 99, 235, 0.25) inset;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ci360-blue-glow-bg::after,
+.ci360-navy-glow-bg::after,
+.ci360-glow-bg::after,
+.dark-section::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -22%;
+  transform: translateY(-50%);
+  width: 1350px;
+  height: 1350px;
+  border-radius: 50%;
+  border: 1px solid rgba(34, 211, 238, 0.12);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure container content renders above background glow rings */
+.ci360-blue-glow-bg > *,
+.ci360-navy-glow-bg > *,
+.ci360-glow-bg > *,
+.dark-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Headings inside container */
+.ci360-blue-glow-bg h1,
+.ci360-blue-glow-bg h2,
+.ci360-blue-glow-bg h3,
+.ci360-blue-glow-bg h4,
+.ci360-blue-glow-bg .display,
+.ci360-navy-glow-bg h1,
+.ci360-navy-glow-bg h2,
+.ci360-navy-glow-bg h3,
+.ci360-navy-glow-bg h4,
+.ci360-navy-glow-bg .display,
+.ci360-glow-bg h1,
+.ci360-glow-bg h2,
+.ci360-glow-bg h3,
+.ci360-glow-bg h4,
+.ci360-glow-bg .display,
+.dark-section h1,
+.dark-section h2,
+.dark-section h3,
+.dark-section h4,
+.dark-section .display {
+  color: #ffffff !important;
+}
+
+/* Heading span & em accent text (e.g. Connected perspectives.) */
+.ci360-blue-glow-bg h1 span,
+.ci360-blue-glow-bg h2 span,
+.ci360-blue-glow-bg h3 span,
+.ci360-blue-glow-bg h4 span,
+.ci360-blue-glow-bg .display span,
+.ci360-blue-glow-bg h1 em,
+.ci360-blue-glow-bg h2 em,
+.ci360-blue-glow-bg h3 em,
+.ci360-blue-glow-bg h4 em,
+.ci360-blue-glow-bg .display em,
+.ci360-navy-glow-bg h1 span,
+.ci360-navy-glow-bg h2 span,
+.ci360-navy-glow-bg h3 span,
+.ci360-navy-glow-bg h4 span,
+.ci360-navy-glow-bg .display span,
+.ci360-navy-glow-bg h1 em,
+.ci360-navy-glow-bg h2 em,
+.ci360-navy-glow-bg h3 em,
+.ci360-navy-glow-bg h4 em,
+.ci360-navy-glow-bg .display em,
+.ci360-glow-bg h1 span,
+.ci360-glow-bg h2 span,
+.ci360-glow-bg h3 span,
+.ci360-glow-bg h4 span,
+.ci360-glow-bg .display span,
+.ci360-glow-bg h1 em,
+.ci360-glow-bg h2 em,
+.ci360-glow-bg h3 em,
+.ci360-glow-bg h4 em,
+.ci360-glow-bg .display em,
+.dark-section h1 span,
+.dark-section h2 span,
+.dark-section h3 span,
+.dark-section h4 span,
+.dark-section .display span,
+.dark-section h1 em,
+.dark-section h2 em,
+.dark-section h3 em,
+.dark-section h4 em,
+.dark-section .display em,
+.ci360-heading-accent,
+span.ci360-heading-accent {
+  color: #a5f3fc !important;
+  font-style: normal;
+}
+
+
 
