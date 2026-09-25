@@ -913,5 +913,26 @@ span.ci360-heading-accent {
   font-style: normal;
 }
 
+/* Custom Service Visual Images (Main Background + Foreground Card Image) */
+.strategy-paper-has-img,
+.brand-board-has-img {
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+.strategy-paper-has-img img,
+.brand-board-has-img img,
+.metric-card-has-img img,
+.film-card-img img,
+.crm-card-overlay img,
+.campaign-card-img img,
+.service-card-photo-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 14px !important;
+  display: block !important;
+}
+
+
 
 

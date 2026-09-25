@@ -161,43 +161,75 @@ function ci_project_card( $p ) {
 function ci_service_visual( $s ) {
 	$total = ci_pad( ci_count( 'ci_service' ) );
 	$imgs  = $s['images'];
-	$im    = function ( $i ) use ( $imgs ) {
-		return isset( $imgs[ $i ] ) ? ci_img( $imgs[ $i ] ) : '';
+	$im    = function ( $i ) use ( $imgs, $s ) {
+		if ( isset( $imgs[ $i ] ) && $imgs[ $i ] ) {
+			return ci_img( $imgs[ $i ] );
+		}
+		if ( 0 === $i && $s['card_image'] ) {
+			return ci_img( $s['card_image'] );
+		}
+		if ( $s['image'] ) {
+			return ci_img( $s['image'] );
+		}
+		return '';
 	};
-	$photo = ci_img( $s['image'], $s['title'] . ' visual composition', 'service-photo' );
+
+	$photo         = $s['image'] ? ci_img( $s['image'], $s['title'] . ' visual composition', 'service-photo' ) : '';
+	$card_photo_id = $s['card_image'] ? $s['card_image'] : ( isset( $imgs[0] ) ? $imgs[0] : 0 );
+	$card_photo    = $card_photo_id ? ci_img( $card_photo_id, $s['title'] . ' card image', 'service-card-photo-img' ) : '';
+
 	$frame = function ( $inside ) use ( $s, $total ) {
 		return '<div class="service-visual visual-' . esc_attr( $s['visual'] ) . ' tone-' . esc_attr( $s['tone'] ) . '"><span class="visual-label">CI360 / ' . ci_e( mb_strtoupper( $s['group'] ) ) . '</span>' . $inside . '<span class="visual-corner">' . ci_e( $s['number'] ) . ' / ' . $total . '</span></div>';
 	};
+
 	switch ( $s['visual'] ) {
 		case 'strategy':
-			return $frame( $photo . '<div class="strategy-paper"><span>THE STARTING POINT</span><b>A better<br>question.</b>' . ci_star() . '</div><div class="pencil-line" aria-hidden="true"></div>' );
+			$paper_content = $card_photo ? $card_photo : '<span>THE STARTING POINT</span><b>A better<br>question.</b>' . ci_star();
+			return $frame( ( $photo ? $photo : '' ) . '<div class="strategy-paper' . ( $card_photo ? ' strategy-paper-has-img' : '' ) . '">' . $paper_content . '</div><div class="pencil-line" aria-hidden="true"></div>' );
+
 		case 'branding':
-			return $frame( '<div class="brand-board"><span>THE BRAND IS<br>THE FEELING.</span><b>Aa.</b><div class="colour-swatches"><i></i><i></i><i></i><i></i></div></div><div class="brand-paper">ci360&deg;' . ci_star() . '<small>MADE TO BE REMEMBERED.</small></div>' );
+			$board_content = $card_photo ? $card_photo : '<span>THE BRAND IS<br>THE FEELING.</span><b>Aa.</b><div class="colour-swatches"><i></i><i></i><i></i><i></i></div>';
+			return $frame( ( $photo ? $photo : '' ) . '<div class="brand-board' . ( $card_photo ? ' brand-board-has-img' : '' ) . '">' . $board_content . '</div><div class="brand-paper">ci360&deg;' . ci_star() . '<small>MADE TO BE REMEMBERED.</small></div>' );
+
 		case 'website':
-			return $frame( '<div class="device-browser"><div class="browser-bar"><i></i><i></i><i></i></div>' . $im( 0 ) . '</div><div class="device-phone">' . $im( 1 ) . '</div><span class="design-cross" aria-hidden="true">+</span>' );
+			$b_img = $photo ? $photo : $im(0);
+			$p_img = $card_photo ? $card_photo : $im(1);
+			return $frame( '<div class="device-browser"><div class="browser-bar"><i></i><i></i><i></i></div>' . $b_img . '</div><div class="device-phone">' . $p_img . '</div><span class="design-cross" aria-hidden="true">+</span>' );
+
 		case 'social':
 		case 'creative':
-			return $frame( '<div class="social-post post-one">' . $im( 0 ) . '</div><div class="social-post post-two">' . $im( 1 ) . '</div><div class="social-heart" aria-hidden="true">&hearts;</div>' );
+			$post1 = $photo ? $photo : $im(0);
+			$post2 = $card_photo ? $card_photo : $im(1);
+			return $frame( '<div class="social-post post-one">' . $post1 . '</div><div class="social-post post-two">' . $post2 . '</div><div class="social-heart" aria-hidden="true">&hearts;</div>' );
+
 		case 'performance':
 			$bars = '';
 			foreach ( array( 35, 48, 42, 66, 54, 85, 96 ) as $h ) {
 				$bars .= '<i style="--h:' . $h . '%"></i>';
 			}
-			return $frame( '<div class="ad-phone">' . $im( 0 ) . '</div><div class="metric-card"><span>CREATIVE + MEDIA</span><b>Make it<br>mean more.</b><div class="mini-bars" aria-hidden="true">' . $bars . '</div></div>' );
+			$phone_img = $photo ? $photo : $im(0);
+			$metric    = $card_photo ? '<div class="metric-card metric-card-has-img">' . $card_photo . '</div>' : '<div class="metric-card"><span>CREATIVE + MEDIA</span><b>Make it<br>mean more.</b><div class="mini-bars" aria-hidden="true">' . $bars . '</div></div>';
+			return $frame( '<div class="ad-phone">' . $phone_img . '</div>' . $metric );
+
 		case 'search':
-			return $frame( '<div class="search-orbit" aria-hidden="true"></div><div class="search-window"><span class="search-address">A CLEARER WAY TO BE FOUND</span><div class="search-input">Your brand, discovered.<span>' . ci_arrow() . '</span></div><b>SEO. AEO. GEO.</b><span class="search-result-line"></span><span class="search-result-line short"></span><div class="search-tags">' . ci_tags( array( 'Search', 'AI answers', 'Local' ) ) . '</div></div>' );
+			return $frame( ( $photo ? $photo : '' ) . '<div class="search-orbit" aria-hidden="true"></div><div class="search-window"><span class="search-address">A CLEARER WAY TO BE FOUND</span><div class="search-input">Your brand, discovered.<span>' . ci_arrow() . '</span></div><b>SEO. AEO. GEO.</b><span class="search-result-line"></span><span class="search-result-line short"></span><div class="search-tags">' . ci_tags( array( 'Search', 'AI answers', 'Local' ) ) . '</div></div>' );
+
 		case 'podcast':
 			$wave = '';
 			for ( $i = 0; $i < 25; $i++ ) {
 				$wave .= '<i style="--i:' . $i . ';--h:' . ( 20 + ( $i * 37 % 80 ) ) . '%"></i>';
 			}
-			return $frame( '<div class="podcast-grid" aria-hidden="true"></div><div class="mic"><div class="mic-head"></div><div class="mic-arm"></div><div class="mic-base"></div></div><div class="audio-wave" aria-hidden="true">' . $wave . '</div><span class="on-air"><i></i> STORIES, ON AIR.</span>' );
+			return $frame( ( $photo ? $photo : '' ) . '<div class="podcast-grid" aria-hidden="true"></div><div class="mic"><div class="mic-head"></div><div class="mic-arm"></div><div class="mic-base"></div></div><div class="audio-wave" aria-hidden="true">' . $wave . '</div><span class="on-air"><i></i> STORIES, ON AIR.</span>' );
+
 		case 'film':
-			return $frame( '<div class="film-photo">' . $photo . '<div class="viewfinder" aria-hidden="true"><i></i><i></i><i></i><i></i></div><span class="rec">REC <i></i></span></div><span class="film-title">A DIFFERENT<br>POINT OF VIEW.</span>' );
+			return $frame( '<div class="film-photo">' . ( $photo ? $photo : $im(0) ) . '<div class="viewfinder" aria-hidden="true"><i></i><i></i><i></i><i></i></div><span class="rec">REC <i></i></span></div>' . ( $card_photo ? '<div class="film-card-img">' . $card_photo . '</div>' : '<span class="film-title">A DIFFERENT<br>POINT OF VIEW.</span>' ) );
+
 		case 'crm':
-			return $frame( '<div class="crm-photo">' . $photo . '</div><div class="message one">A conversation, not a broadcast.<span>01</span></div><div class="message two">The right story. The right moment.<span>02</span></div><div class="message three">Keep the connection going.<span>03</span></div>' );
+			return $frame( '<div class="crm-photo">' . ( $photo ? $photo : $im(0) ) . '</div>' . ( $card_photo ? '<div class="crm-card-overlay">' . $card_photo . '</div>' : '<div class="message one">A conversation, not a broadcast.<span>01</span></div><div class="message two">The right story. The right moment.<span>02</span></div><div class="message three">Keep the connection going.<span>03</span></div>' ) );
+
 		case 'campaign':
-			return $frame( '<div class="billboard"><div class="billboard-poster">' . $im( 0 ) . '</div><div class="billboard-leg"></div></div><div class="campaign-type" aria-hidden="true">OUT<br>THERE.</div>' );
+			$b_img = $photo ? $photo : $im(0);
+			return $frame( '<div class="billboard"><div class="billboard-poster">' . $b_img . '</div><div class="billboard-leg"></div></div>' . ( $card_photo ? '<div class="campaign-card-img">' . $card_photo . '</div>' : '<div class="campaign-type" aria-hidden="true">OUT<br>THERE.</div>' ) );
 	}
 	return $frame( '<div class="analytics-card"><span>OBSERVE. LEARN. IMPROVE.</span><div class="analytics-graph"><svg viewBox="0 0 360 160" aria-hidden="true"><path d="M0 140 50 110 90 120 140 72 180 90 230 30 280 49 350 5" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/></svg></div><b>Clarity is<br>a competitive edge.</b></div><div class="analytics-disc">' . ci_star() . '</div>' );
 }
