@@ -65,6 +65,8 @@ function ci_js_data() {
 		);
 	}
 	return array(
+		'themeUri'     => get_stylesheet_directory_uri(),
+		'brandIcon'    => get_stylesheet_directory_uri() . '/assets/images/brand-icon.png',
 		'settings'     => array(
 			'email'           => (string) ci_opt( 'opt_email' ),
 			'contactMode'     => (string) ci_opt( 'opt_contact_mode' ),
@@ -81,10 +83,10 @@ function ci_js_data() {
  * Head: reduced-motion bootstrap (same as prototype) + page-transition flag + favicon.
  */
 add_action( 'wp_head', function () {
-	echo "<meta name=\"theme-color\" content=\"#f5f3ed\">\n";
+	echo "<meta name=\"theme-color\" content=\"#020617\">\n";
 	echo "<script>try{if(localStorage.getItem('ci360-motion')==='off'||(!localStorage.getItem('ci360-motion')&&matchMedia('(prefers-reduced-motion: reduce)').matches))document.documentElement.classList.add('reduced-motion')}catch(e){}try{if(sessionStorage.getItem('ci360-wipe')){sessionStorage.removeItem('ci360-wipe');if(!document.documentElement.classList.contains('reduced-motion'))document.documentElement.classList.add('ci-wipe-in')}}catch(e){}</script>\n";
 	if ( ! has_site_icon() ) {
-		echo '<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2080%2080%22%3E%3Crect%20width%3D%2280%22%20height%3D%2280%22%20rx%3D%2220%22%20fill%3D%22%23f45a31%22%2F%3E%3Ctext%20x%3D%2212%22%20y%3D%2255%22%20font-family%3D%22Arial%22%20font-weight%3D%22bold%22%20font-size%3D%2246%22%20fill%3D%22%2322221f%22%3Eci%3C%2Ftext%3E%3C%2Fsvg%3E">' . "\n";
+		echo '<link rel="icon" href="' . esc_url( get_stylesheet_directory_uri() . '/assets/images/brand-icon.png' ) . '">' . "\n";
 	}
 	// Basic meta description when no SEO plugin is active.
 	if ( ! defined( 'WPSEO_VERSION' ) && ! class_exists( 'RankMath' ) ) {

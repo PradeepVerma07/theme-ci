@@ -3,7 +3,7 @@
 'use strict';
 const D=window.CI360||{settings:{},testimonials:[],timeline:[]};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const C={e:esc,arrow:(dir='ne')=>`<svg class="icon arrow-${dir}" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,star:()=>`<svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M45 0h10v35L80 10l8 8-25 27h37v10H64l25 25-8 8-26-25v37H45V64L20 89l-8-8 25-26H0V45h35L10 20l8-8 27 25Z" fill="currentColor"/></svg>`};
+const C={e:esc,arrow:(dir='ne')=>`<svg class="icon arrow-${dir}" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,star:()=>`<img class="page-loader-logo" src="${(window.CI360&&window.CI360.brandIcon)?window.CI360.brandIcon:'/wp-content/themes/ci360-hello-child/assets/images/brand-icon.png'}" alt="Loading..." width="90" height="90"/>`};
 const preview=false, reducedQuery=matchMedia('(prefers-reduced-motion: reduce)'), fine=matchMedia('(pointer: fine)');
 let stored=null;try{stored=localStorage.getItem('ci360-motion');}catch{}
 let reduced=stored==='off'||(stored===null&&reducedQuery.matches), controller, observer, routing=false, quote=0, filter='All', toastTimer;
