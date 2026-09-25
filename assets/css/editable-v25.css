@@ -989,6 +989,30 @@ span.ci360-heading-accent {
   color: #cbd5e1 !important;
 }
 
+/* Fix Service Visual Card Container Dimensions */
+.service-detail-art {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 380px !important;
+  border-radius: 26px !important;
+  overflow: hidden !important;
+}
+
+.service-visual {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 380px !important;
+  height: 100% !important;
+  aspect-ratio: 4 / 3 !important;
+  border-radius: 22px !important;
+  overflow: hidden !important;
+}
+
+.service-detail-art .service-visual {
+  min-height: 420px !important;
+  aspect-ratio: 4 / 3 !important;
+}
+
 /* Fix Website & Digital Experiences device visual mockups */
 .service-visual .device-browser {
   position: absolute !important;
