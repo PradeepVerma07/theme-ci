@@ -973,7 +973,7 @@ span.ci360-heading-accent {
 #ci360-timeline-section .ci360-tl-card-title {
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-size: clamp(26px, 3.2vw, 44px) !important;
-  font-weight: 700 !important;
+  font-weight: 500 !important;
   line-height: 1.12 !important;
   letter-spacing: -0.045em !important;
   color: #ffffff !important;
