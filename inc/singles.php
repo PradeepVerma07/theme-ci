@@ -371,9 +371,10 @@ function ci_render_footer() {
 					$socials = ci_rows( 'opt_socials', 'option' );
 					if ( ! empty( $socials ) ) {
 						foreach ( $socials as $soc ) {
-							$soc_label = $soc['label'] ?? '';
-							$soc_url   = $soc['url'] ?? '#';
-							echo '<a href="' . esc_url( $soc_url ) . '" target="_blank" rel="noopener" aria-label="' . esc_attr( $soc_label ) . '">' . ci_e( $soc_label ) . '</a>';
+							$soc_label = trim( (string) ( $soc['label'] ?? '' ) );
+							$soc_url   = trim( (string) ( $soc['url'] ?? '#' ) );
+							$icon_svg  = ci_social_icon_svg( $soc_label, $soc_url );
+							echo '<a href="' . esc_url( $soc_url ) . '" target="_blank" rel="noopener" aria-label="' . esc_attr( $soc_label ? $soc_label : 'Social link' ) . '">' . $icon_svg . '</a>';
 						}
 					} else {
 						?>
