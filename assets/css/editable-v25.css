@@ -478,20 +478,75 @@
   .services-hero .hero-art-badge{width:86px;height:86px;font-size:28px}
 }
 
-/* ---------- 1. Showcase Headline & Title Under Card Fix ---------- */
+/* ---------- 1. Showcase Card Layout & Headline Title Fix ---------- */
+.showcase {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  align-items: center !important;
+}
+
+.showcase-copy {
+  padding: clamp(24px, 3.5vw, 60px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  overflow: visible !important;
+}
+
+.showcase-copy h3 {
+  font-size: clamp(36px, 4vw, 68px) !important;
+  color: var(--navy, #060f26) !important;
+  letter-spacing: -0.05em !important;
+  line-height: 1.05 !important;
+  margin: 0 0 10px 0 !important;
+}
+
 .showcase-headline {
-  font-size: clamp(16px, 1.8vw, 22px) !important;
-  color: #ffffff !important;
-  background: linear-gradient(135deg, #1d4ed8, #3b82f6) !important;
-  padding: 14px 22px !important;
-  border-radius: 14px !important;
-  line-height: 1.4 !important;
-  margin-top: 18px !important;
+  font-size: clamp(18px, 1.8vw, 26px) !important;
+  font-weight: 600 !important;
+  color: #173682 !important;
+  line-height: 1.35 !important;
+  margin-top: 10px !important;
+  margin-bottom: 16px !important;
   display: block !important;
+  background: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
   height: auto !important;
   max-height: none !important;
   overflow: visible !important;
-  box-shadow: 0 4px 15px rgba(29, 78, 216, 0.2) !important;
+  white-space: normal !important;
+}
+
+.showcase-copy > p:not(.showcase-headline) {
+  color: var(--muted, #475569) !important;
+  font-size: clamp(14px, 1.1vw, 16px) !important;
+  line-height: 1.65 !important;
+  margin-bottom: 20px !important;
+}
+
+@media (max-width: 991px) {
+  .showcase {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    padding: 16px !important;
+    border-radius: 24px !important;
+  }
+  .showcase-media {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 280px !important;
+    max-height: 480px !important;
+    aspect-ratio: 4/3 !important;
+    border-radius: 18px !important;
+  }
+  .showcase-copy {
+    width: 100% !important;
+    padding: 24px 16px 20px !important;
+  }
 }
 
 /* ---------- 2. Full-Width Brand Logo Marquee Slider (No side label text) ---------- */
