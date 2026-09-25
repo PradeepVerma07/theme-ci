@@ -166,6 +166,47 @@ function ci_render_footer() {
 		$about = 'CI360 Degrees is an integrated digital marketing and strategic communication agency built around the power of strategic storytelling.';
 	}
 
+	$nav_title = ci_opt( 'opt_footer_explore' );
+	if ( empty( $nav_title ) ) {
+		$nav_title = 'Navigation';
+	}
+
+	$caps_title = ci_opt( 'opt_footer_caps_title' );
+	if ( empty( $caps_title ) ) {
+		$caps_title = 'Key Capabilities';
+	}
+
+	$caps_raw = ci_opt( 'opt_footer_capabilities' );
+	if ( ! empty( $caps_raw ) ) {
+		$caps = array_filter( array_map( 'trim', preg_split( '/\r\n|\r|\n/', (string) $caps_raw ) ) );
+	} else {
+		$caps = array(
+			'Strategic Storytelling',
+			'Social Media Marketing',
+			'Performance Marketing',
+			'SEO, AI Search',
+			'Local Visibility',
+			'Content, Creative',
+			'Campaigns',
+			'Branding',
+			'Design',
+			'Websites',
+			'Digital Experiences',
+			'Podcast Production',
+			'Marketing',
+		);
+	}
+
+	$locs_title = ci_opt( 'opt_footer_locs_title' );
+	if ( empty( $locs_title ) ) {
+		$locs_title = 'Locations';
+	}
+
+	$contact_title = ci_opt( 'opt_footer_contact_title' );
+	if ( empty( $contact_title ) ) {
+		$contact_title = 'Direct Contact';
+	}
+
 	$ci_email  = ci_opt( 'opt_email' );
 	$ci_email2 = ci_opt( 'opt_email_2' );
 	if ( empty( $ci_email2 ) ) {
@@ -179,6 +220,9 @@ function ci_render_footer() {
 	if ( empty( $back_top_label ) ) {
 		$back_top_label = 'Back to top';
 	}
+
+	$logo_id = ci_opt( 'opt_footer_logo' );
+	$logo_w  = (int) ci_opt( 'opt_footer_logo_width' );
 
 	ob_start();
 	?>
@@ -205,103 +249,149 @@ function ci_render_footer() {
 			<!-- Col 1: Brand & Bio -->
 			<div class="ci360-fcol ci360-fcol-brand">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="ci360-footer-logo" aria-label="Home">
-					<svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<circle cx="50" cy="50" r="42" stroke="url(#ci360_grad)" stroke-width="8" stroke-linecap="round"/>
-						<line x1="50" y1="50" x2="80" y2="20" stroke="url(#ci360_grad)" stroke-width="8" stroke-linecap="round"/>
-						<defs>
-							<linearGradient id="ci360_grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-								<stop stop-color="#3b82f6"/>
-								<stop offset="1" stop-color="#22d3ee"/>
-							</linearGradient>
-						</defs>
-					</svg>
+					<?php if ( $logo_id ) : ?>
+						<?php echo ci_img( $logo_id, ci_opt( 'opt_brand' ), '', array( 'style' => 'width:' . ( $logo_w ? $logo_w : 160 ) . 'px; height:auto;' ) ); ?>
+					<?php else : ?>
+						<svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="50" cy="50" r="42" stroke="url(#ci360_grad)" stroke-width="8" stroke-linecap="round"/>
+							<line x1="50" y1="50" x2="80" y2="20" stroke="url(#ci360_grad)" stroke-width="8" stroke-linecap="round"/>
+							<defs>
+								<linearGradient id="ci360_grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+									<stop stop-color="#3b82f6"/>
+									<stop offset="1" stop-color="#22d3ee"/>
+								</linearGradient>
+							</defs>
+						</svg>
+					<?php endif; ?>
 				</a>
 				<p class="ci360-footer-about"><?php echo ci_e( $about ); ?></p>
 			</div>
 
 			<!-- Col 2: Navigation -->
 			<div class="ci360-fcol ci360-fcol-nav">
-				<h4 class="ci360-fhead">Navigation</h4>
+				<h4 class="ci360-fhead"><?php echo ci_e( $nav_title ); ?></h4>
 				<ul class="ci360-flist">
-					<li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">ABOUT</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/founders/' ) ); ?>">FOUNDERS</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/services/' ) ); ?>">SERVICES</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/work/' ) ); ?>">STORIES</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/insights/' ) ); ?>">BLOG</a></li>
+					<?php
+					$nav_items = ci_menu( 'explore' );
+					if ( empty( $nav_items ) ) {
+						$nav_items = ci_menu( 'footer' );
+					}
+					if ( ! empty( $nav_items ) ) {
+						foreach ( $nav_items as $ci_item ) {
+							echo '<li><a href="' . esc_url( $ci_item[0] ) . '">' . ci_e( $ci_item[1] ) . '</a></li>';
+						}
+					} else {
+						?>
+						<li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">ABOUT</a></li>
+						<li><a href="<?php echo esc_url( home_url( '/founders/' ) ); ?>">FOUNDERS</a></li>
+						<li><a href="<?php echo esc_url( home_url( '/services/' ) ); ?>">SERVICES</a></li>
+						<li><a href="<?php echo esc_url( home_url( '/work/' ) ); ?>">STORIES</a></li>
+						<li><a href="<?php echo esc_url( home_url( '/insights/' ) ); ?>">BLOG</a></li>
+						<?php
+					}
+					?>
 				</ul>
 			</div>
 
 			<!-- Col 3: Key Capabilities -->
 			<div class="ci360-fcol ci360-fcol-caps">
-				<h4 class="ci360-fhead">Key Capabilities</h4>
+				<h4 class="ci360-fhead"><?php echo ci_e( $caps_title ); ?></h4>
 				<ul class="ci360-flist">
-					<li>Strategic Storytelling</li>
-					<li>Social Media Marketing</li>
-					<li>Performance Marketing</li>
-					<li>SEO, AI Search</li>
-					<li>Local Visibility</li>
-					<li>Content, Creative</li>
-					<li>Campaigns</li>
-					<li>Branding</li>
-					<li>Design</li>
-					<li>Websites</li>
-					<li>Digital Experiences</li>
-					<li>Podcast Production</li>
-					<li>Marketing</li>
+					<?php foreach ( $caps as $cap_item ) : ?>
+						<li><?php echo ci_e( $cap_item ); ?></li>
+					<?php endforeach; ?>
 				</ul>
 			</div>
 
 			<!-- Col 4: Locations -->
 			<div class="ci360-fcol ci360-fcol-locs">
-				<h4 class="ci360-fhead">Locations</h4>
-				<div class="ci360-loc-group">
-					<span class="ci360-flag-head">🇮🇳 <strong>India</strong></span>
-					<div class="ci360-loc-block">
-						<strong>Ahmedabad</strong>
-						<p>203 – 204, Devashish Complex, Nr. Hotel Kalssic Gold, Off. C.G Road, Ahmedabad, India 380009</p>
+				<h4 class="ci360-fhead"><?php echo ci_e( $locs_title ); ?></h4>
+				<?php
+				$offices = ci_rows( 'opt_offices', 'option' );
+				if ( ! empty( $offices ) ) {
+					foreach ( $offices as $office ) {
+						$flag = ( 'US' === strtoupper( $office['country_code'] ?? '' ) ) ? '🇺🇸' : '🇮🇳';
+						?>
+						<div class="ci360-loc-group" style="margin-bottom:12px;">
+							<span class="ci360-flag-head"><?php echo $flag; ?> <strong><?php echo ci_e( $office['city'] ); ?></strong></span>
+							<?php if ( ! empty( $office['address'] ) ) : ?>
+								<div class="ci360-loc-block">
+									<p><?php echo ci_e( $office['address'] ); ?></p>
+								</div>
+							<?php endif; ?>
+						</div>
+						<?php
+					}
+				} else {
+					?>
+					<div class="ci360-loc-group">
+						<span class="ci360-flag-head">🇮🇳 <strong>India</strong></span>
+						<div class="ci360-loc-block">
+							<strong>Ahmedabad</strong>
+							<p>203 – 204, Devashish Complex, Nr. Hotel Kalssic Gold, Off. C.G Road, Ahmedabad, India 380009</p>
+						</div>
+						<div class="ci360-loc-block" style="margin-top:6px;">
+							<strong>Delhi</strong>
+						</div>
 					</div>
-					<div class="ci360-loc-block" style="margin-top:6px;">
-						<strong>Delhi</strong>
+					<div class="ci360-loc-group" style="margin-top:16px;">
+						<span class="ci360-flag-head">🇺🇸 <strong>International</strong></span>
+						<div class="ci360-loc-block">
+							<strong>Greenville, USA</strong>
+						</div>
 					</div>
-				</div>
-				<div class="ci360-loc-group" style="margin-top:16px;">
-					<span class="ci360-flag-head">🇺🇸 <strong>International</strong></span>
-					<div class="ci360-loc-block">
-						<strong>Greenville, USA</strong>
-					</div>
-				</div>
+					<?php
+				}
+				?>
 			</div>
 
 			<!-- Col 5: Direct Contact -->
 			<div class="ci360-fcol ci360-fcol-contact">
-				<h4 class="ci360-fhead">Direct Contact</h4>
+				<h4 class="ci360-fhead"><?php echo ci_e( $contact_title ); ?></h4>
 				<ul class="ci360-contact-list">
-					<li>
-						<a href="mailto:<?php echo esc_attr( $ci_email ); ?>">
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
-							<?php echo ci_e( $ci_email ); ?>
-						</a>
-					</li>
-					<li>
-						<a href="mailto:<?php echo esc_attr( $ci_email2 ); ?>">
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
-							<?php echo ci_e( $ci_email2 ); ?>
-						</a>
-					</li>
+					<?php if ( $ci_email ) : ?>
+						<li>
+							<a href="mailto:<?php echo esc_attr( $ci_email ); ?>">
+								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+								<?php echo ci_e( $ci_email ); ?>
+							</a>
+						</li>
+					<?php endif; ?>
+					<?php if ( $ci_email2 ) : ?>
+						<li>
+							<a href="mailto:<?php echo esc_attr( $ci_email2 ); ?>">
+								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+								<?php echo ci_e( $ci_email2 ); ?>
+							</a>
+						</li>
+					<?php endif; ?>
 				</ul>
 				<div class="ci360-social-icons">
-					<a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
-						<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-					</a>
-					<a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
-						<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-					</a>
-					<a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
-						<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-					</a>
-					<a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube">
-						<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#ffffff"/></svg>
-					</a>
+					<?php
+					$socials = ci_rows( 'opt_socials', 'option' );
+					if ( ! empty( $socials ) ) {
+						foreach ( $socials as $soc ) {
+							$soc_label = $soc['label'] ?? '';
+							$soc_url   = $soc['url'] ?? '#';
+							echo '<a href="' . esc_url( $soc_url ) . '" target="_blank" rel="noopener" aria-label="' . esc_attr( $soc_label ) . '">' . ci_e( $soc_label ) . '</a>';
+						}
+					} else {
+						?>
+						<a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+							<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+						</a>
+						<a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
+							<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+						</a>
+						<a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+							<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+						</a>
+						<a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube">
+							<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#ffffff"/></svg>
+						</a>
+						<?php
+					}
+					?>
 				</div>
 			</div>
 		</div>
