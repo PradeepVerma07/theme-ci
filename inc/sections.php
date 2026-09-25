@@ -257,7 +257,22 @@ function ci_s_about_journey( $s ) {
 
 	$card = '<div class="ci360-tl-card-grid"><div class="ci360-tl-card-left"><div><span class="ci360-tl-year-big">' . ci_e( $first['year'] ) . '</span><h3 class="ci360-tl-card-title">' . wp_kses( $first['title'], array( 'br' => array() ) ) . '</h3></div><p class="ci360-tl-card-desc">' . ci_e( $first['desc'] ) . '</p><div class="ci360-tl-tags">' . $tags . '</div><div class="ci360-tl-nav"><button type="button" class="ci360-tl-nav-btn prev" data-ci360-tl-prev disabled>← <span>Previous</span></button><button type="button" class="ci360-tl-nav-btn next" data-ci360-tl-next><span>Next</span> →</button></div></div><div class="ci360-tl-card-right">' . $image . '<span class="ci360-tl-img-fade" aria-hidden="true"></span><span class="ci360-tl-img-vignette" aria-hidden="true"></span><span class="ci360-tl-progress" aria-hidden="true"></span></div></div>';
 
-	return '<section id="ci360-timeline-section" data-ci360-timeline="' . esc_attr( wp_json_encode( $data ) ) . '"><div class="ci360-tl-inner"><div class="ci360-tl-heading"><h2>' . ci_html( $heading ) . '</h2></div><div class="ci360-tl-track-wrap"><span class="ci360-tl-track-rail" aria-hidden="true"></span><span class="ci360-tl-track-fill" data-ci360-tl-fill aria-hidden="true"></span><div class="ci360-tl-steps" data-ci360-tl-steps>' . $steps . '</div></div><div class="ci360-tl-card"><span class="ci360-tl-card-glow" data-ci360-tl-glow style="background:radial-gradient(ellipse,' . esc_attr( $first['glow'] ) . ')" aria-hidden="true"></span><div class="ci360-tl-card-inner" data-ci360-tl-card>' . $card . '</div></div></div></section>';
+	$style_vars = '';
+	if ( ! empty( $s['heading_color'] ) ) {
+		$style_vars .= '--ci-tl-heading-color:' . esc_attr( $s['heading_color'] ) . ';';
+	}
+	if ( ! empty( $s['accent_color'] ) ) {
+		$style_vars .= '--ci-tl-accent-color:' . esc_attr( $s['accent_color'] ) . ';';
+	}
+	if ( ! empty( $s['card_title_color'] ) ) {
+		$style_vars .= '--ci-tl-card-title-color:' . esc_attr( $s['card_title_color'] ) . ';';
+	}
+	if ( ! empty( $s['font_weight'] ) ) {
+		$style_vars .= '--ci-tl-font-weight:' . esc_attr( $s['font_weight'] ) . ';';
+	}
+	$style_attr = $style_vars ? ' style="' . $style_vars . '"' : '';
+
+	return '<section id="ci360-timeline-section"' . $style_attr . ' data-ci360-timeline="' . esc_attr( wp_json_encode( $data ) ) . '"><div class="ci360-tl-inner"><div class="ci360-tl-heading"><h2>' . ci_html( $heading ) . '</h2></div><div class="ci360-tl-track-wrap"><span class="ci360-tl-track-rail" aria-hidden="true"></span><span class="ci360-tl-track-fill" data-ci360-tl-fill aria-hidden="true"></span><div class="ci360-tl-steps" data-ci360-tl-steps>' . $steps . '</div></div><div class="ci360-tl-card"><span class="ci360-tl-card-glow" data-ci360-tl-glow style="background:radial-gradient(ellipse,' . esc_attr( $first['glow'] ) . ')" aria-hidden="true"></span><div class="ci360-tl-card-inner" data-ci360-tl-card>' . $card . '</div></div></div></section>';
 }
 
 /** Photos bundled with the theme, matched by name when a Team member has no photo. */

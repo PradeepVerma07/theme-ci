@@ -342,6 +342,17 @@ Navigating the digital realm with a splash of creativity and a dash of strategic
 			'controls' => array(
 				array( 'type' => 'section', 'label' => 'Heading' ),
 				array( 'type' => 'html', 'key' => 'heading', 'label' => 'Heading', 'default' => 'Built one <em>meaningful</em><br>business problem at a time.' ),
+				array( 'type' => 'color', 'key' => 'heading_color', 'label' => 'Heading color', 'default' => '#ffffff' ),
+				array( 'type' => 'color', 'key' => 'accent_color', 'label' => 'Accent text color', 'default' => '#22d3ee' ),
+				array( 'type' => 'color', 'key' => 'card_title_color', 'label' => 'Card title color', 'default' => '#ffffff' ),
+				array( 'type' => 'select', 'key' => 'font_weight', 'label' => 'Heading font weight', 'options' => array(
+					'300' => 'Light (300)',
+					'400' => 'Regular (400)',
+					'500' => 'Medium (500)',
+					'600' => 'SemiBold (600)',
+					'700' => 'Bold (700)',
+					'800' => 'ExtraBold (800)',
+				), 'default' => '600' ),
 				array( 'type' => 'section', 'label' => 'Milestones' ),
 				array( 'type' => 'repeater', 'key' => 'timeline', 'label' => 'Timeline', 'title_field' => 'year', 'fields' => array(
 					array( 'type' => 'text', 'key' => 'year', 'label' => 'Year', 'default' => '' ),

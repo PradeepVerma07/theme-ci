@@ -934,40 +934,40 @@ span.ci360-heading-accent {
 }
 
 /* ================================================================
-   TIMELINE SECTION TYPOGRAPHY & FONT MATCHING FIX
+   TIMELINE SECTION TYPOGRAPHY & EDITABLE COLOR / WEIGHT
    ================================================================ */
 #ci360-timeline-section .ci360-tl-heading h2 {
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-size: clamp(44px, 5.5vw, 76px) !important;
-  font-weight: 600 !important;
+  font-weight: var(--ci-tl-font-weight, 600) !important;
   line-height: 1.08 !important;
   letter-spacing: -0.045em !important;
-  color: #ffffff !important;
+  color: var(--ci-tl-heading-color, #ffffff) !important;
   margin-bottom: 0 !important;
 }
 
 #ci360-timeline-section .ci360-tl-heading h2 em,
 #ci360-timeline-section .ci360-tl-heading h2 span {
   font-style: normal !important;
-  font-weight: 600 !important;
-  background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%) !important;
+  font-weight: var(--ci-tl-font-weight, 600) !important;
+  background: linear-gradient(135deg, var(--ci-tl-accent-color, #22d3ee) 0%, #3b82f6 100%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
-  color: #22d3ee !important;
+  color: var(--ci-tl-accent-color, #22d3ee) !important;
 }
 
 #ci360-timeline-section .ci360-tl-year-big {
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-size: clamp(44px, 5vw, 76px) !important;
-  font-weight: 600 !important;
+  font-weight: var(--ci-tl-font-weight, 600) !important;
   line-height: 1.05 !important;
   letter-spacing: -0.045em !important;
-  background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%) !important;
+  background: linear-gradient(135deg, var(--ci-tl-accent-color, #22d3ee) 0%, #3b82f6 100%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
-  color: #22d3ee !important;
+  color: var(--ci-tl-accent-color, #22d3ee) !important;
   margin-bottom: 10px !important;
 }
 
@@ -977,7 +977,7 @@ span.ci360-heading-accent {
   font-weight: 500 !important;
   line-height: 1.12 !important;
   letter-spacing: -0.045em !important;
-  color: #ffffff !important;
+  color: var(--ci-tl-card-title-color, #ffffff) !important;
   margin: 0 !important;
 }
 
