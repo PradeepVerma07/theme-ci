@@ -933,6 +933,62 @@ span.ci360-heading-accent {
   display: block !important;
 }
 
+/* ================================================================
+   TIMELINE SECTION TYPOGRAPHY & FONT MATCHING FIX
+   ================================================================ */
+#ci360-timeline-section .ci360-tl-heading h2 {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: clamp(48px, 6vw, 94px) !important;
+  font-weight: 700 !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.06em !important;
+  color: #ffffff !important;
+  margin-bottom: 0 !important;
+}
+
+#ci360-timeline-section .ci360-tl-heading h2 em,
+#ci360-timeline-section .ci360-tl-heading h2 span {
+  font-style: normal !important;
+  color: #6fe6ff !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  -webkit-text-fill-color: #6fe6ff !important;
+}
+
+#ci360-timeline-section .ci360-tl-year-big {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: clamp(48px, 5.5vw, 84px) !important;
+  font-weight: 700 !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.05em !important;
+  color: #6fe6ff !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  -webkit-text-fill-color: #6fe6ff !important;
+  margin-bottom: 10px !important;
+}
+
+#ci360-timeline-section .ci360-tl-card-title {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: clamp(26px, 3.2vw, 44px) !important;
+  font-weight: 700 !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.045em !important;
+  color: #ffffff !important;
+  margin: 0 !important;
+}
+
+#ci360-timeline-section .ci360-tl-card-desc {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: clamp(15px, 1.2vw, 17px) !important;
+  font-weight: 400 !important;
+  line-height: 1.7 !important;
+  color: #cbd5e1 !important;
+}
+
+
 
 
 
