@@ -272,7 +272,32 @@ function ci_s_about_journey( $s ) {
 	}
 	$style_attr = $style_vars ? ' style="' . $style_vars . '"' : '';
 
-	return '<section id="ci360-timeline-section"' . $style_attr . ' data-ci360-timeline="' . esc_attr( wp_json_encode( $data ) ) . '"><div class="ci360-tl-inner"><div class="ci360-tl-heading"><h2>' . ci_html( $heading ) . '</h2></div><div class="ci360-tl-track-wrap"><span class="ci360-tl-track-rail" aria-hidden="true"></span><span class="ci360-tl-track-fill" data-ci360-tl-fill aria-hidden="true"></span><div class="ci360-tl-steps" data-ci360-tl-steps>' . $steps . '</div></div><div class="ci360-tl-card"><span class="ci360-tl-card-glow" data-ci360-tl-glow style="background:radial-gradient(ellipse,' . esc_attr( $first['glow'] ) . ')" aria-hidden="true"></span><div class="ci360-tl-card-inner" data-ci360-tl-card>' . $card . '</div></div></div></section>';
+	$h_styles = array();
+	if ( ! empty( $s['heading_color'] ) ) {
+		$h_styles[] = 'color:' . esc_attr( $s['heading_color'] );
+	}
+	if ( ! empty( $s['font_weight'] ) ) {
+		$h_styles[] = 'font-weight:' . esc_attr( $s['font_weight'] );
+	}
+	$h_style_attr = $h_styles ? ' style="' . implode( ';', $h_styles ) . '"' : '';
+
+	$em_styles = array();
+	if ( ! empty( $s['accent_color'] ) ) {
+		$em_styles[] = 'color:' . esc_attr( $s['accent_color'] );
+		$em_styles[] = '-webkit-text-fill-color:' . esc_attr( $s['accent_color'] );
+		$em_styles[] = 'background:none';
+	}
+	if ( ! empty( $s['font_weight'] ) ) {
+		$em_styles[] = 'font-weight:' . esc_attr( $s['font_weight'] );
+	}
+	$em_style_attr = $em_styles ? ' style="' . implode( ';', $em_styles ) . '"' : '';
+
+	$heading_html = ci_html( $heading );
+	if ( $em_style_attr ) {
+		$heading_html = str_replace( array( '<em>', '<span>' ), array( '<em' . $em_style_attr . '>', '<span' . $em_style_attr . '>' ), $heading_html );
+	}
+
+	return '<section id="ci360-timeline-section"' . $style_attr . ' data-ci360-timeline="' . esc_attr( wp_json_encode( $data ) ) . '"><div class="ci360-tl-inner"><div class="ci360-tl-heading"><h2' . $h_style_attr . '>' . $heading_html . '</h2></div><div class="ci360-tl-track-wrap"><span class="ci360-tl-track-rail" aria-hidden="true"></span><span class="ci360-tl-track-fill" data-ci360-tl-fill aria-hidden="true"></span><div class="ci360-tl-steps" data-ci360-tl-steps>' . $steps . '</div></div><div class="ci360-tl-card"><span class="ci360-tl-card-glow" data-ci360-tl-glow style="background:radial-gradient(ellipse,' . esc_attr( $first['glow'] ) . ')" aria-hidden="true"></span><div class="ci360-tl-card-inner" data-ci360-tl-card>' . $card . '</div></div></div></section>';
 }
 
 /** Photos bundled with the theme, matched by name when a Team member has no photo. */

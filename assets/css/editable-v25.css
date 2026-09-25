@@ -939,22 +939,22 @@ span.ci360-heading-accent {
 #ci360-timeline-section .ci360-tl-heading h2 {
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-size: clamp(44px, 5.5vw, 76px) !important;
-  font-weight: var(--ci-tl-font-weight, 600) !important;
+  font-weight: var(--ci-tl-font-weight, 500);
   line-height: 1.08 !important;
   letter-spacing: -0.045em !important;
-  color: var(--ci-tl-heading-color, #ffffff) !important;
+  color: var(--ci-tl-heading-color, #ffffff);
   margin-bottom: 0 !important;
 }
 
 #ci360-timeline-section .ci360-tl-heading h2 em,
 #ci360-timeline-section .ci360-tl-heading h2 span {
   font-style: normal !important;
-  font-weight: var(--ci-tl-font-weight, 600) !important;
-  background: linear-gradient(135deg, var(--ci-tl-accent-color, #22d3ee) 0%, #3b82f6 100%) !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  color: var(--ci-tl-accent-color, #22d3ee) !important;
+  font-weight: inherit;
+  background: linear-gradient(135deg, var(--ci-tl-accent-color, #22d3ee) 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--ci-tl-accent-color, #22d3ee);
 }
 
 #ci360-timeline-section .ci360-tl-year-big {
