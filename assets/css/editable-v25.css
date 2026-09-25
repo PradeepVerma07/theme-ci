@@ -661,3 +661,38 @@ a.nav-contact,
   background: #22d3ee;
   color: #040a1f;
 }
+.ci360-social-icons a polygon {
+  fill: #ffffff;
+  transition: fill 0.25s;
+}
+.ci360-social-icons a:hover polygon {
+  fill: #22d3ee;
+}
+
+@media (max-width: 767px) {
+  .site-header {
+    height: 64px !important;
+    padding-inline: 16px !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 999 !important;
+    margin: 0 !important;
+    background: rgba(245, 248, 255, 0.95) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-bottom: 1px solid rgba(40, 70, 170, 0.08) !important;
+  }
+  .site-header .logo {
+    font-size: 22px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  .site-header .menu-toggle {
+    width: 36px !important;
+    height: 36px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
