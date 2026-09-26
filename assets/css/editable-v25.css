@@ -2510,10 +2510,12 @@ span.ci360-heading-accent {
 }
 
 .ci360-case-hero {
-  height: 55vh !important;
-  min-height: 440px !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
   background-color: #0f172a !important;
-  margin-bottom: 20px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  width: 100% !important;
 }
 
 .ci360-case-body {
@@ -2551,9 +2553,10 @@ span.ci360-heading-accent {
 }
 
 .ci360-case-main-container {
-  width: 90% !important;
-  max-width: 1200px !important;
-  margin: 40px auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
   box-sizing: border-box !important;
 }
 

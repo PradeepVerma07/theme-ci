@@ -538,39 +538,32 @@ function ci_render_project( $post_id ) {
 					</div>
 				</div>
 			</section>
-		<?php else : ?>
-			<!-- Top Breadcrumbs for Elementor Pages -->
-			<div class="ci360-case-top-breadcrumbs wrap" style="padding-top: 30px; margin-bottom: 20px;">
-				<nav class="ci360-service-breadcrumb" aria-label="Breadcrumb">
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
-					<span class="sep">&gt;</span>
-					<a href="<?php echo esc_url( home_url( '/work/' ) ); ?>">Work</a>
-					<span class="sep">&gt;</span>
-					<span class="current"><?php echo esc_html( $title ); ?></span>
-				</nav>
-			</div>
 		<?php endif; ?>
 
 		<!-- 2. Main Case Study Story Content Area (FULL WIDTH - NO SIDEBAR) -->
-		<section class="ci360-case-main-container wrap">
+		<section class="ci360-case-main-container">
 			<article class="ci360-case-article ci360-case-full-width">
 				<!-- WordPress / Elementor Main Content Area -->
-				<div class="ci360-case-body entry-content">
+				<div class="ci360-case-body entry-content <?php echo $is_elementor ? '' : 'wrap'; ?>">
 					<?php echo $content_raw; ?>
 				</div>
 
 				<!-- Legacy Custom Story Blocks (if present) -->
 				<?php if ( ! empty( $custom_story ) ) : ?>
-					<div class="ci360-case-story-blocks">
+					<div class="ci360-case-story-blocks wrap">
 						<?php echo $custom_story; ?>
 					</div>
 				<?php endif; ?>
 
-				<?php echo $gallery; ?>
+				<?php if ( ! empty( $gallery ) ) : ?>
+					<div class="wrap">
+						<?php echo $gallery; ?>
+					</div>
+				<?php endif; ?>
 
 				<!-- 3. Related 4 Case Studies Grid AT THE END OF CONTENT -->
 				<?php if ( ! empty( $related_cards ) ) : ?>
-					<div class="ci360-related-box-container ci360-case-end-related">
+					<div class="ci360-related-box-container ci360-case-end-related wrap">
 						<div class="ci360-related-box">
 							<div class="ci360-related-header">
 								<h2>Featured Case Studies</h2>
@@ -584,7 +577,7 @@ function ci_render_project( $post_id ) {
 				<?php endif; ?>
 
 				<!-- Professional Next & Previous Buttons Bar Below Content -->
-				<nav class="ci360-case-nav-bar ci360-case-nav-pro" aria-label="Case Study Navigation">
+				<nav class="ci360-case-nav-bar ci360-case-nav-pro wrap" aria-label="Case Study Navigation">
 					<?php if ( ! empty( $prev_data ) ) : ?>
 						<a href="<?php echo esc_url( $prev_data['url'] ); ?>" class="ci360-case-nav-btn prev">
 							<span class="nav-arrow">&larr;</span>
@@ -611,7 +604,7 @@ function ci_render_project( $post_id ) {
 				</nav>
 
 				<!-- Professional Share Icons Bar Below Content -->
-				<div class="ci360-share-bar ci360-share-bar-pro">
+				<div class="ci360-share-bar ci360-share-bar-pro wrap">
 					<span class="ci360-share-label">Share this Case Study:</span>
 					<div class="ci360-share-icons">
 						<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $encoded_url; ?>" target="_blank" rel="noopener noreferrer" class="ci360-share-icon fb" title="Share on Facebook">
