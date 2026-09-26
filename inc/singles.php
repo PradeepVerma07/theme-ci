@@ -38,12 +38,17 @@ function ci_render_service( $post_id ) {
 		$thumb_url = CI360_URI . '/assets/images/studio-detail.webp';
 	}
 
-	// Content raw (WP editor or Elementor)
-	$content_raw = '';
-	if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is_built_with_elementor( $post_id ) ) {
+	// Content raw (WP editor or Elementor with 3-tier fallback)
+	$is_elementor = class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is_built_with_elementor( $post_id );
+	$content_raw  = '';
+	if ( $is_elementor ) {
 		$content_raw = \Elementor\Plugin::$instance->frontend->get_builder_content_for_display( $post_id );
-	} else {
+	}
+	if ( empty( trim( wp_strip_all_tags( $content_raw ) ) ) ) {
 		$content_raw = apply_filters( 'the_content', $post->post_content );
+	}
+	if ( empty( trim( wp_strip_all_tags( $content_raw ) ) ) ) {
+		$content_raw = $post->post_content;
 	}
 
 	// Related 4 Services
