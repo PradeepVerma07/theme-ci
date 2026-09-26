@@ -12,6 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 get_header();
 echo '<main id="main">';
-echo ci_render_insight( get_queried_object_id() ); // phpcs:ignore WordPress.Security.EscapeOutput
+if ( have_posts() ) {
+	while ( have_posts() ) {
+		the_post();
+		echo ci_render_insight( get_the_ID() ); // phpcs:ignore WordPress.Security.EscapeOutput
+	}
+} else {
+	echo ci_render_insight( get_queried_object_id() ); // phpcs:ignore WordPress.Security.EscapeOutput
+}
 echo '</main>';
 get_footer();

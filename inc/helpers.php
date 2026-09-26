@@ -145,7 +145,7 @@ function ci_arrow( $dir = 'ne' ) {
 	return '<svg class="icon arrow-' . $dir . '" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 }
 function ci_star() {
-	return '<svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M45 0h10v35L80 10l8 8-25 27h37v10H64l25 25-8 8-26-25v37H45V64L20 89l-8-8 25-26H0V45h35L10 20l8-8 27 25Z" fill="currentColor"/></svg>';
+	return '<svg class="star modern-star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 0C50 27.614 72.386 50 100 50C72.386 50 50 72.386 50 100C50 72.386 27.614 50 0 50C27.614 50 50 27.614 50 0Z" fill="currentColor"/></svg>';
 }
 function ci_label( $n, $t ) {
 	return '<div class="section-label"><span>' . ci_e( $n ) . '</span><span>' . ci_e( $t ) . '</span></div>';

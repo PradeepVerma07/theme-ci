@@ -1397,6 +1397,54 @@ span.ci360-heading-accent {
   color: #2563eb !important;
 }
 
+/* Modern Single Post Content & Full-Width Layout */
+.article-reading.no-toc {
+  grid-template-columns: 1fr !important;
+  max-width: 920px !important;
+  margin: 0 auto !important;
+}
+
+.article-reading.no-toc .article-body {
+  grid-column: 1 / -1 !important;
+  max-width: 100% !important;
+}
+
+.article-wp-content {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #1e293b;
+}
+
+.article-wp-content p {
+  margin-bottom: 1.5em;
+}
+
+.article-wp-content h2,
+.article-wp-content h3,
+.article-wp-content h4 {
+  color: #0f172a;
+  font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+  line-height: 1.3;
+}
+
+.article-wp-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 1.5em 0;
+}
+
+.article-wp-content blockquote {
+  border-left: 4px solid #2563eb;
+  padding-left: 1.25rem;
+  margin: 1.5em 0;
+  font-style: italic;
+  color: #475569;
+}
+
+
 
 
 
