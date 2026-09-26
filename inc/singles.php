@@ -425,12 +425,16 @@ function ci_render_project( $post_id ) {
 	// Check if post is built with Elementor
 	$is_elementor = class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is_built_with_elementor( $post_id );
 
-	// Retrieve actual Post Content (Elementor or WP Editor content)
+	// Retrieve actual Post Content (Elementor or WP Editor content with 3-tier fallback)
 	$content_raw = '';
 	if ( $is_elementor ) {
 		$content_raw = \Elementor\Plugin::$instance->frontend->get_builder_content_for_display( $post_id );
-	} else {
+	}
+	if ( empty( trim( wp_strip_all_tags( $content_raw ) ) ) ) {
 		$content_raw = apply_filters( 'the_content', $wp_post->post_content );
+	}
+	if ( empty( trim( wp_strip_all_tags( $content_raw ) ) ) ) {
+		$content_raw = $wp_post->post_content;
 	}
 
 	// Custom field story blocks (fallback or legacy CPT content)
@@ -534,17 +538,26 @@ function ci_render_project( $post_id ) {
 					</div>
 				</div>
 			</section>
+		<?php else : ?>
+			<!-- Top Breadcrumbs for Elementor Pages -->
+			<div class="ci360-case-top-breadcrumbs wrap" style="padding-top: 30px; margin-bottom: 20px;">
+				<nav class="ci360-service-breadcrumb" aria-label="Breadcrumb">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
+					<span class="sep">&gt;</span>
+					<a href="<?php echo esc_url( home_url( '/work/' ) ); ?>">Work</a>
+					<span class="sep">&gt;</span>
+					<span class="current"><?php echo esc_html( $title ); ?></span>
+				</nav>
+			</div>
 		<?php endif; ?>
 
 		<!-- 2. Main Case Study Story Content Area (FULL WIDTH - NO SIDEBAR) -->
 		<section class="ci360-case-main-container wrap">
 			<article class="ci360-case-article ci360-case-full-width">
 				<!-- WordPress / Elementor Main Content Area -->
-				<?php if ( ! empty( trim( $content_raw ) ) ) : ?>
-					<div class="ci360-case-body entry-content">
-						<?php echo $content_raw; ?>
-					</div>
-				<?php endif; ?>
+				<div class="ci360-case-body entry-content">
+					<?php echo $content_raw; ?>
+				</div>
 
 				<!-- Legacy Custom Story Blocks (if present) -->
 				<?php if ( ! empty( $custom_story ) ) : ?>
