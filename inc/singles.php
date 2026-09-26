@@ -91,7 +91,6 @@ function ci_render_service( $post_id ) {
 		$formatted_title = esc_html( $title );
 	}
 
-	?>
 	// Dynamic Overview Data
 	$ov_heading  = ci_get( 'service_overview_heading', $post_id ) ?: 'Turn Conversations Into <span class="ci360-title-gradient">Communities</span>';
 	$ov_copy     = ci_get( 'service_overview_copy', $post_id ) ?: "Social media is more than just posting — it's about people, conversations, and real connections. We help brands show up with purpose, create engaging content, and build communities that drive meaningful business results.";
