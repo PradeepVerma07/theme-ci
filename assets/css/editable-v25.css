@@ -1780,15 +1780,17 @@ span.ci360-heading-accent {
   margin-bottom: 16px;
 }
 
+.ci360-blog-kicker-light span,
 .ci360-cat-badge-light {
-  background: #3b82f6;
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 5px 14px;
-  border-radius: 20px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  background: #3b82f6 !important;
+  color: #ffffff !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  padding: 5px 14px !important;
+  border-radius: 20px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  display: inline-block !important;
 }
 
 .ci360-meta-badge-light {

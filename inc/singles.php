@@ -414,9 +414,12 @@ function ci_render_project( $post_id ) {
 		}
 	}
 
+	// Check if post is built with Elementor
+	$is_elementor = class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is_built_with_elementor( $post_id );
+
 	// Retrieve actual Post Content (Elementor or WP Editor content)
 	$content_raw = '';
-	if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is_built_with_elementor( $post_id ) ) {
+	if ( $is_elementor ) {
 		$content_raw = \Elementor\Plugin::$instance->frontend->get_builder_content_for_display( $post_id );
 	} else {
 		$content_raw = apply_filters( 'the_content', $wp_post->post_content );
@@ -440,13 +443,36 @@ function ci_render_project( $post_id ) {
 		$gallery = '<div class="project-gallery-box"><div class="gallery-heading"><h4>PROJECT GALLERY</h4><span>' . ci_pad( count( $p['gallery'] ) ) . ' IMAGES</span></div><div class="gallery-grid ' . ( 1 === count( $p['gallery'] ) ? 'gallery-single' : '' ) . '">' . $items . '</div></div>';
 	}
 
-	// Related 4 Case Studies (query across ci_project and post)
-	$rel_query = new WP_Query( array(
+	// Related 4 Case Studies (filtered by category if available)
+	$related_args = array(
 		'post_type'      => array( 'ci_project', 'post' ),
 		'posts_per_page' => 4,
 		'post__not_in'   => array( $post_id ),
 		'post_status'    => 'publish',
-	) );
+	);
+
+	$terms = get_the_terms( $post_id, 'ci_project_category' );
+	if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+		$related_args['tax_query'] = array(
+			array(
+				'taxonomy' => 'ci_project_category',
+				'field'    => 'term_id',
+				'terms'    => $terms[0]->term_id,
+			),
+		);
+	} else {
+		$cats = get_the_category( $post_id );
+		if ( ! empty( $cats ) ) {
+			$related_args['cat'] = $cats[0]->term_id;
+		}
+	}
+
+	$rel_query = new WP_Query( $related_args );
+	if ( ! $rel_query->have_posts() ) {
+		unset( $related_args['tax_query'] );
+		unset( $related_args['cat'] );
+		$rel_query = new WP_Query( $related_args );
+	}
 
 	$related_cards = '';
 	if ( $rel_query->have_posts() ) {
@@ -457,7 +483,12 @@ function ci_render_project( $post_id ) {
 			$r_url     = get_permalink( $rid );
 			$r_thumb   = get_the_post_thumbnail_url( $rid, 'medium_large' );
 			$r_cats    = get_the_category( $rid );
-			$r_cat     = ! empty( $r_cats ) ? $r_cats[0]->name : 'Case Study';
+			if ( empty( $r_cats ) ) {
+				$r_terms = get_the_terms( $rid, 'ci_project_category' );
+				$r_cat   = ( ! empty( $r_terms ) && ! is_wp_error( $r_terms ) ) ? $r_terms[0]->name : 'Case Study';
+			} else {
+				$r_cat = $r_cats[0]->name;
+			}
 			$r_excerpt = has_excerpt( $rid ) ? get_the_excerpt( $rid ) : wp_trim_words( get_the_content(), 15 );
 
 			$img_tag = $r_thumb ? '<img src="' . esc_url( $r_thumb ) . '" alt="' . esc_attr( $r_title ) . '" loading="lazy">' : ci_star();
@@ -472,30 +503,30 @@ function ci_render_project( $post_id ) {
 
 	?>
 	<div id="ci360-case-study-root" class="ci360-case-study-page">
-		<!-- 1. Hero Banner Header -->
-		<section class="ci360-hero-full-screen ci360-case-hero" <?php if ( $feat_img_url ) : ?>style="background-image: url('<?php echo esc_url( $feat_img_url ); ?>');"<?php endif; ?>>
-			<div class="ci360-hero-overlay"></div>
-			<div class="ci360-hero-full-content wrap">
-				<div class="ci360-hero-left-align">
-					<nav class="ci360-blog-breadcrumb-light" aria-label="Breadcrumb">
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
-						<span>/</span>
-						<a href="<?php echo esc_url( home_url( '/work/' ) ); ?>">Work</a>
-						<span>/</span>
-						<span><?php echo esc_html( $title ); ?></span>
-					</nav>
-					<div class="ci360-blog-kicker-light">
-						<span><?php echo esc_html( mb_strtoupper( $cat_name ) ); ?></span>
-						<i></i>
-						<span>CASE STUDY</span>
+		<!-- 1. Hero Banner Header (ONLY output if NOT built with Elementor) -->
+		<?php if ( ! $is_elementor ) : ?>
+			<section class="ci360-hero-full-screen ci360-case-hero" <?php if ( $feat_img_url ) : ?>style="background-image: url('<?php echo esc_url( $feat_img_url ); ?>');"<?php endif; ?>>
+				<div class="ci360-hero-overlay"></div>
+				<div class="ci360-hero-full-content wrap">
+					<div class="ci360-hero-left-align">
+						<nav class="ci360-blog-breadcrumb-light" aria-label="Breadcrumb">
+							<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
+							<span>/</span>
+							<a href="<?php echo esc_url( home_url( '/work/' ) ); ?>">Work</a>
+							<span>/</span>
+							<span><?php echo esc_html( $title ); ?></span>
+						</nav>
+						<div class="ci360-blog-kicker-light">
+							<span><?php echo esc_html( mb_strtoupper( $cat_name ) ); ?></span>
+						</div>
+						<h1 class="ci360-hero-full-title"><?php echo esc_html( $title ); ?></h1>
+						<?php if ( ! empty( $headline ) ) : ?>
+							<p class="ci360-hero-lead"><?php echo esc_html( $headline ); ?></p>
+						<?php endif; ?>
 					</div>
-					<h1 class="ci360-hero-full-title"><?php echo esc_html( $title ); ?></h1>
-					<?php if ( ! empty( $headline ) ) : ?>
-						<p class="ci360-hero-lead"><?php echo esc_html( $headline ); ?></p>
-					<?php endif; ?>
 				</div>
-			</div>
-		</section>
+			</section>
+		<?php endif; ?>
 
 		<!-- 2. Top 1 Row of 4 Related Case Studies -->
 		<?php if ( ! empty( $related_cards ) ) : ?>
