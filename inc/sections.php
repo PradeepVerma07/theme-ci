@@ -946,4 +946,146 @@ function ci_s_challenge_approach( $s ) {
 	return $out;
 }
 
+/** Render Service Hero Section */
+function ci_s_service_hero( $s ) {
+	$kicker     = $s['kicker'] ?? 'OUR SERVICE';
+	$title      = $s['title'] ?? 'Branding & Design';
+	$lead       = $s['lead'] ?? '';
+	$btn1       = $s['cta_primary'] ?? 'Start a Conversation';
+	$btn1_url   = ci_url( $s['cta_primary_link'] ?? '/contact/' );
+	$btn2       = $s['cta_secondary'] ?? 'Contact Us';
+	$btn2_url   = ci_url( $s['cta_secondary_link'] ?? '/contact/' );
+	$img        = ci_img( $s['image'] ?? 'studio-detail.webp', $title, 'ci360-hero-img-main', true );
+
+	$words = explode( ' ', $title );
+	if ( count( $words ) > 1 ) {
+		$last_word       = array_pop( $words );
+		$formatted_title = esc_html( implode( ' ', $words ) ) . ' <span class="ci360-title-gradient">' . esc_html( $last_word ) . '</span>';
+	} else {
+		$formatted_title = esc_html( $title );
+	}
+
+	return '<section class="ci360-service-hero"' . ci_s_id( $s ) . '>'
+		. '<div class="ci360-service-hero-bg"></div>'
+		. '<div class="ci360-service-hero-wrap wrap">'
+		. '<div class="ci360-service-hero-left">'
+		. '<nav class="ci360-service-breadcrumb" aria-label="Breadcrumb"><a href="' . esc_url( home_url( '/' ) ) . '">Home</a><span class="sep">&gt;</span><a href="' . esc_url( home_url( '/services/' ) ) . '">Services</a><span class="sep">&gt;</span><span class="current">' . esc_html( $title ) . '</span></nav>'
+		. '<div class="ci360-service-kicker"><span>' . esc_html( mb_strtoupper( $kicker ) ) . '</span></div>'
+		. '<h1 class="ci360-service-hero-title">' . $formatted_title . '</h1>'
+		. '<p class="ci360-service-hero-lead">' . esc_html( $lead ) . '</p>'
+		. '<div class="ci360-service-hero-btns">'
+		. '<a href="' . esc_url( $btn1_url ) . '" class="ci360-btn-pill-primary">' . esc_html( $btn1 ) . ' ' . ci_arrow() . '</a>'
+		. '<a href="' . esc_url( $btn2_url ) . '" class="ci360-btn-pill-outline">' . esc_html( $btn2 ) . '</a>'
+		. '</div>'
+		. '</div>'
+		. '<div class="ci360-service-hero-right"><div class="ci360-service-visual-stage"><div class="ci360-hero-main-card">'
+		. $img
+		. '<div class="ci360-glass-badge badge-followers"><span class="label">Followers</span><span class="value">125K</span><span class="trend">+12%</span></div>'
+		. '<div class="ci360-glass-badge badge-engagement"><span class="label">Engagement</span><span class="value">+278%</span></div>'
+		. '<div class="ci360-glass-badge badge-reach"><span class="label">Reach</span><span class="value">2.4M</span></div>'
+		. '<div class="ci360-platform-pills"><span class="platform-icon ig"></span><span class="platform-icon fb"></span><span class="platform-icon tk"></span><span class="platform-icon li"></span><span class="platform-icon yt"></span><span class="platform-icon x"></span></div>'
+		. '</div></div></div>'
+		. '</div></section>';
+}
+
+/** Render Service Overview Section */
+function ci_s_service_overview( $s ) {
+	$kicker   = $s['kicker'] ?? 'OVERVIEW';
+	$heading  = $s['heading'] ?? 'Turn Conversations Into <em>Communities</em>';
+	$copy     = $s['copy'] ?? '';
+	$features = ci_s_rows( $s['features'] ?? array() );
+	$hl_title = $s['highlights_title'] ?? 'Service Highlights';
+	$hl_list  = ci_s_rows( $s['highlights_list'] ?? array() );
+	$btn      = $s['card_button'] ?? 'Discuss Your Goals';
+	$btn_url  = ci_url( $s['card_button_link'] ?? '/contact/' );
+	$subtext  = $s['card_subtext'] ?? 'Get a tailored strategy for your brand.';
+
+	$feat_html = '';
+	if ( ! empty( $features ) ) {
+		$icons = array(
+			'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+			'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+			'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',
+		);
+		foreach ( $features as $fi => $ft ) {
+			$icon_svg   = $icons[ $fi % count( $icons ) ];
+			$feat_html .= '<div class="ci360-feat-item"><div class="ci360-feat-icon">' . $icon_svg . '</div><div class="ci360-feat-text"><h4>' . ci_e( $ft['title'] ?? '' ) . '</h4><p>' . ci_e( $ft['text'] ?? '' ) . '</p></div></div>';
+		}
+	}
+
+	$hl_html = '';
+	if ( ! empty( $hl_list ) ) {
+		foreach ( $hl_list as $hl ) {
+			$hl_html .= '<li><i>✓</i> ' . ci_e( $hl['item'] ?? '' ) . '</li>';
+		}
+	}
+
+	return '<section class="ci360-service-overview wrap"' . ci_s_id( $s ) . '>'
+		. '<div class="ci360-overview-left"><span class="ci360-sub-kicker">' . ci_e( $kicker ) . '</span><h2 class="ci360-section-title">' . ci_html( $heading ) . '</h2><p class="ci360-overview-copy">' . ci_e( $copy ) . '</p><div class="ci360-overview-features">' . $feat_html . '</div></div>'
+		. '<div class="ci360-overview-right"><div class="ci360-highlights-card"><h3>' . ci_e( $hl_title ) . '</h3><ul class="ci360-highlights-list">' . $hl_html . '</ul><a href="' . esc_url( $btn_url ) . '" class="ci360-btn-pill-card">' . ci_e( $btn ) . ' ' . ci_arrow() . '</a><span class="ci360-card-subtext">' . ci_e( $subtext ) . '</span></div></div>'
+		. '</section>';
+}
+
+/** Render Service What's Included Section */
+function ci_s_service_included( $s ) {
+	$kicker  = $s['kicker'] ?? 'WHAT\'S INCLUDED';
+	$heading = $s['heading'] ?? 'Everything You Need to <em>Grow on Social</em>';
+	$subtext = $s['subtext'] ?? 'From strategy to execution, we handle every part of your journey.';
+	$cards   = ci_s_rows( $s['cards'] ?? array() );
+
+	$cards_html = '';
+	if ( ! empty( $cards ) ) {
+		foreach ( $cards as $c ) {
+			$img_src    = ! empty( $c['image'] ) ? ci_img_url( $c['image'] ) : CI360_URI . '/assets/images/studio-detail.webp';
+			$icon       = $c['icon'] ?? '🎯';
+			$cards_html .= '<div class="ci360-inc-card"><div class="ci360-inc-thumb"><img src="' . esc_url( $img_src ) . '" alt="' . esc_attr( $c['title'] ?? '' ) . '" loading="lazy"><span class="ci360-inc-icon">' . esc_html( $icon ) . '</span></div><div class="ci360-inc-body"><h3>' . ci_e( $c['title'] ?? '' ) . '</h3><p>' . ci_e( $c['text'] ?? '' ) . '</p></div></div>';
+		}
+	}
+
+	return '<section class="ci360-service-included wrap"' . ci_s_id( $s ) . '>'
+		. '<div class="ci360-section-header"><span class="ci360-sub-kicker">' . ci_e( $kicker ) . '</span><h2 class="ci360-section-title">' . ci_html( $heading ) . '</h2><p class="ci360-section-sub">' . ci_e( $subtext ) . '</p></div>'
+		. '<div class="ci360-included-grid">' . $cards_html . '</div>'
+		. '</section>';
+}
+
+/** Render Service Our Approach Section */
+function ci_s_service_approach( $s ) {
+	$kicker  = $s['kicker'] ?? 'OUR APPROACH';
+	$heading = $s['heading'] ?? 'A Strategic, <em>Results-Driven Process</em>';
+	$intro   = $s['intro'] ?? 'We combine strategy, creativity, and data to create experiences that deliver real business impact.';
+	$steps   = ci_s_rows( $s['steps'] ?? array() );
+
+	$steps_html = '';
+	if ( ! empty( $steps ) ) {
+		$tot = count( $steps );
+		foreach ( $steps as $i => $st ) {
+			$num        = $st['num'] ?? ( $i + 1 );
+			$icon       = $st['icon'] ?? '💡';
+			$arrow      = ( $i < $tot - 1 ) ? '<span class="step-arrow">&rarr;</span>' : '';
+			$steps_html .= '<div class="ci360-step-item"><div class="step-head"><span class="step-num">' . esc_html( $num ) . '</span><span class="step-icon">' . esc_html( $icon ) . '</span>' . $arrow . '</div><h3>' . ci_e( $st['title'] ?? '' ) . '</h3><p>' . ci_e( $st['text'] ?? '' ) . '</p></div>';
+		}
+	}
+
+	return '<section class="ci360-service-approach wrap"' . ci_s_id( $s ) . '>'
+		. '<div class="ci360-approach-header"><div><span class="ci360-sub-kicker">' . ci_e( $kicker ) . '</span><h2 class="ci360-section-title">' . ci_html( $heading ) . '</h2></div><div><p class="ci360-approach-intro">' . ci_e( $intro ) . '</p></div></div>'
+		. '<div class="ci360-approach-timeline">' . $steps_html . '</div>'
+		. '</section>';
+}
+
+/** Render Service Dark CTA Banner */
+function ci_s_service_cta( $s ) {
+	$kicker     = $s['kicker'] ?? 'LET\'S WORK TOGETHER';
+	$heading    = $s['heading'] ?? 'Ready to grow your brand on social media?';
+	$subtext    = $s['subtext'] ?? 'Our team is here to understand your goals and create a tailored strategy that drives real results.';
+	$btn        = $s['button'] ?? 'Contact Us';
+	$btn_url    = ci_url( $s['button_link'] ?? '/contact/' );
+	$subcaption = $s['subcaption'] ?? 'Talk to our experts today.';
+
+	return '<section class="ci360-service-cta-banner wrap"' . ci_s_id( $s ) . '>'
+		. '<div class="ci360-cta-banner-inner">'
+		. '<div class="ci360-cta-text"><span class="ci360-cta-kicker">' . ci_e( $kicker ) . '</span><h2>' . ci_e( $heading ) . '</h2><p>' . ci_e( $subtext ) . '</p></div>'
+		. '<div class="ci360-cta-action"><a href="' . esc_url( $btn_url ) . '" class="ci360-btn-cta-blue">' . ci_e( $btn ) . ' ' . ci_arrow() . '</a><span class="ci360-cta-sub">' . ci_e( $subcaption ) . '</span></div>'
+		. '</div></section>';
+}
+
 
