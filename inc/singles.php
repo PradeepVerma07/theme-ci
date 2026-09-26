@@ -536,22 +536,7 @@ function ci_render_project( $post_id ) {
 			</section>
 		<?php endif; ?>
 
-		<!-- 2. Top 1 Row of 4 Related Case Studies -->
-		<?php if ( ! empty( $related_cards ) ) : ?>
-			<section class="wrap ci360-related-box-container ci360-case-top-related">
-				<div class="ci360-related-box">
-					<div class="ci360-related-header">
-						<h2>Featured Case Studies</h2>
-						<a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="text-link">Explore all work <?php echo ci_arrow(); ?></a>
-					</div>
-					<div class="ci360-related-grid articles-grid four-col">
-						<?php echo $related_cards; ?>
-					</div>
-				</div>
-			</section>
-		<?php endif; ?>
-
-		<!-- 3. Main Case Study Story Content Area (FULL WIDTH - NO SIDEBAR) -->
+		<!-- 2. Main Case Study Story Content Area (FULL WIDTH - NO SIDEBAR) -->
 		<section class="ci360-case-main-container wrap">
 			<article class="ci360-case-article ci360-case-full-width">
 				<!-- WordPress / Elementor Main Content Area -->
@@ -569,6 +554,21 @@ function ci_render_project( $post_id ) {
 				<?php endif; ?>
 
 				<?php echo $gallery; ?>
+
+				<!-- 3. Related 4 Case Studies Grid AT THE END OF CONTENT -->
+				<?php if ( ! empty( $related_cards ) ) : ?>
+					<div class="ci360-related-box-container ci360-case-end-related">
+						<div class="ci360-related-box">
+							<div class="ci360-related-header">
+								<h2>Featured Case Studies</h2>
+								<a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="text-link">Explore all work <?php echo ci_arrow(); ?></a>
+							</div>
+							<div class="ci360-related-grid articles-grid four-col">
+								<?php echo $related_cards; ?>
+							</div>
+						</div>
+					</div>
+				<?php endif; ?>
 
 				<!-- Professional Next & Previous Buttons Bar Below Content -->
 				<nav class="ci360-case-nav-bar ci360-case-nav-pro" aria-label="Case Study Navigation">

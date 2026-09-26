@@ -2535,12 +2535,16 @@ span.ci360-heading-accent {
   margin-bottom: 16px !important;
 }
 
-/* Top Related Section below Hero Banner */
+/* End-of-content Related Case Studies Section */
+.ci360-case-end-related,
 .ci360-case-top-related {
-  margin-top: 40px !important;
+  margin-top: 50px !important;
   margin-bottom: 40px !important;
+  padding-top: 40px !important;
+  border-top: 1px solid #e2e8f0 !important;
 }
 
+.ci360-case-end-related .ci360-related-box,
 .ci360-case-top-related .ci360-related-box {
   border-top: none !important;
   padding-top: 0 !important;
