@@ -948,14 +948,30 @@ function ci_s_challenge_approach( $s ) {
 
 /** Render Service Hero Section */
 function ci_s_service_hero( $s ) {
-	$kicker     = $s['kicker'] ?? 'OUR SERVICE';
-	$title      = $s['title'] ?? 'Branding & Design';
-	$lead       = $s['lead'] ?? '';
-	$btn1       = $s['cta_primary'] ?? 'Start a Conversation';
-	$btn1_url   = ci_url( $s['cta_primary_link'] ?? '/contact/' );
-	$btn2       = $s['cta_secondary'] ?? 'Contact Us';
-	$btn2_url   = ci_url( $s['cta_secondary_link'] ?? '/contact/' );
-	$img        = ci_img( $s['image'] ?? 'studio-detail.webp', $title, 'ci360-hero-img-main', true );
+	$bc_home     = $s['breadcrumb_home'] ?? 'Home';
+	$bc_parent   = $s['breadcrumb_parent'] ?? 'Services';
+	$bc_p_url    = ci_url( $s['breadcrumb_parent_link'] ?? '/services/' );
+	$kicker      = $s['kicker'] ?? 'OUR SERVICE';
+	$title       = $s['title'] ?? 'Branding & Design';
+	$lead        = $s['lead'] ?? '';
+	$btn1        = $s['cta_primary'] ?? 'Start a Conversation';
+	$btn1_url    = ci_url( $s['cta_primary_link'] ?? '/contact/' );
+	$btn2        = $s['cta_secondary'] ?? 'Contact Us';
+	$btn2_url    = ci_url( $s['cta_secondary_link'] ?? '/contact/' );
+	$img_val     = ! empty( $s['image'] ) ? $s['image'] : 'studio-detail.webp';
+	$img         = ci_img( $img_val, $title, 'ci360-hero-img-main', true );
+
+	$badge1_lbl  = $s['badge1_label'] ?? 'Followers';
+	$badge1_val  = $s['badge1_value'] ?? '125K';
+	$badge1_trd  = $s['badge1_trend'] ?? '+12%';
+
+	$badge2_lbl  = $s['badge2_label'] ?? 'Engagement';
+	$badge2_val  = $s['badge2_value'] ?? '+278%';
+
+	$badge3_lbl  = $s['badge3_label'] ?? 'Reach';
+	$badge3_val  = $s['badge3_value'] ?? '2.4M';
+
+	$show_badges = ( ! isset( $s['show_badges'] ) || 'no' !== $s['show_badges'] );
 
 	$words = explode( ' ', $title );
 	if ( count( $words ) > 1 ) {
@@ -965,24 +981,29 @@ function ci_s_service_hero( $s ) {
 		$formatted_title = esc_html( $title );
 	}
 
+	$badges_html = '';
+	if ( $show_badges ) {
+		$badges_html = '<div class="ci360-glass-badge badge-followers"><span class="label">' . esc_html( $badge1_lbl ) . '</span><span class="value">' . esc_html( $badge1_val ) . '</span>' . ( $badge1_trd ? '<span class="trend">' . esc_html( $badge1_trd ) . '</span>' : '' ) . '</div>'
+			. '<div class="ci360-glass-badge badge-engagement"><span class="label">' . esc_html( $badge2_lbl ) . '</span><span class="value">' . esc_html( $badge2_val ) . '</span></div>'
+			. '<div class="ci360-glass-badge badge-reach"><span class="label">' . esc_html( $badge3_lbl ) . '</span><span class="value">' . esc_html( $badge3_val ) . '</span></div>';
+	}
+
 	return '<section class="ci360-service-hero"' . ci_s_id( $s ) . '>'
 		. '<div class="ci360-service-hero-bg"></div>'
 		. '<div class="ci360-service-hero-wrap wrap">'
 		. '<div class="ci360-service-hero-left">'
-		. '<nav class="ci360-service-breadcrumb" aria-label="Breadcrumb"><a href="' . esc_url( home_url( '/' ) ) . '">Home</a><span class="sep">&gt;</span><a href="' . esc_url( home_url( '/services/' ) ) . '">Services</a><span class="sep">&gt;</span><span class="current">' . esc_html( $title ) . '</span></nav>'
+		. '<nav class="ci360-service-breadcrumb" aria-label="Breadcrumb"><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html( $bc_home ) . '</a><span class="sep">&gt;</span><a href="' . esc_url( $bc_p_url ) . '">' . esc_html( $bc_parent ) . '</a><span class="sep">&gt;</span><span class="current">' . esc_html( $title ) . '</span></nav>'
 		. '<div class="ci360-service-kicker"><span>' . esc_html( mb_strtoupper( $kicker ) ) . '</span></div>'
 		. '<h1 class="ci360-service-hero-title">' . $formatted_title . '</h1>'
 		. '<p class="ci360-service-hero-lead">' . esc_html( $lead ) . '</p>'
 		. '<div class="ci360-service-hero-btns">'
-		. '<a href="' . esc_url( $btn1_url ) . '" class="ci360-btn-pill-primary">' . esc_html( $btn1 ) . ' ' . ci_arrow() . '</a>'
-		. '<a href="' . esc_url( $btn2_url ) . '" class="ci360-btn-pill-outline">' . esc_html( $btn2 ) . '</a>'
+		. ( $btn1 ? '<a href="' . esc_url( $btn1_url ) . '" class="ci360-btn-pill-primary">' . esc_html( $btn1 ) . ' ' . ci_arrow() . '</a>' : '' )
+		. ( $btn2 ? '<a href="' . esc_url( $btn2_url ) . '" class="ci360-btn-pill-outline">' . esc_html( $btn2 ) . '</a>' : '' )
 		. '</div>'
 		. '</div>'
 		. '<div class="ci360-service-hero-right"><div class="ci360-service-visual-stage"><div class="ci360-hero-main-card">'
 		. $img
-		. '<div class="ci360-glass-badge badge-followers"><span class="label">Followers</span><span class="value">125K</span><span class="trend">+12%</span></div>'
-		. '<div class="ci360-glass-badge badge-engagement"><span class="label">Engagement</span><span class="value">+278%</span></div>'
-		. '<div class="ci360-glass-badge badge-reach"><span class="label">Reach</span><span class="value">2.4M</span></div>'
+		. $badges_html
 		. '<div class="ci360-platform-pills"><span class="platform-icon ig"></span><span class="platform-icon fb"></span><span class="platform-icon tk"></span><span class="platform-icon li"></span><span class="platform-icon yt"></span><span class="platform-icon x"></span></div>'
 		. '</div></div></div>'
 		. '</div></section>';
