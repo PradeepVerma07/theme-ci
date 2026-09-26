@@ -1444,6 +1444,250 @@ span.ci360-heading-accent {
   color: #475569;
 }
 
+/* ==========================================================================
+   Modern Single Blog Post Styling
+   ========================================================================== */
+.ci360-modern-blog-single {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+.ci360-blog-header {
+  max-width: 900px;
+  margin: 0 auto 40px auto;
+}
+
+.ci360-blog-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.ci360-blog-breadcrumb a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.ci360-blog-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.ci360-blog-breadcrumb .current {
+  color: #0f172a;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 300px;
+}
+
+.ci360-blog-kicker {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.ci360-cat-badge {
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ci360-read-badge,
+.ci360-date-badge {
+  background: #f8fafc;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.ci360-blog-main-heading {
+  font-size: 42px;
+  line-height: 1.25;
+  font-weight: 800;
+  color: #060f26;
+  letter-spacing: -0.03em;
+  margin: 0 0 24px 0;
+}
+
+@media (max-width: 768px) {
+  .ci360-blog-main-heading {
+    font-size: 28px;
+  }
+}
+
+.ci360-blog-hero-media {
+  width: 100%;
+  max-height: 520px;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-top: 28px;
+  box-shadow: 0 20px 50px rgba(6, 15, 38, 0.12);
+}
+
+.ci360-blog-hero-media img,
+.ci360-modern-hero-img {
+  width: 100%;
+  height: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.ci360-blog-container {
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.ci360-blog-content {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #1e293b;
+}
+
+.ci360-blog-content p {
+  margin-bottom: 1.6em;
+}
+
+.ci360-blog-content h2,
+.ci360-blog-content h3,
+.ci360-blog-content h4 {
+  color: #0f172a;
+  font-weight: 700;
+  margin-top: 2.2em;
+  margin-bottom: 0.8em;
+  line-height: 1.3;
+}
+
+.ci360-blog-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 14px;
+  margin: 2em 0;
+}
+
+/* Social Share Bar */
+.ci360-blog-share-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 24px 0;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  margin-top: 50px;
+}
+
+.ci360-share-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ci360-share-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ci360-share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #334155;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.ci360-share-btn:hover {
+  background: #2563eb;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+}
+
+/* Next / Previous Navigation */
+.ci360-blog-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+@media (max-width: 640px) {
+  .ci360-blog-nav {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ci360-nav-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px 24px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.ci360-nav-card.disabled {
+  visibility: hidden;
+}
+
+.ci360-nav-card:hover {
+  background: #ffffff;
+  border-color: #2563eb;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(6, 15, 38, 0.08);
+}
+
+.ci360-nav-card .nav-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #2563eb;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ci360-nav-card .nav-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.35;
+}
+
+/* Related Section */
+.ci360-blog-related-section {
+  margin-top: 70px;
+  padding-top: 50px;
+  border-top: 1px solid #e2e8f0;
+}
+
 
 
 

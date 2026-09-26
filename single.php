@@ -12,15 +12,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 get_header();
 
+echo '<main id="main">';
 while ( have_posts() ) {
 	the_post();
-	?>
-	<main id="main" <?php post_class( 'site-main' ); ?>>
-		<div class="page-content entry-content">
-			<?php the_content(); ?>
-		</div>
-	</main>
-	<?php
+	echo ci_render_modern_blog_post( get_the_ID() );
 }
+echo '</main>';
 
 get_footer();
