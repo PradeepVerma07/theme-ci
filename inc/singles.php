@@ -186,38 +186,54 @@ function ci_render_project( $post_id ) {
 			</div>
 		</section>
 
-		<!-- 2. TOP Navigation Bar (Previous & Next Case Study Buttons ONLY TOP) -->
-		<div class="wrap ci360-case-top-nav-container">
-			<nav class="ci360-case-nav-bar ci360-case-nav-bar-top" aria-label="Case Study Top Navigation">
-				<?php if ( $prev_proj ) : ?>
-					<a href="<?php echo esc_url( $prev_proj['url'] ); ?>" class="ci360-case-nav-btn prev">
-						<small>&larr; Previous Case Study</small>
-						<strong><?php echo ci_e( $prev_proj['name'] ); ?></strong>
-					</a>
-				<?php endif; ?>
-				<?php if ( $next_proj ) : ?>
-					<a href="<?php echo esc_url( $next_proj['url'] ); ?>" class="ci360-case-nav-btn next">
-						<small>Next Case Study &rarr;</small>
-						<strong><?php echo ci_e( $next_proj['name'] ); ?></strong>
-					</a>
-				<?php endif; ?>
-			</nav>
-		</div>
+		<!-- 2. Top 1 Row of 4 Related Case Studies -->
+		<?php if ( $related_cards ) : ?>
+			<section class="wrap ci360-related-box-container ci360-case-top-related">
+				<div class="ci360-related-box">
+					<div class="ci360-related-header">
+						<h2>Featured Case Studies</h2>
+						<a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="text-link">Explore all work <?php echo ci_arrow(); ?></a>
+					</div>
+					<div class="ci360-related-grid">
+						<?php echo $related_cards; ?>
+					</div>
+				</div>
+			</section>
+		<?php endif; ?>
 
-		<!-- 3. Brand Connection & Impact Section -->
-		<?php echo ci_s_impact_brand( array( 'channels_title' => 'Brand Channels:', 'impact_title' => 'The Impact' ) ); ?>
-
-		<!-- 4. Challenge & Approach Section -->
-		<?php echo ci_s_challenge_approach( array() ); ?>
-
-		<!-- 5. Main Case Study Story Content Area (NO SIDEBAR) -->
+		<!-- 3. Main Case Study Story Content Area (FULL WIDTH - NO SIDEBAR) -->
 		<section class="ci360-case-main-container wrap">
 			<article class="ci360-case-article ci360-case-full-width">
 				<?php echo $story; ?>
 				<?php echo $gallery; ?>
 
-				<!-- Share Icons Bar -->
-				<div class="ci360-share-bar">
+				<!-- Professional Next & Previous Buttons Bar Below Content -->
+				<nav class="ci360-case-nav-bar ci360-case-nav-pro" aria-label="Case Study Navigation">
+					<?php if ( $prev_proj ) : ?>
+						<a href="<?php echo esc_url( $prev_proj['url'] ); ?>" class="ci360-case-nav-btn prev">
+							<span class="nav-arrow">&larr;</span>
+							<div class="nav-content">
+								<small>Previous Case Study</small>
+								<strong><?php echo ci_e( $prev_proj['name'] ); ?></strong>
+							</div>
+						</a>
+					<?php else : ?>
+						<div class="ci360-case-nav-btn prev disabled"></div>
+					<?php endif; ?>
+
+					<?php if ( $next_proj ) : ?>
+						<a href="<?php echo esc_url( $next_proj['url'] ); ?>" class="ci360-case-nav-btn next">
+							<div class="nav-content text-right">
+								<small>Next Case Study</small>
+								<strong><?php echo ci_e( $next_proj['name'] ); ?></strong>
+							</div>
+							<span class="nav-arrow">&rarr;</span>
+						</a>
+					<?php endif; ?>
+				</nav>
+
+				<!-- Professional Share Icons Bar Below Content -->
+				<div class="ci360-share-bar ci360-share-bar-pro">
 					<span class="ci360-share-label">Share this Case Study:</span>
 					<div class="ci360-share-icons">
 						<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $encoded_url; ?>" target="_blank" rel="noopener noreferrer" class="ci360-share-icon fb" title="Share on Facebook">
@@ -239,21 +255,6 @@ function ci_render_project( $post_id ) {
 				</div>
 			</article>
 		</section>
-
-		<!-- 6. Related 4 Case Studies Box (4-in-a-row) BELOW -->
-		<?php if ( $related_cards ) : ?>
-			<section class="wrap ci360-related-box-container">
-				<div class="ci360-related-box">
-					<div class="ci360-related-header">
-						<h2>Related Case Studies</h2>
-						<a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="text-link">Explore all work <?php echo ci_arrow(); ?></a>
-					</div>
-					<div class="ci360-related-grid">
-						<?php echo $related_cards; ?>
-					</div>
-				</div>
-			</section>
-		<?php endif; ?>
 	</div>
 	<?php
 	return ob_get_clean();
