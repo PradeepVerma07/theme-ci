@@ -190,21 +190,23 @@ function ci_render_modern_blog_post( $post_id ) {
 		<header class="ci360-blog-hero-full" style="background-image: url('<?php echo esc_url( $thumb_url ); ?>');">
 			<div class="ci360-hero-full-overlay"></div>
 			<div class="ci360-hero-full-content wrap">
-				<nav class="ci360-blog-breadcrumb-light" aria-label="Breadcrumb">
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
-					<span class="sep">/</span>
-					<a href="<?php echo esc_url( get_permalink( ci_page_id( 'insights' ) ) ); ?>">Blog</a>
-					<span class="sep">/</span>
-					<span class="current"><?php echo esc_html( $title ); ?></span>
-				</nav>
+				<div class="ci360-hero-left-align">
+					<nav class="ci360-blog-breadcrumb-light" aria-label="Breadcrumb">
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
+						<span class="sep">/</span>
+						<a href="<?php echo esc_url( get_permalink( ci_page_id( 'insights' ) ) ); ?>">Blog</a>
+						<span class="sep">/</span>
+						<span class="current"><?php echo esc_html( $title ); ?></span>
+					</nav>
 
-				<div class="ci360-blog-kicker-light">
-					<span class="ci360-cat-badge-light"><?php echo esc_html( $cat_name ); ?></span>
-					<span class="ci360-meta-badge-light"><?php echo esc_html( $read_time ); ?></span>
-					<span class="ci360-meta-badge-light"><?php echo esc_html( $date ); ?></span>
+					<div class="ci360-blog-kicker-light">
+						<span class="ci360-cat-badge-light"><?php echo esc_html( $cat_name ); ?></span>
+						<span class="ci360-meta-badge-light"><?php echo esc_html( $read_time ); ?></span>
+						<span class="ci360-meta-badge-light"><?php echo esc_html( $date ); ?></span>
+					</div>
+
+					<h1 class="ci360-hero-full-title"><?php echo esc_html( $title ); ?></h1>
 				</div>
-
-				<h1 class="ci360-hero-full-title"><?php echo esc_html( $title ); ?></h1>
 			</div>
 		</header>
 
