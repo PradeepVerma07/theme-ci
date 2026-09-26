@@ -117,6 +117,12 @@ add_filter( 'document_title_parts', function ( $parts ) {
 /**
  * Register custom post and page templates for Elementor and WordPress editors.
  */
+add_filter( 'theme_templates', function( $post_templates, $theme, $post, $post_type ) {
+	$post_templates['template-case-study.php'] = 'Case Study Template';
+	$post_templates['template-blog-post.php']  = 'Blog Post Template';
+	return $post_templates;
+}, 10, 4 );
+
 add_filter( 'theme_post_templates', function( $post_templates, $theme, $post, $post_type ) {
 	$post_templates['template-case-study.php'] = 'Case Study Template';
 	$post_templates['template-blog-post.php']  = 'Blog Post Template';
@@ -128,4 +134,5 @@ add_filter( 'theme_page_templates', function( $page_templates, $theme, $post ) {
 	$page_templates['template-blog-post.php']  = 'Blog Post Template';
 	return $page_templates;
 }, 10, 3 );
+
 

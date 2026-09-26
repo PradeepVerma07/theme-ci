@@ -194,7 +194,7 @@ function ci_render_project( $post_id ) {
 						<h2>Featured Case Studies</h2>
 						<a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="text-link">Explore all work <?php echo ci_arrow(); ?></a>
 					</div>
-					<div class="ci360-related-grid">
+					<div class="ci360-related-grid articles-grid four-col">
 						<?php echo $related_cards; ?>
 					</div>
 				</div>
