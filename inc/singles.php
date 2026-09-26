@@ -329,15 +329,17 @@ function ci_render_modern_blog_post( $post_id ) {
 			</aside>
 		</div>
 
-		<!-- 3. BOTTOM 4-IN-A-ROW RELATED READS SECTION -->
+		<!-- 3. BOTTOM 4-IN-A-ROW RELATED READS SECTION IN BOX -->
 		<?php if ( $related_html ) : ?>
 			<section class="ci360-blog-related-section wrap">
-				<div class="section-heading">
-					<div class="section-label"><span>04</span><span>RELATED READS</span></div>
-					<h2>Related Articles & Case Studies</h2>
-				</div>
-				<div class="articles-grid four-col">
-					<?php echo $related_html; ?>
+				<div class="ci360-related-box">
+					<div class="section-heading">
+						<div class="section-label"><span>04</span><span>RELATED READS</span></div>
+						<h2>Related Articles & Case Studies</h2>
+					</div>
+					<div class="articles-grid four-col">
+						<?php echo $related_html; ?>
+					</div>
 				</div>
 			</section>
 		<?php endif; ?>

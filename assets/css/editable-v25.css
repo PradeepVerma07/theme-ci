@@ -2040,6 +2040,39 @@ span.ci360-heading-accent {
   transform: translateY(-2px);
 }
 
+/* Container Box for Related Reads */
+.ci360-related-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  padding: 40px 36px;
+  box-shadow: 0 10px 30px rgba(6, 15, 38, 0.04);
+}
+
+.ci360-blog-related-section {
+  margin-top: 60px;
+  padding-top: 0;
+  border-top: none;
+}
+
+/* Hero Content Strict Left Alignment */
+.ci360-hero-full-content {
+  text-align: left !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+
+.ci360-blog-breadcrumb-light,
+.ci360-blog-kicker-light {
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
+
+.ci360-hero-full-title {
+  text-align: left !important;
+}
+
 
 
 
