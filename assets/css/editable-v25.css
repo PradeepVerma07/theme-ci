@@ -3593,6 +3593,68 @@ span.ci360-heading-accent {
   color: #0284c7;
 }
 
+/* Category & Archive Page Header */
+.ci360-archive-hero {
+  background: #f8fafc !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  padding: 60px 0 40px 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Related Card Category Pill Badge inside Media */
+.ci360-related-media .ci360-related-cat {
+  position: absolute !important;
+  top: 14px !important;
+  left: 14px !important;
+  background: #2563eb !important;
+  color: #ffffff !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 4px 10px !important;
+  border-radius: 999px !important;
+  z-index: 2 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Archive Pagination Bar */
+.ci360-pagination-wrap .page-numbers {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  list-style: none !important;
+}
+
+.ci360-pagination-wrap a.page-numbers,
+.ci360-pagination-wrap span.page-numbers {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 40px !important;
+  height: 40px !important;
+  padding: 0 14px !important;
+  border-radius: 10px !important;
+  border: 1px solid #e2e8f0 !important;
+  background: #ffffff !important;
+  color: #0f172a !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.ci360-pagination-wrap span.page-numbers.current,
+.ci360-pagination-wrap a.page-numbers:hover {
+  background: #2563eb !important;
+  border-color: #2563eb !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2) !important;
+}
+
 
 
 
