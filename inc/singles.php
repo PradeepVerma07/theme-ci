@@ -38,8 +38,25 @@ function ci_render_service( $post_id ) {
 		$thumb_url = CI360_URI . '/assets/images/studio-detail.webp';
 	}
 
-	// Check if post is built with Elementor
-	$is_elementor = class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is_built_with_elementor( $post_id );
+	// Check if post is built or being edited with Elementor
+	$is_elementor = class_exists( '\Elementor\Plugin' ) && (
+		\Elementor\Plugin::$instance->db->is_built_with_elementor( $post_id ) ||
+		\Elementor\Plugin::$instance->editor->is_edit_mode() ||
+		\Elementor\Plugin::$instance->preview->is_preview_mode()
+	);
+
+	if ( $is_elementor ) {
+		?>
+		<div id="ci360-single-service-root" class="ci360-single-service-page elementor-edited-service">
+			<section class="ci360-service-main-content">
+				<div class="ci360-service-body entry-content">
+					<?php the_content(); ?>
+				</div>
+			</section>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
 
 	// Related 4 Services
 	$rel_query = new WP_Query( array(
@@ -506,8 +523,65 @@ function ci_render_project( $post_id ) {
 		}
 	}
 
-	// Check if post is built with Elementor
-	$is_elementor = class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is_built_with_elementor( $post_id );
+	// Check if post is built or being edited with Elementor
+	$is_elementor = class_exists( '\Elementor\Plugin' ) && (
+		\Elementor\Plugin::$instance->db->is_built_with_elementor( $post_id ) ||
+		\Elementor\Plugin::$instance->editor->is_edit_mode() ||
+		\Elementor\Plugin::$instance->preview->is_preview_mode()
+	);
+
+	if ( $is_elementor ) {
+		?>
+		<div id="ci360-case-study-root" class="ci360-case-study-page elementor-edited-case">
+			<section class="ci360-case-main-container">
+				<article class="ci360-case-article ci360-case-full-width">
+					<div class="ci360-case-body entry-content">
+						<?php the_content(); ?>
+					</div>
+					<?php if ( ! empty( $related_cards ) ) : ?>
+						<div class="ci360-related-box-container ci360-case-end-related wrap">
+							<div class="ci360-related-box">
+								<div class="ci360-related-header">
+									<h2>Featured Case Studies</h2>
+									<a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="text-link">Explore all work <?php echo ci_arrow(); ?></a>
+								</div>
+								<div class="ci360-related-grid articles-grid four-col">
+									<?php echo $related_cards; ?>
+								</div>
+							</div>
+						</div>
+					<?php endif; ?>
+					<nav class="ci360-case-nav-bar ci360-case-nav-pro wrap" aria-label="Case Study Navigation">
+						<?php if ( ! empty( $prev_data ) ) : ?>
+							<a href="<?php echo esc_url( $prev_data['url'] ); ?>" class="ci360-case-nav-btn prev">
+								<span class="nav-arrow">&larr;</span>
+								<div class="nav-content">
+									<small>Previous Case Study</small>
+									<strong><?php echo esc_html( $prev_data['name'] ); ?></strong>
+								</div>
+							</a>
+						<?php else : ?>
+							<div class="ci360-case-nav-btn prev disabled"></div>
+						<?php endif; ?>
+
+						<?php if ( ! empty( $next_data ) ) : ?>
+							<a href="<?php echo esc_url( $next_data['url'] ); ?>" class="ci360-case-nav-btn next">
+								<div class="nav-content text-right">
+									<small>Next Case Study</small>
+									<strong><?php echo esc_html( $next_data['name'] ); ?></strong>
+								</div>
+								<span class="nav-arrow">&rarr;</span>
+							</a>
+						<?php else : ?>
+							<div class="ci360-case-nav-btn next disabled"></div>
+						<?php endif; ?>
+					</nav>
+				</article>
+			</section>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
 
 	// Retrieve actual Post Content (Elementor or WP Editor content with 3-tier fallback)
 	$content_raw = '';
