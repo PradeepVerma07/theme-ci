@@ -126,7 +126,7 @@ function ci_render_insight( $post_id ) {
 	return ob_get_clean();
 }
 
-/** Modern Blog Post Template renderer. */
+/** Modern Blog Post Template renderer with full-screen hero and sidebar. */
 function ci_render_modern_blog_post( $post_id ) {
 	$post = get_post( $post_id );
 	if ( ! $post ) {
@@ -144,11 +144,17 @@ function ci_render_modern_blog_post( $post_id ) {
 	$word_count  = str_word_count( wp_strip_all_tags( $content_raw ) );
 	$read_time   = max( 1, (int) ceil( $word_count / 200 ) ) . ' min read';
 
-	$has_thumb  = has_post_thumbnail( $post_id );
-	$thumb_html = $has_thumb ? get_the_post_thumbnail( $post_id, 'full', array( 'class' => 'ci360-modern-hero-img', 'loading' => 'eager' ) ) : '';
+	$thumb_url = get_the_post_thumbnail_url( $post_id, 'full' );
+	if ( ! $thumb_url ) {
+		$thumb_url = CI360_URI . '/assets/images/studio-detail.webp';
+	}
 
 	$prev_post = get_previous_post();
 	$next_post = get_next_post();
+
+	$all_cats         = get_categories( array( 'hide_empty' => true, 'number' => 8 ) );
+	$sidebar_projects = ci_posts( 'ci_project', array( 'posts_per_page' => 3 ) );
+	$sidebar_services = ci_posts( 'ci_service', array( 'posts_per_page' => 4 ) );
 
 	$related_args = array(
 		'post_type'      => 'post',
@@ -179,78 +185,153 @@ function ci_render_modern_blog_post( $post_id ) {
 
 	ob_start();
 	?>
-	<article class="ci360-modern-blog-single wrap">
-		<header class="ci360-blog-header">
-			<nav class="ci360-blog-breadcrumb" aria-label="Breadcrumb">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
-				<span class="sep">/</span>
-				<a href="<?php echo esc_url( get_permalink( ci_page_id( 'insights' ) ) ); ?>">Blog</a>
-				<span class="sep">/</span>
-				<span class="current"><?php echo esc_html( $title ); ?></span>
-			</nav>
+	<article class="ci360-full-blog-single">
+		<!-- 1. FULL SCREEN HERO BANNER -->
+		<header class="ci360-blog-hero-full" style="background-image: url('<?php echo esc_url( $thumb_url ); ?>');">
+			<div class="ci360-hero-full-overlay"></div>
+			<div class="ci360-hero-full-content wrap">
+				<nav class="ci360-blog-breadcrumb-light" aria-label="Breadcrumb">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
+					<span class="sep">/</span>
+					<a href="<?php echo esc_url( get_permalink( ci_page_id( 'insights' ) ) ); ?>">Blog</a>
+					<span class="sep">/</span>
+					<span class="current"><?php echo esc_html( $title ); ?></span>
+				</nav>
 
-			<div class="ci360-blog-kicker">
-				<span class="ci360-cat-badge"><?php echo esc_html( $cat_name ); ?></span>
-				<span class="ci360-read-badge"><?php echo esc_html( $read_time ); ?></span>
-				<span class="ci360-date-badge"><?php echo esc_html( $date ); ?></span>
-			</div>
-
-			<h1 class="ci360-blog-main-heading"><?php echo esc_html( $title ); ?></h1>
-
-			<?php if ( $has_thumb ) : ?>
-				<div class="ci360-blog-hero-media">
-					<?php echo $thumb_html; ?>
+				<div class="ci360-blog-kicker-light">
+					<span class="ci360-cat-badge-light"><?php echo esc_html( $cat_name ); ?></span>
+					<span class="ci360-meta-badge-light"><?php echo esc_html( $read_time ); ?></span>
+					<span class="ci360-meta-badge-light"><?php echo esc_html( $date ); ?></span>
 				</div>
-			<?php endif; ?>
+
+				<h1 class="ci360-hero-full-title"><?php echo esc_html( $title ); ?></h1>
+			</div>
 		</header>
 
-		<div class="ci360-blog-container">
-			<div class="ci360-blog-content entry-content">
-				<?php echo apply_filters( 'the_content', $content_raw ); ?>
-			</div>
-
-			<div class="ci360-blog-share-section">
-				<span class="ci360-share-title">Share this article:</span>
-				<div class="ci360-share-buttons">
-					<a href="https://twitter.com/intent/tweet?url=<?php echo urlencode( $permalink ); ?>&text=<?php echo urlencode( $title ); ?>" target="_blank" rel="noopener" aria-label="Share on X" class="ci360-share-btn share-x">
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-					</a>
-					<a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo urlencode( $permalink ); ?>" target="_blank" rel="noopener" aria-label="Share on LinkedIn" class="ci360-share-btn share-linkedin">
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-					</a>
-					<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode( $permalink ); ?>" target="_blank" rel="noopener" aria-label="Share on Facebook" class="ci360-share-btn share-facebook">
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-					</a>
-					<a href="https://api.whatsapp.com/send?text=<?php echo urlencode( $title . ' ' . $permalink ); ?>" target="_blank" rel="noopener" aria-label="Share on WhatsApp" class="ci360-share-btn share-whatsapp">
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-					</a>
-					<button type="button" class="ci360-share-btn share-copy" onclick="navigator.clipboard.writeText('<?php echo esc_js( $permalink ); ?>'); alert('Link copied to clipboard!');" aria-label="Copy link">
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-					</button>
+		<!-- 2. MAIN LAYOUT: LEFT CONTENT + RIGHT SIDEBAR -->
+		<div class="ci360-blog-layout wrap">
+			<!-- LEFT: ARTICLE CONTENT & NAV -->
+			<main class="ci360-blog-main-content">
+				<div class="ci360-blog-body entry-content">
+					<?php echo apply_filters( 'the_content', $content_raw ); ?>
 				</div>
-			</div>
 
-			<nav class="ci360-blog-nav" aria-label="Post Navigation">
-				<?php if ( $prev_post ) : ?>
-					<a href="<?php echo esc_url( get_permalink( $prev_post->ID ) ); ?>" class="ci360-nav-card nav-prev">
-						<span class="nav-label">&larr; Previous Article</span>
-						<span class="nav-title"><?php echo esc_html( get_the_title( $prev_post->ID ) ); ?></span>
-					</a>
-				<?php else : ?>
-					<div class="ci360-nav-card nav-prev disabled"></div>
+				<!-- Social Share Bar -->
+				<div class="ci360-blog-share-section">
+					<span class="ci360-share-title">Share Article:</span>
+					<div class="ci360-share-buttons">
+						<a href="https://twitter.com/intent/tweet?url=<?php echo urlencode( $permalink ); ?>&text=<?php echo urlencode( $title ); ?>" target="_blank" rel="noopener" aria-label="Share on X" class="ci360-share-btn share-x">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+						</a>
+						<a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo urlencode( $permalink ); ?>" target="_blank" rel="noopener" aria-label="Share on LinkedIn" class="ci360-share-btn share-linkedin">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+						</a>
+						<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode( $permalink ); ?>" target="_blank" rel="noopener" aria-label="Share on Facebook" class="ci360-share-btn share-facebook">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+						</a>
+						<a href="https://api.whatsapp.com/send?text=<?php echo urlencode( $title . ' ' . $permalink ); ?>" target="_blank" rel="noopener" aria-label="Share on WhatsApp" class="ci360-share-btn share-whatsapp">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+						</a>
+						<button type="button" class="ci360-share-btn share-copy" onclick="navigator.clipboard.writeText('<?php echo esc_js( $permalink ); ?>'); alert('Link copied to clipboard!');" aria-label="Copy link">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+						</button>
+					</div>
+				</div>
+
+				<!-- Next / Previous Article Cards -->
+				<nav class="ci360-blog-nav" aria-label="Post Navigation">
+					<?php if ( $prev_post ) : ?>
+						<a href="<?php echo esc_url( get_permalink( $prev_post->ID ) ); ?>" class="ci360-nav-card nav-prev">
+							<span class="nav-label">&larr; Previous Article</span>
+							<span class="nav-title"><?php echo esc_html( get_the_title( $prev_post->ID ) ); ?></span>
+						</a>
+					<?php else : ?>
+						<div class="ci360-nav-card nav-prev disabled"></div>
+					<?php endif; ?>
+
+					<?php if ( $next_post ) : ?>
+						<a href="<?php echo esc_url( get_permalink( $next_post->ID ) ); ?>" class="ci360-nav-card nav-next">
+							<span class="nav-label">Next Article &rarr;</span>
+							<span class="nav-title"><?php echo esc_html( get_the_title( $next_post->ID ) ); ?></span>
+						</a>
+					<?php endif; ?>
+				</nav>
+			</main>
+
+			<!-- RIGHT: SIDEBAR WIDGETS -->
+			<aside class="ci360-blog-sidebar">
+				<!-- Category Filters -->
+				<?php if ( ! empty( $all_cats ) ) : ?>
+					<div class="ci360-sidebar-widget">
+						<h3 class="widget-title">Categories</h3>
+						<ul class="ci360-cat-list">
+							<?php foreach ( $all_cats as $c ) : ?>
+								<li class="<?php echo $c->term_id === $cat_id ? 'active' : ''; ?>">
+									<a href="<?php echo esc_url( get_category_link( $c->term_id ) ); ?>">
+										<span><?php echo esc_html( $c->name ); ?></span>
+										<small><?php echo (int) $c->count; ?></small>
+									</a>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
 				<?php endif; ?>
 
-				<?php if ( $next_post ) : ?>
-					<a href="<?php echo esc_url( get_permalink( $next_post->ID ) ); ?>" class="ci360-nav-card nav-next">
-						<span class="nav-label">Next Article &rarr;</span>
-						<span class="nav-title"><?php echo esc_html( get_the_title( $next_post->ID ) ); ?></span>
-					</a>
+				<!-- Featured Case Studies -->
+				<?php if ( ! empty( $sidebar_projects ) ) : ?>
+					<div class="ci360-sidebar-widget">
+						<h3 class="widget-title">Featured Case Studies</h3>
+						<div class="ci360-sidebar-projects">
+							<?php foreach ( $sidebar_projects as $p_item ) : ?>
+								<?php
+								$proj_data = ci_project( $p_item );
+								$p_img_id  = $proj_data['image'] ? $proj_data['image'] : $proj_data['front'];
+								?>
+								<a href="<?php echo esc_url( $proj_data['url'] ); ?>" class="ci360-sidebar-project-item">
+									<span class="sidebar-proj-img">
+										<?php echo ci_img( $p_img_id, $proj_data['name'] ); ?>
+									</span>
+									<div>
+										<span class="sidebar-proj-cat"><?php echo esc_html( $proj_data['category'] ); ?></span>
+										<h4><?php echo esc_html( $proj_data['name'] ); ?></h4>
+									</div>
+								</a>
+							<?php endforeach; ?>
+						</div>
+					</div>
 				<?php endif; ?>
-			</nav>
+
+				<!-- Key Services -->
+				<?php if ( ! empty( $sidebar_services ) ) : ?>
+					<div class="ci360-sidebar-widget">
+						<h3 class="widget-title">Core Services</h3>
+						<ul class="ci360-sidebar-services">
+							<?php foreach ( $sidebar_services as $s_item ) : ?>
+								<?php $srv_data = ci_service( $s_item ); ?>
+								<li>
+									<a href="<?php echo esc_url( $srv_data['url'] ); ?>">
+										<span><?php echo esc_html( $srv_data['title'] ); ?></span>
+										<?php echo ci_arrow(); ?>
+									</a>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				<?php endif; ?>
+
+				<!-- Consultation CTA Widget -->
+				<div class="ci360-sidebar-cta-box">
+					<span class="cta-kicker">STRATEGIC GROWTH</span>
+					<h3>Ready to elevate your brand?</h3>
+					<p>Let's turn your vision into measurable digital impact.</p>
+					<a href="<?php echo esc_url( get_permalink( ci_page_id( 'contact' ) ) ); ?>" class="ci360-cta-button">Start a Conversation <?php echo ci_arrow(); ?></a>
+				</div>
+			</aside>
 		</div>
 
+		<!-- 3. BOTTOM 4-IN-A-ROW RELATED READS SECTION -->
 		<?php if ( $related_html ) : ?>
-			<section class="ci360-blog-related-section">
+			<section class="ci360-blog-related-section wrap">
 				<div class="section-heading">
 					<div class="section-label"><span>04</span><span>RELATED READS</span></div>
 					<h2>Related Articles & Case Studies</h2>
