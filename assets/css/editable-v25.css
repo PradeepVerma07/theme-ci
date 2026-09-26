@@ -2045,20 +2045,149 @@ span.ci360-heading-accent {
   transform: translateY(-2px);
 }
 
-/* Container Box for Related Reads */
+/* Clean Flat Container & Grid for Related Reads */
 .ci360-related-box {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 24px;
-  padding: 40px 36px;
-  box-shadow: 0 10px 30px rgba(6, 15, 38, 0.04);
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 40px 0 20px 0 !important;
+  box-shadow: none !important;
+  border-top: 1px solid #e2e8f0 !important;
 }
 
 .ci360-blog-related-section {
-  margin-top: 60px;
+  margin-top: 50px;
   padding-top: 0;
   border-top: none;
 }
+
+.ci360-related-box .section-heading,
+.ci360-related-box .ci360-related-header {
+  margin-bottom: 24px;
+}
+
+.ci360-related-box .section-heading h2,
+.ci360-related-box .ci360-related-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+/* Individual items inside related grid: flat borderless clean layout */
+.ci360-related-box .blog-card,
+.ci360-related-box .article-card,
+.ci360-related-box .ci360-related-card {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  transform: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.ci360-related-box .blog-card:hover,
+.ci360-related-box .article-card:hover,
+.ci360-related-box .ci360-related-card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Image container */
+.ci360-related-box .blog-card-media,
+.ci360-related-box .article-card .media,
+.ci360-related-box .ci360-related-media {
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 16 / 10 !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  background: #0f172a !important;
+  margin-bottom: 14px !important;
+}
+
+.ci360-related-box .blog-card-media img,
+.ci360-related-box .ci360-related-media img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 0 !important;
+  transition: transform 0.4s ease !important;
+}
+
+.ci360-related-box .blog-card:hover .blog-card-media img,
+.ci360-related-box .ci360-related-card:hover .ci360-related-media img {
+  transform: scale(1.06) !important;
+}
+
+/* Body content */
+.ci360-related-box .blog-card-body,
+.ci360-related-box .ci360-related-body {
+  padding: 0 !important;
+  background: transparent !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+.ci360-related-box .blog-card-meta,
+.ci360-related-box .ci360-related-cat {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #64748b !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+}
+
+.ci360-related-box .blog-card h3,
+.ci360-related-box .ci360-related-body h3 {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+  color: #0f172a !important;
+  margin: 0 !important;
+  transition: color 0.2s ease !important;
+}
+
+.ci360-related-box .blog-card:hover h3,
+.ci360-related-box .ci360-related-card:hover h3 {
+  color: #2563eb !important;
+}
+
+.ci360-related-box .blog-card-excerpt,
+.ci360-related-box .ci360-related-body p {
+  font-size: 14px !important;
+  color: #64748b !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+/* Card footer */
+.ci360-related-box .blog-card-foot {
+  border-top: none !important;
+  padding: 8px 0 0 0 !important;
+  background: transparent !important;
+}
+
+.ci360-related-box .blog-card-read,
+.ci360-related-box .ci360-related-link {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #2563eb !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
 
 /* 90% Container Width Side Alignment */
 .ci360-full-blog-single .wrap,
