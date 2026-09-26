@@ -1247,27 +1247,47 @@ span.ci360-heading-accent {
 }
 
 /* Blog / Posts Grid - 4 Columns Layout & Enhanced Media Styling */
-@media (min-width: 1025px) {
+@media (min-width: 900px) {
   .articles-grid,
   .insights-grid,
-  .blog-section .articles-grid {
+  .ci360-insights-grid,
+  .blog-section .articles-grid,
+  .blog-section .insights-grid,
+  [class*="articles-grid"],
+  [class*="insights-grid"] {
     display: grid !important;
     grid-template-columns: repeat(4, 1fr) !important;
-    gap: 32px 20px !important;
+    gap: 28px 16px !important;
   }
 }
 
-@media (min-width: 641px) and (max-width: 1024px) {
+@media (min-width: 601px) and (max-width: 899px) {
   .articles-grid,
   .insights-grid,
-  .blog-section .articles-grid {
+  .ci360-insights-grid,
+  .blog-section .articles-grid,
+  .blog-section .insights-grid,
+  [class*="articles-grid"],
+  [class*="insights-grid"] {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 28px 18px !important;
+    gap: 24px 16px !important;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 600px) {
+  .articles-grid,
+  .insights-grid,
+  .ci360-insights-grid,
+  .blog-section .articles-grid,
+  .blog-section .insights-grid,
+  [class*="articles-grid"],
+  [class*="insights-grid"] {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
   .articles-grid,
   .insights-grid,
   .blog-section .articles-grid {
