@@ -273,7 +273,26 @@ function ci_service_grid_card( $s, $settings = array() ) {
 /* ------------------------------------------------------------------ Insights */
 
 function ci_article_card( $a, $i ) {
-	return '<article class="article-card" data-reveal><a href="' . esc_url( $a['url'] ) . '" class="article-cover tone-' . esc_attr( $a['tone'] ) . '" data-cursor="Read">' . ci_img( $a['image'], $a['title'] . ' editorial illustration' ) . '<div class="article-cover-overlay"></div><span class="cover-index">NOTES / 0' . ( $i + 1 ) . '</span><span class="cover-title">' . ci_e( $a['title'] ) . '</span>' . ci_star() . '</a><div class="article-meta"><span>' . ci_e( $a['kicker'] ) . '</span><span>' . ci_e( $a['read'] ) . ' read</span></div><h3><a href="' . esc_url( $a['url'] ) . '">' . ci_e( $a['title'] ) . ' ' . ci_arrow() . '</a></h3></article>';
+	$has_img   = ! empty( $a['image'] );
+	$img_html  = $has_img ? ci_img( $a['image'], $a['title'] . ' editorial illustration' ) : '';
+	$num_str   = ( $i + 1 ) < 10 ? '0' . ( $i + 1 ) : (string) ( $i + 1 );
+	$kicker    = ! empty( $a['kicker'] ) ? $a['kicker'] : 'Article';
+
+	if ( $has_img ) {
+		$cover_inner = $img_html . '<div class="article-cover-overlay"></div><span class="cover-index">' . ci_e( $kicker ) . '</span>';
+	} else {
+		$cover_inner = '<div class="article-cover-overlay"></div><span class="cover-index">NOTES / ' . $num_str . '</span><span class="cover-title">' . ci_e( $a['title'] ) . '</span>' . ci_star();
+	}
+
+	$read_str = ! empty( $a['read'] ) ? ( false !== strpos( $a['read'], 'read' ) ? $a['read'] : $a['read'] . ' read' ) : '';
+
+	return '<article class="article-card' . ( $has_img ? ' has-featured-image' : ' no-featured-image' ) . '" data-reveal>'
+		. '<a href="' . esc_url( $a['url'] ) . '" class="article-cover tone-' . esc_attr( ! empty( $a['tone'] ) ? $a['tone'] : 'blue' ) . '" data-cursor="Read">'
+		. $cover_inner
+		. '</a>'
+		. '<div class="article-meta"><span>' . ci_e( $kicker ) . '</span>' . ( $read_str ? '<span>' . ci_e( $read_str ) . '</span>' : '' ) . '</div>'
+		. '<h3><a href="' . esc_url( $a['url'] ) . '">' . ci_e( $a['title'] ) . ' ' . ci_arrow() . '</a></h3>'
+		. '</article>';
 }
 
 /* ------------------------------------------------------------------ Shared sections */

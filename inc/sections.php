@@ -689,9 +689,6 @@ function ci_s_insights_featured( $s ) {
 /* ================================================================ PAGE HERO – BANNER */
 
 function ci_s_page_banner( $s ) {
-	if ( is_page() && ci_page_id( 'insights' ) && (int) get_queried_object_id() === (int) ci_page_id( 'insights' ) ) {
-		return '';
-	}
 	$crumb  = '' !== trim( (string) $s['crumb'] ) ? ci_breadcrumb( $s['crumb'] ) : '';
 	$second = $s['secondary'] ? '<a class="text-link" href="' . esc_url( 0 === strpos( (string) $s['secondary_link'], '#' ) ? $s['secondary_link'] : ci_url( $s['secondary_link'] ) ) . '">' . ci_e( $s['secondary'] ) . ' ' . ci_arrow( 0 === strpos( (string) $s['secondary_link'], '#' ) ? 'se' : 'ne' ) . '</a>' : '';
 	$button = $s['button'] ? ( 0 === strpos( (string) $s['button_link'], '#' )
