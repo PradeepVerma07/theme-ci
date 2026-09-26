@@ -3174,21 +3174,38 @@ span.ci360-heading-accent {
   background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%) !important;
   color: #ffffff !important;
   width: 100% !important;
-  text-align: center !important;
-  padding: 14px 20px !important;
+  padding: 16px 24px !important;
   border-radius: 9999px !important;
-  font-size: 15px !important;
-  font-weight: 600 !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
   text-decoration: none !important;
-  display: inline-block !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
   box-shadow: 0 8px 20px rgba(2, 132, 199, 0.3) !important;
   transition: all 0.3s ease !important;
   box-sizing: border-box !important;
 }
 
+.ci360-btn-pill-card .icon,
+.ci360-btn-pill-card svg {
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  transition: transform 0.3s ease !important;
+}
+
 .ci360-btn-pill-card:hover {
   transform: translateY(-2px) !important;
   box-shadow: 0 12px 28px rgba(2, 132, 199, 0.45) !important;
+}
+
+.ci360-btn-pill-card:hover .icon,
+.ci360-btn-pill-card:hover svg {
+  transform: translate(3px, -3px) !important;
 }
 
 .ci360-card-subtext {
