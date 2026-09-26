@@ -855,3 +855,55 @@ function ci_s_blog_archive( $s ) {
 		. '<div class="blog-archive-grid">' . $cards . '</div>'
 		. '<div class="blog-no-results" hidden><h2>' . ci_html( $s['empty_heading'] ) . '</h2><p>' . ci_e( $s['empty_text'] ) . '</p><button type="button" class="button button-dark" data-blog-reset><span>' . ci_e( $s['empty_button'] ) . '</span><i>' . ci_arrow() . '</i></button></div></section>';
 }
+
+/** Render Impact & Brand Channels Section */
+function ci_s_impact_brand( $s ) {
+	$channels_title = $s['channels_title'] ?? 'Brand Channels:';
+	$channels       = ci_s_rows( $s['channels'] ?? array() );
+	$impact_title   = $s['impact_title'] ?? 'The Impact';
+	$cards          = ci_s_rows( $s['impact_cards'] ?? array() );
+
+	$ch_html = '';
+	if ( ! empty( $channels ) ) {
+		foreach ( $channels as $ch ) {
+			$platform = $ch['platform'] ?? '';
+			$url      = ! empty( $ch['url'] ) ? $ch['url'] : '#';
+			$icon     = ci_social_icon_svg( $platform, $url );
+			$ch_html .= '<a href="' . esc_url( $url ) . '" class="ci360-brand-ch-icon" title="' . esc_attr( ucfirst( $platform ) ) . '" target="_blank" rel="noopener noreferrer">' . $icon . '</a>';
+		}
+	}
+
+	$cards_html = '';
+	if ( ! empty( $cards ) ) {
+		foreach ( $cards as $card ) {
+			$text = $card['text'] ?? '';
+			$cards_html .= '<div class="ci360-impact-card"><div class="ci360-impact-card-content"><p>' . ci_e( $text ) . '</p></div></div>';
+		}
+	}
+
+	$out = '<section class="ci360-impact-brand-section wrap"' . ci_s_id( $s ) . '>';
+	if ( $channels_title || $ch_html ) {
+		$out .= '<div class="ci360-brand-channels-wrapper">';
+		if ( $channels_title ) {
+			$out .= '<h3 class="ci360-brand-channels-title">' . ci_e( $channels_title ) . '</h3>';
+		}
+		if ( $ch_html ) {
+			$out .= '<div class="ci360-brand-channels-icons">' . $ch_html . '</div>';
+		}
+		$out .= '</div>';
+	}
+
+	$out .= '<div class="ci360-impact-box">';
+	if ( $impact_title ) {
+		$out .= '<div class="ci360-impact-header"><h2>' . ci_e( $impact_title ) . '</h2></div>';
+	}
+	if ( $cards_html ) {
+		$out .= '<div class="ci360-impact-grid">' . $cards_html . '</div>';
+	}
+	$out .= '</div>';
+
+	$out .= '</section>';
+
+	return $out;
+}
+

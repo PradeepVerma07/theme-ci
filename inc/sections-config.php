@@ -638,6 +638,48 @@ While marketing continues to evolve through AI, automation, and immersive digita
 			'controls' => array(
 			),
 		),
+		'impact-brand' => array(
+			'title'    => 'Impact and Brand Channels',
+			'icon'     => 'eicon-rating',
+			'desc'     => 'Displays Brand Channels social icons bar and customizable 3-column Impact cards grid.',
+			'controls' => array(
+				array( 'type' => 'section', 'label' => 'Brand Channels' ),
+				array( 'type' => 'text', 'key' => 'channels_title', 'label' => 'Brand Channels Title', 'default' => 'Brand Channels:' ),
+				array(
+					'type'        => 'repeater',
+					'key'         => 'channels',
+					'label'       => 'Social Channels',
+					'title_field' => 'platform',
+					'fields'      => array(
+						array( 'type' => 'text', 'key' => 'platform', 'label' => 'Platform (facebook, twitter, linkedin, instagram, wordpress)', 'default' => 'facebook' ),
+						array( 'type' => 'text', 'key' => 'url', 'label' => 'Link URL', 'default' => '#' ),
+					),
+					'default'     => array(
+						array( 'platform' => 'facebook', 'url' => '#' ),
+						array( 'platform' => 'twitter', 'url' => '#' ),
+						array( 'platform' => 'linkedin', 'url' => '#' ),
+						array( 'platform' => 'instagram', 'url' => '#' ),
+						array( 'platform' => 'wordpress', 'url' => '#' ),
+					),
+				),
+				array( 'type' => 'section', 'label' => 'The Impact' ),
+				array( 'type' => 'text', 'key' => 'impact_title', 'label' => 'Impact Box Title', 'default' => 'The Impact' ),
+				array(
+					'type'        => 'repeater',
+					'key'         => 'impact_cards',
+					'label'       => 'Impact Cards',
+					'title_field' => 'text',
+					'fields'      => array(
+						array( 'type' => 'textarea', 'key' => 'text', 'label' => 'Card Text', 'default' => '' ),
+					),
+					'default'     => array(
+						array( 'text' => 'Created a completely new logo, brand identity, and brand book.' ),
+						array( 'text' => 'Designed and developed the website around Station Satcom\'s evolving technology portfolio.' ),
+						array( 'text' => 'Built and continue to manage its social media and always-on content ecosystem.' ),
+					),
+				),
+			),
+		),
 	);
 	// Client logos default: every logo bundled with the theme.
 	$defs['brand-strip']['controls'][1]['default'] = ci_default_logos();

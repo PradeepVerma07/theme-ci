@@ -2118,6 +2118,133 @@ span.ci360-heading-accent {
   text-align: left !important;
 }
 
+/* ---------- Impact & Brand Section ---------- */
+.ci360-impact-brand-section {
+  padding: 60px 0;
+  width: 90% !important;
+  max-width: 1400px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+.ci360-brand-channels-wrapper {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.ci360-brand-channels-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+}
+
+.ci360-brand-channels-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ci360-brand-ch-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #0f172a;
+  color: #ffffff;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.ci360-brand-ch-icon:hover {
+  background-color: #2563eb;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.ci360-brand-ch-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* Dark Navy Container Box */
+.ci360-impact-box {
+  background: #0d1527;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.ci360-impact-header {
+  background: #060c1a;
+  padding: 24px 30px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ci360-impact-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.ci360-impact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 40px 36px;
+}
+
+@media (max-width: 992px) {
+  .ci360-impact-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 30px 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .ci360-impact-grid {
+    grid-template-columns: 1fr;
+    padding: 24px 16px;
+  }
+}
+
+.ci360-impact-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 36px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 180px;
+  transition: all 0.3s ease;
+}
+
+.ci360-impact-card:hover {
+  border-color: rgba(96, 165, 250, 0.5);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+  transform: translateY(-2px);
+}
+
+.ci360-impact-card-content p {
+  color: #e2e8f0;
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 400;
+  margin: 0;
+}
+
+
 
 
 
