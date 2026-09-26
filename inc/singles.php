@@ -92,6 +92,37 @@ function ci_render_service( $post_id ) {
 	}
 
 	?>
+	// Dynamic Overview Data
+	$ov_heading  = ci_get( 'service_overview_heading', $post_id ) ?: 'Turn Conversations Into <span class="ci360-title-gradient">Communities</span>';
+	$ov_copy     = ci_get( 'service_overview_copy', $post_id ) ?: "Social media is more than just posting — it's about people, conversations, and real connections. We help brands show up with purpose, create engaging content, and build communities that drive meaningful business results.";
+	$ov_features = ci_rows( 'service_overview_features', $post_id );
+
+	// Dynamic Highlights Card Data
+	$hl_title = ci_get( 'service_highlights_title', $post_id ) ?: 'Service Highlights';
+	$hl_rows  = ci_rows( 'service_highlights_list', $post_id );
+
+	// Dynamic What's Included Data
+	$inc_heading = ci_get( 'service_included_heading', $post_id ) ?: 'Everything You Need to <span class="ci360-title-gradient">Grow on Social</span>';
+	$inc_rows    = ci_rows( 'service_included_cards', $post_id );
+
+	// Dynamic Our Approach Data
+	$app_heading = ci_get( 'service_approach_heading', $post_id ) ?: 'A Strategic, <span class="ci360-title-gradient">Results-Driven Process</span>';
+	$app_steps   = ci_rows( 'service_steps', $post_id );
+
+	// Dynamic CTA Banner Data
+	$cta_heading = ci_get( 'service_cta_heading', $post_id ) ?: 'Ready to grow your brand on social media?';
+	$cta_sub     = ci_get( 'service_cta_sub', $post_id ) ?: 'Our team is here to understand your goals and create a tailored strategy that drives real results.';
+
+	// Override image if specified in ACF
+	$custom_img_id = ci_get( 'service_image', $post_id );
+	if ( $custom_img_id ) {
+		$img_url_meta = wp_get_attachment_image_url( $custom_img_id, 'full' );
+		if ( $img_url_meta ) {
+			$thumb_url = $img_url_meta;
+		}
+	}
+
+	?>
 	<div id="ci360-single-service-root" class="ci360-single-service-page">
 		<!-- 1. HERO SECTION -->
 		<section class="ci360-service-hero">
@@ -151,49 +182,69 @@ function ci_render_service( $post_id ) {
 		<section class="ci360-service-overview wrap">
 			<div class="ci360-overview-left">
 				<span class="ci360-sub-kicker">OVERVIEW</span>
-				<h2 class="ci360-section-title">Turn Conversations Into <span class="ci360-title-gradient">Communities</span></h2>
-				<p class="ci360-overview-copy">Social media is more than just posting — it's about people, conversations, and real connections. We help brands show up with purpose, create engaging content, and build communities that drive meaningful business results.</p>
+				<h2 class="ci360-section-title"><?php echo ci_html( $ov_heading ); ?></h2>
+				<p class="ci360-overview-copy"><?php echo esc_html( $ov_copy ); ?></p>
 				
 				<div class="ci360-overview-features">
-					<div class="ci360-feat-item">
-						<div class="ci360-feat-icon icon-users">
-							<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+					<?php if ( ! empty( $ov_features ) ) : ?>
+						<?php foreach ( $ov_features as $feat ) : ?>
+							<div class="ci360-feat-item">
+								<div class="ci360-feat-icon icon-users">
+									<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+								</div>
+								<div class="ci360-feat-text">
+									<h4><?php echo esc_html( $feat['title'] ?? '' ); ?></h4>
+									<p><?php echo esc_html( $feat['text'] ?? '' ); ?></p>
+								</div>
+							</div>
+						<?php endforeach; ?>
+					<?php else : ?>
+						<div class="ci360-feat-item">
+							<div class="ci360-feat-icon icon-users">
+								<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+							</div>
+							<div class="ci360-feat-text">
+								<h4>Stronger Brand Presence</h4>
+								<p>Be where your audience spends their time.</p>
+							</div>
 						</div>
-						<div class="ci360-feat-text">
-							<h4>Stronger Brand Presence</h4>
-							<p>Be where your audience spends their time.</p>
+						<div class="ci360-feat-item">
+							<div class="ci360-feat-icon icon-chat">
+								<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+							</div>
+							<div class="ci360-feat-text">
+								<h4>Real Engagement</h4>
+								<p>Turn followers into loyal advocates.</p>
+							</div>
 						</div>
-					</div>
-					<div class="ci360-feat-item">
-						<div class="ci360-feat-icon icon-chat">
-							<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+						<div class="ci360-feat-item">
+							<div class="ci360-feat-icon icon-chart">
+								<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+							</div>
+							<div class="ci360-feat-text">
+								<h4>Measurable Growth</h4>
+								<p>Drive visibility, leads, and long-term impact.</p>
+							</div>
 						</div>
-						<div class="ci360-feat-text">
-							<h4>Real Engagement</h4>
-							<p>Turn followers into loyal advocates.</p>
-						</div>
-					</div>
-					<div class="ci360-feat-item">
-						<div class="ci360-feat-icon icon-chart">
-							<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-						</div>
-						<div class="ci360-feat-text">
-							<h4>Measurable Growth</h4>
-							<p>Drive visibility, leads, and long-term impact.</p>
-						</div>
-					</div>
+					<?php endif; ?>
 				</div>
 			</div>
 
 			<div class="ci360-overview-right">
 				<div class="ci360-highlights-card">
-					<h3>Service Highlights</h3>
+					<h3><?php echo esc_html( $hl_title ); ?></h3>
 					<ul class="ci360-highlights-list">
-						<li><i>✓</i> Platform-specific strategies</li>
-						<li><i>✓</i> Content creation & design</li>
-						<li><i>✓</i> Community management</li>
-						<li><i>✓</i> Influencer collaboration (optional)</li>
-						<li><i>✓</i> Performance tracking & reporting</li>
+						<?php if ( ! empty( $hl_rows ) ) : ?>
+							<?php foreach ( $hl_rows as $hl ) : ?>
+								<li><i>✓</i> <?php echo esc_html( $hl['item'] ?? '' ); ?></li>
+							<?php endforeach; ?>
+						<?php else : ?>
+							<li><i>✓</i> Platform-specific strategies</li>
+							<li><i>✓</i> Content creation & design</li>
+							<li><i>✓</i> Community management</li>
+							<li><i>✓</i> Influencer collaboration (optional)</li>
+							<li><i>✓</i> Performance tracking & reporting</li>
+						<?php endif; ?>
 					</ul>
 					<a href="<?php echo esc_url( $contact_url ); ?>" class="ci360-btn-pill-card">Discuss Your Goals <?php echo ci_arrow(); ?></a>
 					<span class="ci360-card-subtext">Get a tailored strategy for your brand.</span>
@@ -205,51 +256,70 @@ function ci_render_service( $post_id ) {
 		<section class="ci360-service-included wrap">
 			<div class="ci360-section-header">
 				<span class="ci360-sub-kicker">WHAT'S INCLUDED</span>
-				<h2 class="ci360-section-title">Everything You Need to <span class="ci360-title-gradient">Grow on Social</span></h2>
-				<p class="ci360-section-sub">From strategy to execution, we handle every part of your social media journey.</p>
+				<h2 class="ci360-section-title"><?php echo ci_html( $inc_heading ); ?></h2>
+				<p class="ci360-section-sub">From strategy to execution, we handle every part of your journey.</p>
 			</div>
 
 			<div class="ci360-included-grid">
-				<div class="ci360-inc-card">
-					<div class="ci360-inc-thumb">
-						<img src="<?php echo esc_url( CI360_URI . '/assets/images/studio-detail.webp' ); ?>" alt="Content Strategy" loading="lazy">
-						<span class="ci360-inc-icon icon-target">🎯</span>
+				<?php if ( ! empty( $inc_rows ) ) : ?>
+					<?php foreach ( $inc_rows as $inc_item ) : ?>
+						<?php
+						$card_img_id  = $inc_item['image'] ?? 0;
+						$card_img_src = $card_img_id ? wp_get_attachment_image_url( $card_img_id, 'medium_large' ) : CI360_URI . '/assets/images/studio-detail.webp';
+						?>
+						<div class="ci360-inc-card">
+							<div class="ci360-inc-thumb">
+								<img src="<?php echo esc_url( $card_img_src ); ?>" alt="<?php echo esc_attr( $inc_item['title'] ?? '' ); ?>" loading="lazy">
+								<span class="ci360-inc-icon icon-target">🎯</span>
+							</div>
+							<div class="ci360-inc-body">
+								<h3><?php echo esc_html( $inc_item['title'] ?? '' ); ?></h3>
+								<p><?php echo esc_html( $inc_item['text'] ?? '' ); ?></p>
+							</div>
+						</div>
+					<?php endforeach; ?>
+				<?php else : ?>
+					<div class="ci360-inc-card">
+						<div class="ci360-inc-thumb">
+							<img src="<?php echo esc_url( CI360_URI . '/assets/images/studio-detail.webp' ); ?>" alt="Content Strategy" loading="lazy">
+							<span class="ci360-inc-icon icon-target">🎯</span>
+						</div>
+						<div class="ci360-inc-body">
+							<h3>Content Strategy</h3>
+							<p>Tailored strategies for each platform to reach, engage, and convert your ideal audience.</p>
+						</div>
 					</div>
-					<div class="ci360-inc-body">
-						<h3>Content Strategy</h3>
-						<p>Tailored strategies for each platform to reach, engage, and convert your ideal audience.</p>
+					<div class="ci360-inc-card">
+						<div class="ci360-inc-thumb">
+							<img src="<?php echo esc_url( CI360_URI . '/assets/images/studio-hero.webp' ); ?>" alt="Content Creation" loading="lazy">
+							<span class="ci360-inc-icon icon-camera">📷</span>
+						</div>
+						<div class="ci360-inc-body">
+							<h3>Content Creation</h3>
+							<p>High-quality visuals, videos, and copy designed to stop the scroll and spark action.</p>
+						</div>
 					</div>
-				</div>
-				<div class="ci360-inc-card">
-					<div class="ci360-inc-thumb">
-						<img src="<?php echo esc_url( CI360_URI . '/assets/images/studio-hero.webp' ); ?>" alt="Content Creation" loading="lazy">
-						<span class="ci360-inc-icon icon-camera">📷</span>
+					<div class="ci360-inc-card">
+						<div class="ci360-inc-thumb">
+							<img src="<?php echo esc_url( CI360_URI . '/assets/images/station.webp' ); ?>" alt="Community Management" loading="lazy">
+							<span class="ci360-inc-icon icon-group">👥</span>
+						</div>
+						<div class="ci360-inc-body">
+							<h3>Community Management</h3>
+							<p>Active engagement and meaningful interactions to build loyal communities.</p>
+						</div>
 					</div>
-					<div class="ci360-inc-body">
-						<h3>Content Creation</h3>
-						<p>High-quality visuals, videos, and copy designed to stop the scroll and spark action.</p>
+					<div class="ci360-inc-card">
+						<div class="ci360-inc-thumb">
+							<img src="<?php echo esc_url( CI360_URI . '/assets/images/brand-icon.png' ); ?>" alt="Performance Reporting" loading="lazy">
+							<span class="ci360-inc-icon icon-report">📊</span>
+						</div>
+						<div class="ci360-inc-body">
+							<h3>Performance Reporting</h3>
+							<p>Transparent reports with clear insights to show what's working and what's next.</p>
+						</div>
 					</div>
-				</div>
-				<div class="ci360-inc-card">
-					<div class="ci360-inc-thumb">
-						<img src="<?php echo esc_url( CI360_URI . '/assets/images/station.webp' ); ?>" alt="Community Management" loading="lazy">
-						<span class="ci360-inc-icon icon-group">👥</span>
-					</div>
-					<div class="ci360-inc-body">
-						<h3>Community Management</h3>
-						<p>Active engagement and meaningful interactions to build loyal communities.</p>
-					</div>
-				</div>
-				<div class="ci360-inc-card">
-					<div class="ci360-inc-thumb">
-						<img src="<?php echo esc_url( CI360_URI . '/assets/images/brand-icon.png' ); ?>" alt="Performance Reporting" loading="lazy">
-						<span class="ci360-inc-icon icon-report">📊</span>
-					</div>
-					<div class="ci360-inc-body">
-						<h3>Performance Reporting</h3>
-						<p>Transparent reports with clear insights to show what's working and what's next.</p>
-					</div>
-				</div>
+				<?php endif; ?>
 			</div>
 		</section>
 
@@ -258,49 +328,65 @@ function ci_render_service( $post_id ) {
 			<div class="ci360-approach-header">
 				<div>
 					<span class="ci360-sub-kicker">OUR APPROACH</span>
-					<h2 class="ci360-section-title">A Strategic, <span class="ci360-title-gradient">Results-Driven Process</span></h2>
+					<h2 class="ci360-section-title"><?php echo ci_html( $app_heading ); ?></h2>
 				</div>
 				<div>
-					<p class="ci360-approach-intro">We combine strategy, creativity, and data to create social media experiences that deliver real business impact.</p>
+					<p class="ci360-approach-intro">We combine strategy, creativity, and data to create experiences that deliver real business impact.</p>
 				</div>
 			</div>
 
 			<div class="ci360-approach-timeline">
-				<div class="ci360-step-item">
-					<div class="step-head">
-						<span class="step-num">1</span>
-						<span class="step-icon">🔍</span>
-						<span class="step-arrow">&rarr;</span>
+				<?php if ( ! empty( $app_steps ) ) : ?>
+					<?php foreach ( $app_steps as $step_i => $step ) : ?>
+						<div class="ci360-step-item">
+							<div class="step-head">
+								<span class="step-num"><?php echo esc_html( $step_i + 1 ); ?></span>
+								<span class="step-icon">💡</span>
+								<?php if ( $step_i < count( $app_steps ) - 1 ) : ?>
+									<span class="step-arrow">&rarr;</span>
+								<?php endif; ?>
+							</div>
+							<h3><?php echo esc_html( $step['title'] ?? '' ); ?></h3>
+							<p><?php echo esc_html( $step['text'] ?? '' ); ?></p>
+						</div>
+					<?php endforeach; ?>
+				<?php else : ?>
+					<div class="ci360-step-item">
+						<div class="step-head">
+							<span class="step-num">1</span>
+							<span class="step-icon">🔍</span>
+							<span class="step-arrow">&rarr;</span>
+						</div>
+						<h3>Discover & Plan</h3>
+						<p>Understand your goals, audience, and opportunities.</p>
 					</div>
-					<h3>Discover & Plan</h3>
-					<p>Understand your goals, audience, and opportunities.</p>
-				</div>
-				<div class="ci360-step-item">
-					<div class="step-head">
-						<span class="step-num">2</span>
-						<span class="step-icon">💡</span>
-						<span class="step-arrow">&rarr;</span>
+					<div class="ci360-step-item">
+						<div class="step-head">
+							<span class="step-num">2</span>
+							<span class="step-icon">💡</span>
+							<span class="step-arrow">&rarr;</span>
+						</div>
+						<h3>Create & Launch</h3>
+						<p>Develop strategies and compelling content.</p>
 					</div>
-					<h3>Create & Launch</h3>
-					<p>Develop strategies and compelling content.</p>
-				</div>
-				<div class="ci360-step-item">
-					<div class="step-head">
-						<span class="step-num">3</span>
-						<span class="step-icon">🤝</span>
-						<span class="step-arrow">&rarr;</span>
+					<div class="ci360-step-item">
+						<div class="step-head">
+							<span class="step-num">3</span>
+							<span class="step-icon">🤝</span>
+							<span class="step-arrow">&rarr;</span>
+						</div>
+						<h3>Engage & Grow</h3>
+						<p>Manage and optimize across platforms.</p>
 					</div>
-					<h3>Engage & Grow</h3>
-					<p>Manage and optimize across platforms.</p>
-				</div>
-				<div class="ci360-step-item">
-					<div class="step-head">
-						<span class="step-num">4</span>
-						<span class="step-icon">📊</span>
+					<div class="ci360-step-item">
+						<div class="step-head">
+							<span class="step-num">4</span>
+							<span class="step-icon">📊</span>
+						</div>
+						<h3>Measure & Refine</h3>
+						<p>Track performance and continuously improve.</p>
 					</div>
-					<h3>Measure & Refine</h3>
-					<p>Track performance and continuously improve.</p>
-				</div>
+				<?php endif; ?>
 			</div>
 		</section>
 
@@ -309,12 +395,12 @@ function ci_render_service( $post_id ) {
 			<div class="ci360-cta-banner-inner">
 				<div class="ci360-cta-text">
 					<span class="ci360-cta-kicker">LET'S WORK TOGETHER</span>
-					<h2>Ready to grow your brand on social media?</h2>
-					<p>Our team is here to understand your goals and create a tailored strategy that drives real results.</p>
+					<h2><?php echo esc_html( $cta_heading ); ?></h2>
+					<p><?php echo esc_html( $cta_sub ); ?></p>
 				</div>
 				<div class="ci360-cta-action">
 					<a href="<?php echo esc_url( $contact_url ); ?>" class="ci360-btn-cta-blue">Contact Us <?php echo ci_arrow(); ?></a>
-					<span class="ci360-cta-sub">Talk to our social media experts today.</span>
+					<span class="ci360-cta-sub">Talk to our experts today.</span>
 				</div>
 			</div>
 		</section>
