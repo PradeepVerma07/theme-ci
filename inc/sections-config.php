@@ -680,6 +680,35 @@ While marketing continues to evolve through AI, automation, and immersive digita
 				),
 			),
 		),
+		'challenge-approach' => array(
+			'title'    => 'Challenge and Approach',
+			'icon'     => 'eicon-tabs',
+			'desc'     => 'Displays The Challenge and The Approach side-by-side with highlight stat cards.',
+			'controls' => array(
+				array( 'type' => 'section', 'label' => 'The Challenge' ),
+				array( 'type' => 'text', 'key' => 'challenge_title', 'label' => 'Challenge Title', 'default' => 'The Challenge' ),
+				array( 'type' => 'textarea', 'key' => 'challenge_text', 'label' => 'Challenge Text', 'default' => 'Station Satcom needed to reposition its brand identity to reflect its evolving global technology ecosystem while maintaining trust with legacy maritime & satcom enterprise clients.' ),
+				array( 'type' => 'section', 'label' => 'The Approach' ),
+				array( 'type' => 'text', 'key' => 'approach_title', 'label' => 'Approach Title', 'default' => 'The Approach' ),
+				array( 'type' => 'textarea', 'key' => 'approach_text', 'label' => 'Approach Text', 'default' => 'We executed a full 360° strategy encompassing a modern brand book, high-performance website architecture, and an always-on content marketing strategy across multi-channel touchpoints.' ),
+				array( 'type' => 'section', 'label' => 'Highlight Metrics' ),
+				array(
+					'type'        => 'repeater',
+					'key'         => 'stats',
+					'label'       => 'Stats Cards',
+					'title_field' => 'label',
+					'fields'      => array(
+						array( 'type' => 'text', 'key' => 'number', 'label' => 'Stat Number', 'default' => '+150%' ),
+						array( 'type' => 'text', 'key' => 'label', 'label' => 'Stat Label', 'default' => 'Brand Reach Growth' ),
+					),
+					'default'     => array(
+						array( 'number' => '360°', 'label' => 'Brand Transformation' ),
+						array( 'number' => '+150%', 'label' => 'Digital Engagement' ),
+						array( 'number' => '2.4x', 'label' => 'Lead Conversions' ),
+					),
+				),
+			),
+		),
 	);
 	// Client logos default: every logo bundled with the theme.
 	$defs['brand-strip']['controls'][1]['default'] = ci_default_logos();

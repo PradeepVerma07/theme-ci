@@ -907,3 +907,43 @@ function ci_s_impact_brand( $s ) {
 	return $out;
 }
 
+/** Render Challenge & Approach Section */
+function ci_s_challenge_approach( $s ) {
+	$challenge_title = $s['challenge_title'] ?? 'The Challenge';
+	$challenge_text  = $s['challenge_text'] ?? '';
+	$approach_title   = $s['approach_title'] ?? 'The Approach';
+	$approach_text    = $s['approach_text'] ?? '';
+	$stats            = ci_s_rows( $s['stats'] ?? array() );
+
+	$stats_html = '';
+	if ( ! empty( $stats ) ) {
+		foreach ( $stats as $st ) {
+			$stats_html .= '<div class="ci360-ca-stat-card"><span class="ci360-ca-stat-number">' . ci_e( $st['number'] ?? '' ) . '</span><span class="ci360-ca-stat-label">' . ci_e( $st['label'] ?? '' ) . '</span></div>';
+		}
+	}
+
+	$out = '<section class="ci360-challenge-approach-section wrap"' . ci_s_id( $s ) . '>';
+	$out .= '<div class="ci360-ca-grid">';
+
+	$out .= '<div class="ci360-ca-card ci360-ca-challenge">';
+	$out .= '<div class="ci360-ca-card-header"><span class="ci360-ca-kicker">01 / PROBLEM</span><h3>' . ci_e( $challenge_title ) . '</h3></div>';
+	$out .= '<div class="ci360-ca-card-body"><p>' . ci_e( $challenge_text ) . '</p></div>';
+	$out .= '</div>';
+
+	$out .= '<div class="ci360-ca-card ci360-ca-approach">';
+	$out .= '<div class="ci360-ca-card-header"><span class="ci360-ca-kicker">02 / SOLUTION</span><h3>' . ci_e( $approach_title ) . '</h3></div>';
+	$out .= '<div class="ci360-ca-card-body"><p>' . ci_e( $approach_text ) . '</p></div>';
+	$out .= '</div>';
+
+	$out .= '</div>';
+
+	if ( $stats_html ) {
+		$out .= '<div class="ci360-ca-stats-row">' . $stats_html . '</div>';
+	}
+
+	$out .= '</section>';
+
+	return $out;
+}
+
+

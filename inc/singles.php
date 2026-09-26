@@ -54,41 +54,229 @@ $sec     = function ( $p, $h2attr = ' data-reveal', $intro = false ) {
 
 function ci_render_project( $post_id ) {
 	ob_start();
-$p       = ci_project( $post_id );
-$ids     = ci_ids( 'ci_project' );
-$total   = count( $ids );
-$is_case = 'case' === $p['type'];
-$pos     = array_search( $p['id'], $ids, true );
-$next    = ci_project( $ids[ ( false === $pos ? 0 : $pos + 1 ) % max( 1, $total ) ] );
+	$p       = ci_project( $post_id );
+	$ids     = ci_ids( 'ci_project' );
+	$total   = count( $ids );
+	$pos     = array_search( $p['id'], $ids, true );
 
-$t  = $p['term'];
-$p1 = ( $t && ci_term_get( 'cat_p1', $t ) ) ? ci_term_get( 'cat_p1', $t ) : ci_opt( 'opt_sector_p1' );
-$p2 = ( $t && ci_term_get( 'cat_p2', $t ) ) ? ci_term_get( 'cat_p2', $t ) : ci_opt( 'opt_sector_p2' );
+	// Next & Prev projects
+	$prev_id   = $ids[ ( false === $pos || 0 === $pos ? $total - 1 : $pos - 1 ) ];
+	$next_id   = $ids[ ( false === $pos || $pos === $total - 1 ? 0 : $pos + 1 ) ];
+	$prev_proj = ci_project( $prev_id );
+	$next_proj = ci_project( $next_id );
 
-if ( $is_case && $p['sections'] ) {
-	$story = '';
-	foreach ( $p['sections'] as $r ) {
-		$story .= '<h3>' . ci_e( $r['title'] ) . '</h3><p>' . ci_e( $r['text'] ) . '</p>';
+	// Featured image URL
+	$feat_img_id  = get_post_thumbnail_id( $post_id );
+	if ( ! $feat_img_id && ! empty( $p['image'] ) ) {
+		$feat_img_id = $p['image'];
 	}
-} else {
-	$story = '<p class="large-copy">' . ci_e( $p['summary'] ) . '</p><h3>' . ci_e( ci_opt( 'perspective' === $p['type'] ? 'tpl_project_lens' : 'tpl_project_direction' ) ) . '</h3>' . ci_paragraphs( array( $p1, $p2 ) );
-}
-$tag_type = ci_opt( 'tpl_tag_' . ( in_array( $p['type'], array( 'case', 'gallery' ), true ) ? $p['type'] : 'perspective' ) );
+	$feat_img_url = $feat_img_id ? wp_get_attachment_image_url( $feat_img_id, 'full' ) : ci_url( 'station.webp' );
 
-$gallery = '';
-if ( $p['gallery'] ) {
-	$items = '';
-	foreach ( $p['gallery'] as $i => $im ) {
-		$items .= '<button class="gallery-image tone-' . esc_attr( $p['tone'] ) . '" data-lightbox="' . esc_url( wp_get_attachment_image_url( $im, 'full' ) ) . '" aria-label="View ' . esc_attr( $p['name'] ) . ' image ' . ( $i + 1 ) . ' full size">' . ci_img( $im, $p['name'] . ' creative ' . ( $i + 1 ) ) . '<span>' . ci_e( ci_opt( 'tpl_project_view' ) ) . ' ' . ci_arrow() . '</span></button>';
+	// Project Category
+	$cat_name = ! empty( $p['category'] ) ? $p['category'] : 'Case Study';
+	$permalink = get_permalink( $post_id );
+	$encoded_url   = urlencode( $permalink );
+	$encoded_title = urlencode( $p['name'] );
+
+	// Story content
+	$is_case = 'case' === $p['type'];
+	if ( $is_case && ! empty( $p['sections'] ) ) {
+		$story = '';
+		foreach ( $p['sections'] as $r ) {
+			$story .= '<div class="ci360-case-story-block"><h3>' . ci_e( $r['title'] ) . '</h3><p>' . ci_e( $r['text'] ) . '</p></div>';
+		}
+	} else {
+		$t  = $p['term'];
+		$p1 = ( $t && ci_term_get( 'cat_p1', $t ) ) ? ci_term_get( 'cat_p1', $t ) : ci_opt( 'opt_sector_p1' );
+		$p2 = ( $t && ci_term_get( 'cat_p2', $t ) ) ? ci_term_get( 'cat_p2', $t ) : ci_opt( 'opt_sector_p2' );
+		$story = '<p class="large-copy">' . ci_e( $p['summary'] ) . '</p><h3>' . ci_e( ci_opt( 'perspective' === $p['type'] ? 'tpl_project_lens' : 'tpl_project_direction' ) ) . '</h3>' . ci_paragraphs( array( $p1, $p2 ) );
 	}
-	$gallery = '<section class="project-gallery wrap"><div class="gallery-heading">' . ci_sec_label( 'tpl_project_gallery', 'option' ) . '<span>' . ci_pad( count( $p['gallery'] ) ) . ' IMAGES</span></div><div class="gallery-grid ' . ( 1 === count( $p['gallery'] ) ? 'gallery-single' : '' ) . '">' . $items . '</div></section>';
-}
-$links = '';
-foreach ( array_slice( ci_ids( 'ci_service' ), 0, 4 ) as $sid ) {
-	$s      = ci_service( $sid );
-	$links .= '<a href="' . esc_url( $s['url'] ) . '"><span>' . ci_e( $s['number'] ) . '</span><h3>' . ci_e( $s['title'] ) . '</h3>' . ci_arrow() . '</a>';
-}
-?><section class="page-hero wrap project-detail-hero"><?php echo ci_breadcrumb( 'Work / ' . $p['name'] ); ?><div class="project-detail-eyebrow"><?php echo ci_label( mb_strtoupper( $p['category'] ), ci_type_label( $p['type'] ) ); ?><span><?php echo ci_e( $p['number'] ); ?> / <?php echo ci_pad( $total ); ?></span></div><h1 class="project-display" data-title><?php echo ci_e( $p['name'] ); ?></h1><div class="project-hero-visual" data-reveal><?php echo ci_case_visual( $p ); ?></div><p class="image-attribution"><?php echo ci_e( $p['note'] ); ?></p></section><section class="section wrap project-story"><div><?php echo ci_sec_label( 'tpl_project_story', 'option' ); ?><h2 data-reveal><?php echo ci_e( $p['headline'] ); ?></h2><?php echo ci_tags( array( $p['category'], $tag_type ) ); ?></div><div><?php echo $story; ?><?php if ( $p['disclosure'] ) : ?><p class="project-disclosure"><?php echo ci_html( $p['disclosure'] ); ?></p><?php endif; ?></div></section><?php echo $gallery; ?><section class="section wrap"><div class="section-heading"><?php echo ci_sec_label( 'tpl_project_links', 'option' ); ?><h2 data-reveal><?php echo ci_html( ci_opt( 'tpl_project_links_heading' ) ); ?></h2></div><div class="service-link-grid"><?php echo $links; ?></div></section><?php if ( $next ) : ?><a class="next-project tone-<?php echo esc_attr( $next['tone'] ); ?>" href="<?php echo esc_url( $next['url'] ); ?>"><div class="wrap"><span class="small-label"><?php echo ci_e( ci_opt( 'tpl_project_next' ) ); ?></span><h2><?php echo ci_e( $next['name'] ); ?> <?php echo ci_arrow(); ?></h2></div></a><?php endif; ?>
+
+	// Gallery
+	$gallery = '';
+	if ( ! empty( $p['gallery'] ) ) {
+		$items = '';
+		foreach ( $p['gallery'] as $i => $im ) {
+			$items .= '<button type="button" class="gallery-image tone-' . esc_attr( $p['tone'] ) . '" data-lightbox="' . esc_url( wp_get_attachment_image_url( $im, 'full' ) ) . '" aria-label="View ' . esc_attr( $p['name'] ) . ' image ' . ( $i + 1 ) . ' full size">' . ci_img( $im, $p['name'] . ' creative ' . ( $i + 1 ) ) . '<span>' . ci_e( ci_opt( 'tpl_project_view' ) ) . ' ' . ci_arrow() . '</span></button>';
+		}
+		$gallery = '<div class="project-gallery-box"><div class="gallery-heading"><h4>PROJECT GALLERY</h4><span>' . ci_pad( count( $p['gallery'] ) ) . ' IMAGES</span></div><div class="gallery-grid ' . ( 1 === count( $p['gallery'] ) ? 'gallery-single' : '' ) . '">' . $items . '</div></div>';
+	}
+
+	// Related 4 Case Studies (exclude current)
+	$related_ids = array_diff( $ids, array( $post_id ) );
+	$related_ids = array_slice( array_values( $related_ids ), 0, 4 );
+	$related_cards = '';
+	foreach ( $related_ids as $rid ) {
+		$rp = ci_project( $rid );
+		$rp_img = ci_img( $rp['image'], $rp['name'] );
+		$related_cards .= '<a class="ci360-related-card" href="' . esc_url( $rp['url'] ) . '">'
+			. '<div class="ci360-related-media">' . ( $rp_img ? $rp_img : ci_star() ) . '<span class="ci360-related-cat">' . ci_e( $rp['category'] ) . '</span></div>'
+			. '<div class="ci360-related-body"><h3>' . ci_e( $rp['name'] ) . '</h3><p>' . ci_e( $rp['headline'] ) . '</p><span class="ci360-related-link">View Case Study ' . ci_arrow() . '</span></div>'
+			. '</a>';
+	}
+
+	// Right Sidebar Content
+	$terms = get_terms( array( 'taxonomy' => 'ci_project_category', 'hide_empty' => false ) );
+	$cat_widget = '';
+	if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
+		$cat_links = '';
+		foreach ( $terms as $term ) {
+			$cat_links .= '<li><a href="' . esc_url( get_term_link( $term ) ) . '"><span>' . esc_html( $term->name ) . '</span><small>(' . esc_html( $term->count ) . ')</small></a></li>';
+		}
+		$cat_widget = '<div class="ci360-sidebar-widget"><h4 class="ci360-sidebar-title">Categories</h4><ul class="ci360-sidebar-cat-list">' . $cat_links . '</ul></div>';
+	}
+
+	$feat_widget = '';
+	$feat_ids = array_slice( array_diff( $ids, array( $post_id ) ), 0, 3 );
+	if ( ! empty( $feat_ids ) ) {
+		$feat_items = '';
+		foreach ( $feat_ids as $fid ) {
+			$fp = ci_project( $fid );
+			$fp_img = ci_img( $fp['image'], $fp['name'] );
+			$feat_items .= '<a class="ci360-sidebar-post-item" href="' . esc_url( $fp['url'] ) . '">'
+				. '<span class="ci360-sidebar-post-thumb">' . ( $fp_img ? $fp_img : ci_star() ) . '</span>'
+				. '<span class="ci360-sidebar-post-info"><span class="ci360-sidebar-post-cat">' . ci_e( $fp['category'] ) . '</span><h5 class="ci360-sidebar-post-heading">' . ci_e( $fp['name'] ) . '</h5></span>'
+				. '</a>';
+		}
+		$feat_widget = '<div class="ci360-sidebar-widget"><h4 class="ci360-sidebar-title">Featured Work</h4><div class="ci360-sidebar-posts-list">' . $feat_items . '</div></div>';
+	}
+
+	$services_widget = '';
+	$s_ids = array_slice( ci_ids( 'ci_service' ), 0, 4 );
+	if ( ! empty( $s_ids ) ) {
+		$s_links = '';
+		foreach ( $s_ids as $sid ) {
+			$sv = ci_service( $sid );
+			$s_links .= '<li><a href="' . esc_url( $sv['url'] ) . '"><span>' . ci_e( $sv['title'] ) . '</span>' . ci_arrow() . '</a></li>';
+		}
+		$services_widget = '<div class="ci360-sidebar-widget"><h4 class="ci360-sidebar-title">Capabilities</h4><ul class="ci360-sidebar-services-list">' . $s_links . '</ul></div>';
+	}
+
+	$contact_url = get_permalink( ci_page_id( 'contact' ) );
+	$cta_widget = '<div class="ci360-sidebar-cta-card">'
+		. '<h4>Need a custom strategy?</h4>'
+		. '<p>Let’s build a powerful brand narrative & performance engine for your business.</p>'
+		. '<a href="' . esc_url( $contact_url ? $contact_url : '/contact/' ) . '" class="button button-light"><span>Start a Conversation</span><i>' . ci_arrow() . '</i></a>'
+		. '</div>';
+
+	?>
+	<div id="ci360-case-study-root" class="ci360-case-study-page">
+		<!-- 1. Full-Screen 100vh Hero Banner -->
+		<section class="ci360-hero-full-screen ci360-case-hero" style="background-image: url('<?php echo esc_url( $feat_img_url ); ?>');">
+			<div class="ci360-hero-overlay"></div>
+			<div class="ci360-hero-full-content wrap">
+				<div class="ci360-hero-left-align">
+					<nav class="ci360-blog-breadcrumb-light" aria-label="Breadcrumb">
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
+						<span>/</span>
+						<a href="<?php echo esc_url( home_url( '/work/' ) ); ?>">Work</a>
+						<span>/</span>
+						<span><?php echo ci_e( $p['name'] ); ?></span>
+					</nav>
+					<div class="ci360-blog-kicker-light">
+						<span><?php echo ci_e( mb_strtoupper( $cat_name ) ); ?></span>
+						<i></i>
+						<span>CASE STUDY</span>
+					</div>
+					<h1 class="ci360-hero-full-title"><?php echo ci_e( $p['name'] ); ?></h1>
+					<?php if ( ! empty( $p['headline'] ) ) : ?>
+						<p class="ci360-hero-lead"><?php echo ci_e( $p['headline'] ); ?></p>
+					<?php endif; ?>
+				</div>
+			</div>
+		</section>
+
+		<!-- 2. Brand Connection & Impact Section -->
+		<?php echo ci_s_impact_brand( array( 'channels_title' => 'Brand Channels:', 'impact_title' => 'The Impact' ) ); ?>
+
+		<!-- 3. Challenge & Approach Section -->
+		<?php echo ci_s_challenge_approach( array() ); ?>
+
+		<!-- 4. Main 2-Column Section Layout -->
+		<section class="ci360-blog-layout-container wrap">
+			<div class="ci360-blog-layout">
+				<!-- Left Column: Main Story & Gallery -->
+				<div class="ci360-blog-main-content">
+					<article class="ci360-case-article">
+						<?php echo $story; ?>
+						<?php echo $gallery; ?>
+					</article>
+
+					<!-- Next & Previous Buttons Bar -->
+					<nav class="ci360-case-nav-bar" aria-label="Case Study Navigation">
+						<?php if ( $prev_proj ) : ?>
+							<a href="<?php echo esc_url( $prev_proj['url'] ); ?>" class="ci360-case-nav-btn prev">
+								<small>&larr; Previous Case Study</small>
+								<strong><?php echo ci_e( $prev_proj['name'] ); ?></strong>
+							</a>
+						<?php endif; ?>
+						<?php if ( $next_proj ) : ?>
+							<a href="<?php echo esc_url( $next_proj['url'] ); ?>" class="ci360-case-nav-btn next">
+								<small>Next Case Study &rarr;</small>
+								<strong><?php echo ci_e( $next_proj['name'] ); ?></strong>
+							</a>
+						<?php endif; ?>
+					</nav>
+
+					<!-- Share Icons Bar -->
+					<div class="ci360-share-bar">
+						<span class="ci360-share-label">Share this Case Study:</span>
+						<div class="ci360-share-icons">
+							<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $encoded_url; ?>" target="_blank" rel="noopener noreferrer" class="ci360-share-icon fb" title="Share on Facebook">
+								<?php echo ci_social_icon_svg( 'facebook' ); ?>
+							</a>
+							<a href="https://twitter.com/intent/tweet?url=<?php echo $encoded_url; ?>&text=<?php echo $encoded_title; ?>" target="_blank" rel="noopener noreferrer" class="ci360-share-icon tw" title="Share on X">
+								<?php echo ci_social_icon_svg( 'twitter' ); ?>
+							</a>
+							<a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo $encoded_url; ?>" target="_blank" rel="noopener noreferrer" class="ci360-share-icon li" title="Share on LinkedIn">
+								<?php echo ci_social_icon_svg( 'linkedin' ); ?>
+							</a>
+							<a href="https://api.whatsapp.com/send?text=<?php echo $encoded_title; ?>%20<?php echo $encoded_url; ?>" target="_blank" rel="noopener noreferrer" class="ci360-share-icon wa" title="Share on WhatsApp">
+								<?php echo ci_social_icon_svg( 'whatsapp' ); ?>
+							</a>
+							<button type="button" class="ci360-share-icon copy" title="Copy Link" onclick="navigator.clipboard.writeText('<?php echo esc_url( $permalink ); ?>'); alert('Link copied to clipboard!');">
+								<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<!-- Right Sidebar Column -->
+				<aside class="ci360-blog-sidebar">
+					<!-- Case Details Feature Box -->
+					<div class="ci360-sidebar-widget ci360-case-meta-box">
+						<h4 class="ci360-sidebar-title">Project Overview</h4>
+						<ul class="ci360-case-meta-list">
+							<li><strong>Client:</strong> <span><?php echo ci_e( $p['name'] ); ?></span></li>
+							<li><strong>Category:</strong> <span><?php echo ci_e( $cat_name ); ?></span></li>
+							<li><strong>Services:</strong> <span>Strategy, Branding, Web & Media</span></li>
+							<li><strong>Deliverable:</strong> <span>Full Brand & Platform Overhaul</span></li>
+						</ul>
+					</div>
+
+					<?php echo $cat_widget; ?>
+					<?php echo $feat_widget; ?>
+					<?php echo $services_widget; ?>
+					<?php echo $cta_widget; ?>
+				</aside>
+			</div>
+		</section>
+
+		<!-- 5. Related 4 Case Studies Box (4-in-a-row) -->
+		<?php if ( $related_cards ) : ?>
+			<section class="wrap ci360-related-box-container">
+				<div class="ci360-related-box">
+					<div class="ci360-related-header">
+						<h2>Related Case Studies</h2>
+						<a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="text-link">Explore all work <?php echo ci_arrow(); ?></a>
+					</div>
+					<div class="ci360-related-grid">
+						<?php echo $related_cards; ?>
+					</div>
+				</div>
+			</section>
+		<?php endif; ?>
+	</div>
 	<?php
 	return ob_get_clean();
 }

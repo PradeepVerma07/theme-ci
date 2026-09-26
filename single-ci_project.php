@@ -4,6 +4,7 @@
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+}
 $current_post = get_queried_object();
 if ( $current_post && isset( $current_post->post_name ) ) {
 	$matching_posts = get_posts(
@@ -26,9 +27,15 @@ while ( have_posts() ) {
 	the_post();
 	?>
 	<main id="main" <?php post_class( 'site-main' ); ?>>
-		<div class="page-content entry-content">
-			<?php the_content(); ?>
-		</div>
+		<?php
+		if ( function_exists( 'ci_render_project' ) ) {
+			echo ci_render_project( get_the_ID() );
+		} else {
+			echo '<div class="page-content entry-content">';
+			the_content();
+			echo '</div>';
+		}
+		?>
 	</main>
 	<?php
 }

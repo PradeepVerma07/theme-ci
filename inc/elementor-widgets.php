@@ -242,3 +242,6 @@ class CI360_Widget_project_detail extends CI360_Section_Widget { protected $ci_i
 class CI360_Widget_insight_detail extends CI360_Section_Widget { protected $ci_id = 'insight-detail'; }
 class CI360_Widget_site_header extends CI360_Section_Widget { protected $ci_id = 'site-header'; }
 class CI360_Widget_site_footer extends CI360_Section_Widget { protected $ci_id = 'site-footer'; }
+class CI360_Widget_impact_brand extends CI360_Section_Widget { protected $ci_id = 'impact-brand'; }
+class CI360_Widget_challenge_approach extends CI360_Section_Widget { protected $ci_id = 'challenge-approach'; }
+
