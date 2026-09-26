@@ -244,4 +244,10 @@ class CI360_Widget_site_header extends CI360_Section_Widget { protected $ci_id =
 class CI360_Widget_site_footer extends CI360_Section_Widget { protected $ci_id = 'site-footer'; }
 class CI360_Widget_impact_brand extends CI360_Section_Widget { protected $ci_id = 'impact-brand'; }
 class CI360_Widget_challenge_approach extends CI360_Section_Widget { protected $ci_id = 'challenge-approach'; }
+class CI360_Widget_service_hero extends CI360_Section_Widget { protected $ci_id = 'service-hero'; }
+class CI360_Widget_service_overview extends CI360_Section_Widget { protected $ci_id = 'service-overview'; }
+class CI360_Widget_service_included extends CI360_Section_Widget { protected $ci_id = 'service-included'; }
+class CI360_Widget_service_approach extends CI360_Section_Widget { protected $ci_id = 'service-approach'; }
+class CI360_Widget_service_cta extends CI360_Section_Widget { protected $ci_id = 'service-cta'; }
+
 

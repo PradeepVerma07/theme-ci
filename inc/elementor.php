@@ -14,6 +14,9 @@ add_action( 'elementor/widgets/register', function ( $widgets_manager ) {
 	require_once CI360_DIR . '/inc/elementor-widgets.php';
 	foreach ( array_keys( ci_section_defs() ) as $id ) {
 		$class = 'CI360_Widget_' . str_replace( '-', '_', $id );
+		if ( ! class_exists( $class ) ) {
+			eval( 'class ' . $class . ' extends CI360_Section_Widget { protected $ci_id = "' . $id . '"; }' );
+		}
 		if ( class_exists( $class ) ) {
 			$widgets_manager->register( new $class() );
 		}
@@ -218,7 +221,8 @@ function ci_ensure_service_elementor_data( $post_id ) {
 		return;
 	}
 	$raw = get_post_meta( $post_id, '_elementor_data', true );
-	if ( empty( $raw ) || '[]' === trim( (string) $raw ) ) {
+	$force_reset = isset( $_GET['reset_ci360'] );
+	if ( $force_reset || empty( $raw ) || '[]' === trim( (string) $raw ) || false === strpos( (string) $raw, 'ci360-service-hero' ) ) {
 		$data = ci_build_default_service_elementor_data( $post_id );
 		update_post_meta( $post_id, '_elementor_data', wp_slash( json_encode( $data ) ) );
 		update_post_meta( $post_id, '_elementor_edit_mode', 'builder' );
