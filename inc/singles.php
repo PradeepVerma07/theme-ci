@@ -398,13 +398,7 @@ function ci_render_modern_blog_post( $post_id ) {
 			</div>
 		</header>
 
-		<!-- 2. BRAND CHANNELS & IMPACT SECTION -->
-		<?php echo ci_s_impact_brand( array( 'channels_title' => 'Brand Channels:', 'impact_title' => 'The Impact' ) ); ?>
-
-		<!-- 3. CHALLENGE & APPROACH SECTION -->
-		<?php echo ci_s_challenge_approach( array() ); ?>
-
-		<!-- 4. MAIN LAYOUT: LEFT CONTENT + RIGHT SIDEBAR -->
+		<!-- 2. MAIN LAYOUT: LEFT CONTENT + RIGHT SIDEBAR -->
 		<div class="ci360-blog-layout wrap">
 			<!-- LEFT: ARTICLE CONTENT & NAV -->
 			<main class="ci360-blog-main-content">
