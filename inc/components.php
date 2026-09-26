@@ -106,22 +106,53 @@ function ci_insight( $post ) {
 	}
 	$id       = $post->ID;
 	$sections = ci_rows( 'insight_sections', $id );
-	$read     = ci_get( 'insight_read', $id );
-	if ( ! $read ) {
-		$words = str_word_count( wp_strip_all_tags( implode( ' ', wp_list_pluck( $sections, 'text' ) ) ) );
-		$read  = max( 1, (int) ceil( $words / 200 ) ) . ' min';
+	if ( empty( $sections ) && ! empty( $post->post_content ) ) {
+		$sections = array(
+			array(
+				'title' => '',
+				'text'  => apply_filters( 'the_content', $post->post_content ),
+			),
+		);
 	}
+	$read = ci_get( 'insight_read', $id );
+	if ( ! $read ) {
+		$content_text = implode( ' ', wp_list_pluck( (array) $sections, 'text' ) );
+		$words        = str_word_count( wp_strip_all_tags( $content_text ? $content_text : $post->post_content ) );
+		$read         = max( 1, (int) ceil( $words / 200 ) ) . ' min';
+	}
+	$img = (int) ci_get( 'insight_image', $id );
+	if ( ! $img ) {
+		$img = (int) get_post_thumbnail_id( $id );
+	}
+	if ( ! $img ) {
+		$img = (int) ci_get( 'project_image', $id );
+	}
+
+	$intro = ci_get( 'insight_intro', $id );
+	if ( ! $intro ) {
+		$intro = ci_get( 'project_summary', $id );
+	}
+	if ( ! $intro ) {
+		$intro = get_the_excerpt( $post );
+	}
+
+	$kicker = ci_get( 'insight_kicker', $id );
+	if ( ! $kicker ) {
+		$cats   = wp_list_pluck( (array) get_the_category( $id ), 'name' );
+		$kicker = $cats ? $cats[0] : get_the_date( '', $id );
+	}
+
 	return array(
 		'id'       => $id,
 		'title'    => ci_title( $id ),
 		'url'      => get_permalink( $id ),
-		'kicker'   => ci_get( 'insight_kicker', $id ),
-		'tone'     => ci_get( 'insight_tone', $id ),
-		'image'    => (int) ci_get( 'insight_image', $id ),
+		'kicker'   => $kicker ? $kicker : 'Insight',
+		'tone'     => ci_get( 'insight_tone', $id ) ? ci_get( 'insight_tone', $id ) : 'blue',
+		'image'    => $img,
 		'read'     => $read,
-		'intro'    => ci_get( 'insight_intro', $id ),
+		'intro'    => $intro,
 		'sections' => $sections,
-		'status'   => ci_get( 'insight_status', $id ),
+		'status'   => ci_get( 'insight_status', $id ) ? ci_get( 'insight_status', $id ) : 'Published',
 		'note'     => ci_get( 'insight_note', $id ),
 	);
 }
