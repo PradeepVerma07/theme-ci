@@ -166,21 +166,27 @@ function ci_render_service( $post_id ) {
 				
 				<div class="ci360-overview-features">
 					<div class="ci360-feat-item">
-						<div class="ci360-feat-icon icon-users"></div>
+						<div class="ci360-feat-icon icon-users">
+							<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+						</div>
 						<div class="ci360-feat-text">
 							<h4>Stronger Brand Presence</h4>
 							<p>Be where your audience spends their time.</p>
 						</div>
 					</div>
 					<div class="ci360-feat-item">
-						<div class="ci360-feat-icon icon-chat"></div>
+						<div class="ci360-feat-icon icon-chat">
+							<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+						</div>
 						<div class="ci360-feat-text">
 							<h4>Real Engagement</h4>
 							<p>Turn followers into loyal advocates.</p>
 						</div>
 					</div>
 					<div class="ci360-feat-item">
-						<div class="ci360-feat-icon icon-chart"></div>
+						<div class="ci360-feat-icon icon-chart">
+							<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+						</div>
 						<div class="ci360-feat-text">
 							<h4>Measurable Growth</h4>
 							<p>Drive visibility, leads, and long-term impact.</p>
