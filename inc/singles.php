@@ -125,6 +125,29 @@ function ci_render_service( $post_id ) {
 		}
 	}
 
+	// If built or being edited with Elementor, render the Elementor widgets canvas directly
+	if ( $is_elementor ) {
+		?>
+		<div id="ci360-single-service-root" class="ci360-single-service-page elementor-built-page">
+			<div class="ci360-service-body entry-content">
+				<?php the_content(); ?>
+			</div>
+			<?php if ( ! empty( $related_services_html ) ) : ?>
+				<section class="ci360-service-related wrap">
+					<div class="ci360-section-header">
+						<span class="ci360-sub-kicker">RELATED SERVICES</span>
+						<h2 class="ci360-section-title">Explore More Ways We <span class="ci360-title-gradient">Help Brands Grow</span></h2>
+					</div>
+					<div class="ci360-services-grid-4">
+						<?php echo $related_services_html; ?>
+					</div>
+				</section>
+			<?php endif; ?>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
+
 	?>
 	<div id="ci360-single-service-root" class="ci360-single-service-page">
 		<!-- 1. HERO SECTION -->
@@ -190,7 +213,7 @@ function ci_render_service( $post_id ) {
 
 		<!-- 6. ELEMENTOR & WORDPRESS EDITABLE CONTENT -->
 		<section class="ci360-service-main-content">
-			<div class="ci360-service-body entry-content <?php echo $is_elementor ? '' : 'wrap'; ?>">
+			<div class="ci360-service-body entry-content">
 				<?php the_content(); ?>
 			</div>
 		</section>

@@ -96,3 +96,150 @@ add_action( 'admin_bar_menu', function ( $wp_admin_bar ) {
 		}
 	}
 }, 99 );
+
+/** Generate default Elementor widget data array for a service post. */
+function ci_build_default_service_elementor_data( $post_id ) {
+	$title       = get_the_title( $post_id );
+	$cats        = get_the_terms( $post_id, 'ci_service_category' );
+	$cat_name    = ( ! empty( $cats ) && ! is_wp_error( $cats ) ) ? $cats[0]->name : 'OUR SERVICE';
+	$summary     = has_excerpt( $post_id ) ? get_the_excerpt( $post_id ) : get_post_meta( $post_id, 'service_summary', true );
+	if ( empty( $summary ) ) {
+		$summary = 'Building distinctive brand identities through strategy, logo design, visual language, typography, and integrated brand communication.';
+	}
+	$thumb_id    = get_post_thumbnail_id( $post_id );
+	$thumb_url   = $thumb_id ? wp_get_attachment_image_url( $thumb_id, 'full' ) : CI360_URI . '/assets/images/studio-detail.webp';
+	$contact_url = get_permalink( ci_page_id( 'contact' ) ) ?: home_url( '/contact/' );
+
+	$sections_config = array(
+		array(
+			'widget'   => 'ci360-service-hero',
+			'settings' => array(
+				'kicker'             => $cat_name,
+				'title'              => $title,
+				'lead'               => $summary,
+				'cta_primary'        => 'Start a Conversation',
+				'cta_primary_link'   => $contact_url,
+				'cta_secondary'      => 'Contact Us',
+				'cta_secondary_link' => $contact_url,
+				'image'              => array( 'id' => (string) $thumb_id, 'url' => $thumb_url ),
+				'show_badges'        => 'yes',
+				'badge1_label'       => ci_get( 'service_badge1_label', $post_id ) ?: 'Followers',
+				'badge1_value'       => ci_get( 'service_badge1_value', $post_id ) ?: '125K',
+				'badge1_trend'       => ci_get( 'service_badge1_trend', $post_id ) ?: '+12%',
+				'badge2_label'       => ci_get( 'service_badge2_label', $post_id ) ?: 'Engagement',
+				'badge2_value'       => ci_get( 'service_badge2_value', $post_id ) ?: '+278%',
+				'badge3_label'       => ci_get( 'service_badge3_label', $post_id ) ?: 'Reach',
+				'badge3_value'       => ci_get( 'service_badge3_value', $post_id ) ?: '2.4M',
+			),
+		),
+		array(
+			'widget'   => 'ci360-service-overview',
+			'settings' => array(
+				'kicker'           => 'OVERVIEW',
+				'heading'          => ci_get( 'service_overview_heading', $post_id ) ?: 'Turn Conversations Into <em>Communities</em>',
+				'copy'             => ci_get( 'service_overview_copy', $post_id ) ?: "Social media is more than just posting — it's about people, conversations, and real connections. We help brands show up with purpose, create engaging content, and build communities that drive meaningful business results.",
+				'features'         => ci_rows( 'service_overview_features', $post_id ),
+				'highlights_title' => ci_get( 'service_highlights_title', $post_id ) ?: 'Service Highlights',
+				'highlights_list'  => ci_rows( 'service_highlights_list', $post_id ),
+				'card_button'      => 'Discuss Your Goals',
+				'card_button_link' => $contact_url,
+				'card_subtext'     => 'Get a tailored strategy for your brand.',
+			),
+		),
+		array(
+			'widget'   => 'ci360-service-included',
+			'settings' => array(
+				'kicker'  => "WHAT'S INCLUDED",
+				'heading' => ci_get( 'service_included_heading', $post_id ) ?: 'Everything You Need to <em>Grow on Social</em>',
+				'subtext' => 'From strategy to execution, we handle every part of your journey.',
+				'cards'   => ci_rows( 'service_included_cards', $post_id ),
+			),
+		),
+		array(
+			'widget'   => 'ci360-service-approach',
+			'settings' => array(
+				'kicker'  => 'OUR APPROACH',
+				'heading' => ci_get( 'service_approach_heading', $post_id ) ?: 'A Strategic, <em>Results-Driven Process</em>',
+				'intro'   => 'We combine strategy, creativity, and data to create experiences that deliver real business impact.',
+				'steps'   => ci_rows( 'service_steps', $post_id ),
+			),
+		),
+		array(
+			'widget'   => 'ci360-service-cta',
+			'settings' => array(
+				'kicker'      => "LET'S WORK TOGETHER",
+				'heading'     => ci_get( 'service_cta_heading', $post_id ) ?: 'Ready to grow your brand on social media?',
+				'subtext'     => ci_get( 'service_cta_sub', $post_id ) ?: 'Our team is here to understand your goals and create a tailored strategy that drives real results.',
+				'button'      => 'Contact Us',
+				'button_link' => $contact_url,
+				'subcaption'  => 'Talk to our experts today.',
+			),
+		),
+	);
+
+	$data = array();
+	foreach ( $sections_config as $idx => $cfg ) {
+		$sec_id = 'sec_' . substr( md5( $cfg['widget'] . $idx . $post_id ), 0, 7 );
+		$col_id = 'col_' . substr( md5( $cfg['widget'] . 'col' . $idx . $post_id ), 0, 7 );
+		$wgt_id = 'wgt_' . substr( md5( $cfg['widget'] . 'wgt' . $idx . $post_id ), 0, 7 );
+
+		$data[] = array(
+			'id'       => $sec_id,
+			'elType'   => 'section',
+			'isInner'  => false,
+			'settings' => array(),
+			'elements' => array(
+				array(
+					'id'       => $col_id,
+					'elType'   => 'column',
+					'isInner'  => false,
+					'settings' => array( '_column_size' => 100 ),
+					'elements' => array(
+						array(
+							'id'         => $wgt_id,
+							'elType'     => 'widget',
+							'isInner'    => false,
+							'widgetType' => $cfg['widget'],
+							'settings'   => $cfg['settings'],
+							'elements'   => array(),
+						),
+					),
+				),
+			),
+		);
+	}
+
+	return $data;
+}
+
+/** Ensure _elementor_data is populated with default widgets for a service post. */
+function ci_ensure_service_elementor_data( $post_id ) {
+	if ( ! $post_id || 'ci_service' !== get_post_type( $post_id ) ) {
+		return;
+	}
+	$raw = get_post_meta( $post_id, '_elementor_data', true );
+	if ( empty( $raw ) || '[]' === trim( (string) $raw ) ) {
+		$data = ci_build_default_service_elementor_data( $post_id );
+		update_post_meta( $post_id, '_elementor_data', wp_slash( json_encode( $data ) ) );
+		update_post_meta( $post_id, '_elementor_edit_mode', 'builder' );
+		update_post_meta( $post_id, '_elementor_template_type', 'wp-post' );
+	}
+}
+
+add_action( 'wp', function () {
+	if ( is_singular( 'ci_service' ) ) {
+		ci_ensure_service_elementor_data( get_the_ID() );
+	}
+} );
+
+add_action( 'elementor/editor/before_enqueue_scripts', function () {
+	if ( isset( $_GET['post'] ) ) {
+		ci_ensure_service_elementor_data( (int) $_GET['post'] );
+	}
+} );
+
+add_action( 'admin_init', function () {
+	if ( isset( $_GET['action'] ) && 'elementor' === $_GET['action'] && isset( $_GET['post'] ) ) {
+		ci_ensure_service_elementor_data( (int) $_GET['post'] );
+	}
+} );
