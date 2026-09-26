@@ -54,115 +54,142 @@ $sec     = function ( $p, $h2attr = ' data-reveal', $intro = false ) {
 
 function ci_render_project( $post_id ) {
 	ob_start();
-	$p       = ci_project( $post_id );
-	$ids     = ci_ids( 'ci_project' );
-	$total   = count( $ids );
-	$pos     = array_search( $p['id'], $ids, true );
 
-	// Next & Prev projects
-	$prev_id   = $ids[ ( false === $pos || 0 === $pos ? $total - 1 : $pos - 1 ) ];
-	$next_id   = $ids[ ( false === $pos || $pos === $total - 1 ? 0 : $pos + 1 ) ];
-	$prev_proj = ci_project( $prev_id );
-	$next_proj = ci_project( $next_id );
-
-	// Featured image URL
-	$feat_img_id  = get_post_thumbnail_id( $post_id );
-	if ( ! $feat_img_id && ! empty( $p['image'] ) ) {
-		$feat_img_id = $p['image'];
+	$wp_post = get_post( $post_id );
+	if ( ! $wp_post ) {
+		return '';
 	}
-	$feat_img_url = $feat_img_id ? wp_get_attachment_image_url( $feat_img_id, 'full' ) : ci_url( 'station.webp' );
 
-	// Project Category
-	$cat_name = ! empty( $p['category'] ) ? $p['category'] : 'Case Study';
-	$permalink = get_permalink( $post_id );
+	$title         = get_the_title( $post_id );
+	$permalink     = get_permalink( $post_id );
 	$encoded_url   = urlencode( $permalink );
-	$encoded_title = urlencode( $p['name'] );
+	$encoded_title = urlencode( $title );
 
-	// Story content
-	$is_case = 'case' === $p['type'];
-	if ( $is_case && ! empty( $p['sections'] ) ) {
-		$story = '';
-		foreach ( $p['sections'] as $r ) {
-			$story .= '<div class="ci360-case-story-block"><h3>' . ci_e( $r['title'] ) . '</h3><p>' . ci_e( $r['text'] ) . '</p></div>';
-		}
+	// Fetch category
+	$cats = get_the_category( $post_id );
+	if ( ! empty( $cats ) ) {
+		$cat_name = $cats[0]->name;
 	} else {
-		$t  = $p['term'];
-		$p1 = ( $t && ci_term_get( 'cat_p1', $t ) ) ? ci_term_get( 'cat_p1', $t ) : ci_opt( 'opt_sector_p1' );
-		$p2 = ( $t && ci_term_get( 'cat_p2', $t ) ) ? ci_term_get( 'cat_p2', $t ) : ci_opt( 'opt_sector_p2' );
-		$story = '<p class="large-copy">' . ci_e( $p['summary'] ) . '</p><h3>' . ci_e( ci_opt( 'perspective' === $p['type'] ? 'tpl_project_lens' : 'tpl_project_direction' ) ) . '</h3>' . ci_paragraphs( array( $p1, $p2 ) );
+		$terms = get_the_terms( $post_id, 'ci_project_category' );
+		if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+			$cat_name = $terms[0]->name;
+		} else {
+			$cat_name = 'Case Study';
+		}
 	}
 
-	// Gallery
+	// Excerpt / Headline
+	$headline = has_excerpt( $post_id ) ? get_the_excerpt( $post_id ) : '';
+	$p        = ci_project( $post_id );
+	if ( empty( $headline ) && ! empty( $p['headline'] ) ) {
+		$headline = $p['headline'];
+	}
+
+	// Featured Image URL
+	$feat_img_url = get_the_post_thumbnail_url( $post_id, 'full' );
+	if ( ! $feat_img_url && ! empty( $p['image'] ) ) {
+		$feat_img_url = wp_get_attachment_image_url( $p['image'], 'full' );
+	}
+
+	// Prev & Next Posts (works for any post type!)
+	$prev_post = get_previous_post();
+	$next_post = get_next_post();
+
+	$prev_data = null;
+	if ( $prev_post ) {
+		$prev_data = array(
+			'name' => get_the_title( $prev_post->ID ),
+			'url'  => get_permalink( $prev_post->ID ),
+		);
+	}
+
+	$next_data = null;
+	if ( $next_post ) {
+		$next_data = array(
+			'name' => get_the_title( $next_post->ID ),
+			'url'  => get_permalink( $next_post->ID ),
+		);
+	}
+
+	// Fallback to CPT ci_project IDs list if standard WP prev/next returns empty
+	if ( ! $prev_data || ! $next_data ) {
+		$ids   = ci_ids( 'ci_project' );
+		$total = count( $ids );
+		$pos   = array_search( $post_id, $ids, true );
+		if ( false !== $pos && $total > 1 ) {
+			if ( ! $prev_data ) {
+				$prev_id   = $ids[ 0 === $pos ? $total - 1 : $pos - 1 ];
+				$prev_proj = ci_project( $prev_id );
+				$prev_data = array( 'name' => $prev_proj['name'], 'url' => $prev_proj['url'] );
+			}
+			if ( ! $next_data ) {
+				$next_id   = $ids[ $pos === $total - 1 ? 0 : $pos + 1 ];
+				$next_proj = ci_project( $next_id );
+				$next_data = array( 'name' => $next_proj['name'], 'url' => $next_proj['url'] );
+			}
+		}
+	}
+
+	// Retrieve actual Post Content (Elementor or WP Editor content)
+	$content_raw = '';
+	if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is_built_with_elementor( $post_id ) ) {
+		$content_raw = \Elementor\Plugin::$instance->frontend->get_builder_content_for_display( $post_id );
+	} else {
+		$content_raw = apply_filters( 'the_content', $wp_post->post_content );
+	}
+
+	// Custom field story blocks (fallback or legacy CPT content)
+	$custom_story = '';
+	if ( 'case' === $p['type'] && ! empty( $p['sections'] ) ) {
+		foreach ( $p['sections'] as $r ) {
+			$custom_story .= '<div class="ci360-case-story-block"><h3>' . ci_e( $r['title'] ) . '</h3><p>' . ci_e( $r['text'] ) . '</p></div>';
+		}
+	}
+
+	// Project Gallery
 	$gallery = '';
 	if ( ! empty( $p['gallery'] ) ) {
 		$items = '';
 		foreach ( $p['gallery'] as $i => $im ) {
-			$items .= '<button type="button" class="gallery-image tone-' . esc_attr( $p['tone'] ) . '" data-lightbox="' . esc_url( wp_get_attachment_image_url( $im, 'full' ) ) . '" aria-label="View ' . esc_attr( $p['name'] ) . ' image ' . ( $i + 1 ) . ' full size">' . ci_img( $im, $p['name'] . ' creative ' . ( $i + 1 ) ) . '<span>' . ci_e( ci_opt( 'tpl_project_view' ) ) . ' ' . ci_arrow() . '</span></button>';
+			$items .= '<button type="button" class="gallery-image tone-' . esc_attr( $p['tone'] ) . '" data-lightbox="' . esc_url( wp_get_attachment_image_url( $im, 'full' ) ) . '" aria-label="View creative image ' . ( $i + 1 ) . ' full size">' . ci_img( $im, $title . ' creative ' . ( $i + 1 ) ) . '<span>View Image ' . ci_arrow() . '</span></button>';
 		}
 		$gallery = '<div class="project-gallery-box"><div class="gallery-heading"><h4>PROJECT GALLERY</h4><span>' . ci_pad( count( $p['gallery'] ) ) . ' IMAGES</span></div><div class="gallery-grid ' . ( 1 === count( $p['gallery'] ) ? 'gallery-single' : '' ) . '">' . $items . '</div></div>';
 	}
 
-	// Related 4 Case Studies (exclude current)
-	$related_ids = array_diff( $ids, array( $post_id ) );
-	$related_ids = array_slice( array_values( $related_ids ), 0, 4 );
+	// Related 4 Case Studies (query across ci_project and post)
+	$rel_query = new WP_Query( array(
+		'post_type'      => array( 'ci_project', 'post' ),
+		'posts_per_page' => 4,
+		'post__not_in'   => array( $post_id ),
+		'post_status'    => 'publish',
+	) );
+
 	$related_cards = '';
-	foreach ( $related_ids as $rid ) {
-		$rp = ci_project( $rid );
-		$rp_img = ci_img( $rp['image'], $rp['name'] );
-		$related_cards .= '<a class="ci360-related-card" href="' . esc_url( $rp['url'] ) . '">'
-			. '<div class="ci360-related-media">' . ( $rp_img ? $rp_img : ci_star() ) . '<span class="ci360-related-cat">' . ci_e( $rp['category'] ) . '</span></div>'
-			. '<div class="ci360-related-body"><h3>' . ci_e( $rp['name'] ) . '</h3><p>' . ci_e( $rp['headline'] ) . '</p><span class="ci360-related-link">View Case Study ' . ci_arrow() . '</span></div>'
-			. '</a>';
-	}
+	if ( $rel_query->have_posts() ) {
+		while ( $rel_query->have_posts() ) {
+			$rel_query->the_post();
+			$rid       = get_the_ID();
+			$r_title   = get_the_title( $rid );
+			$r_url     = get_permalink( $rid );
+			$r_thumb   = get_the_post_thumbnail_url( $rid, 'medium_large' );
+			$r_cats    = get_the_category( $rid );
+			$r_cat     = ! empty( $r_cats ) ? $r_cats[0]->name : 'Case Study';
+			$r_excerpt = has_excerpt( $rid ) ? get_the_excerpt( $rid ) : wp_trim_words( get_the_content(), 15 );
 
-	// Right Sidebar Content
-	$terms = get_terms( array( 'taxonomy' => 'ci_project_category', 'hide_empty' => false ) );
-	$cat_widget = '';
-	if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
-		$cat_links = '';
-		foreach ( $terms as $term ) {
-			$cat_links .= '<li><a href="' . esc_url( get_term_link( $term ) ) . '"><span>' . esc_html( $term->name ) . '</span><small>(' . esc_html( $term->count ) . ')</small></a></li>';
-		}
-		$cat_widget = '<div class="ci360-sidebar-widget"><h4 class="ci360-sidebar-title">Categories</h4><ul class="ci360-sidebar-cat-list">' . $cat_links . '</ul></div>';
-	}
+			$img_tag = $r_thumb ? '<img src="' . esc_url( $r_thumb ) . '" alt="' . esc_attr( $r_title ) . '" loading="lazy">' : ci_star();
 
-	$feat_widget = '';
-	$feat_ids = array_slice( array_diff( $ids, array( $post_id ) ), 0, 3 );
-	if ( ! empty( $feat_ids ) ) {
-		$feat_items = '';
-		foreach ( $feat_ids as $fid ) {
-			$fp = ci_project( $fid );
-			$fp_img = ci_img( $fp['image'], $fp['name'] );
-			$feat_items .= '<a class="ci360-sidebar-post-item" href="' . esc_url( $fp['url'] ) . '">'
-				. '<span class="ci360-sidebar-post-thumb">' . ( $fp_img ? $fp_img : ci_star() ) . '</span>'
-				. '<span class="ci360-sidebar-post-info"><span class="ci360-sidebar-post-cat">' . ci_e( $fp['category'] ) . '</span><h5 class="ci360-sidebar-post-heading">' . ci_e( $fp['name'] ) . '</h5></span>'
+			$related_cards .= '<a class="ci360-related-card" href="' . esc_url( $r_url ) . '">'
+				. '<div class="ci360-related-media">' . $img_tag . '<span class="ci360-related-cat">' . esc_html( $r_cat ) . '</span></div>'
+				. '<div class="ci360-related-body"><h3>' . esc_html( $r_title ) . '</h3><p>' . esc_html( $r_excerpt ) . '</p><span class="ci360-related-link">View Case Study ' . ci_arrow() . '</span></div>'
 				. '</a>';
 		}
-		$feat_widget = '<div class="ci360-sidebar-widget"><h4 class="ci360-sidebar-title">Featured Work</h4><div class="ci360-sidebar-posts-list">' . $feat_items . '</div></div>';
+		wp_reset_postdata();
 	}
-
-	$services_widget = '';
-	$s_ids = array_slice( ci_ids( 'ci_service' ), 0, 4 );
-	if ( ! empty( $s_ids ) ) {
-		$s_links = '';
-		foreach ( $s_ids as $sid ) {
-			$sv = ci_service( $sid );
-			$s_links .= '<li><a href="' . esc_url( $sv['url'] ) . '"><span>' . ci_e( $sv['title'] ) . '</span>' . ci_arrow() . '</a></li>';
-		}
-		$services_widget = '<div class="ci360-sidebar-widget"><h4 class="ci360-sidebar-title">Capabilities</h4><ul class="ci360-sidebar-services-list">' . $s_links . '</ul></div>';
-	}
-
-	$contact_url = get_permalink( ci_page_id( 'contact' ) );
-	$cta_widget = '<div class="ci360-sidebar-cta-card">'
-		. '<h4>Need a custom strategy?</h4>'
-		. '<p>Let’s build a powerful brand narrative & performance engine for your business.</p>'
-		. '<a href="' . esc_url( $contact_url ? $contact_url : '/contact/' ) . '" class="button button-light"><span>Start a Conversation</span><i>' . ci_arrow() . '</i></a>'
-		. '</div>';
 
 	?>
 	<div id="ci360-case-study-root" class="ci360-case-study-page">
-		<!-- 1. Full-Screen 100vh Hero Banner -->
-		<section class="ci360-hero-full-screen ci360-case-hero" style="background-image: url('<?php echo esc_url( $feat_img_url ); ?>');">
+		<!-- 1. Hero Banner Header -->
+		<section class="ci360-hero-full-screen ci360-case-hero" <?php if ( $feat_img_url ) : ?>style="background-image: url('<?php echo esc_url( $feat_img_url ); ?>');"<?php endif; ?>>
 			<div class="ci360-hero-overlay"></div>
 			<div class="ci360-hero-full-content wrap">
 				<div class="ci360-hero-left-align">
@@ -171,23 +198,23 @@ function ci_render_project( $post_id ) {
 						<span>/</span>
 						<a href="<?php echo esc_url( home_url( '/work/' ) ); ?>">Work</a>
 						<span>/</span>
-						<span><?php echo ci_e( $p['name'] ); ?></span>
+						<span><?php echo esc_html( $title ); ?></span>
 					</nav>
 					<div class="ci360-blog-kicker-light">
-						<span><?php echo ci_e( mb_strtoupper( $cat_name ) ); ?></span>
+						<span><?php echo esc_html( mb_strtoupper( $cat_name ) ); ?></span>
 						<i></i>
 						<span>CASE STUDY</span>
 					</div>
-					<h1 class="ci360-hero-full-title"><?php echo ci_e( $p['name'] ); ?></h1>
-					<?php if ( ! empty( $p['headline'] ) ) : ?>
-						<p class="ci360-hero-lead"><?php echo ci_e( $p['headline'] ); ?></p>
+					<h1 class="ci360-hero-full-title"><?php echo esc_html( $title ); ?></h1>
+					<?php if ( ! empty( $headline ) ) : ?>
+						<p class="ci360-hero-lead"><?php echo esc_html( $headline ); ?></p>
 					<?php endif; ?>
 				</div>
 			</div>
 		</section>
 
 		<!-- 2. Top 1 Row of 4 Related Case Studies -->
-		<?php if ( $related_cards ) : ?>
+		<?php if ( ! empty( $related_cards ) ) : ?>
 			<section class="wrap ci360-related-box-container ci360-case-top-related">
 				<div class="ci360-related-box">
 					<div class="ci360-related-header">
@@ -204,31 +231,46 @@ function ci_render_project( $post_id ) {
 		<!-- 3. Main Case Study Story Content Area (FULL WIDTH - NO SIDEBAR) -->
 		<section class="ci360-case-main-container wrap">
 			<article class="ci360-case-article ci360-case-full-width">
-				<?php echo $story; ?>
+				<!-- WordPress / Elementor Main Content Area -->
+				<?php if ( ! empty( trim( $content_raw ) ) ) : ?>
+					<div class="ci360-case-body entry-content">
+						<?php echo $content_raw; ?>
+					</div>
+				<?php endif; ?>
+
+				<!-- Legacy Custom Story Blocks (if present) -->
+				<?php if ( ! empty( $custom_story ) ) : ?>
+					<div class="ci360-case-story-blocks">
+						<?php echo $custom_story; ?>
+					</div>
+				<?php endif; ?>
+
 				<?php echo $gallery; ?>
 
 				<!-- Professional Next & Previous Buttons Bar Below Content -->
 				<nav class="ci360-case-nav-bar ci360-case-nav-pro" aria-label="Case Study Navigation">
-					<?php if ( $prev_proj ) : ?>
-						<a href="<?php echo esc_url( $prev_proj['url'] ); ?>" class="ci360-case-nav-btn prev">
+					<?php if ( ! empty( $prev_data ) ) : ?>
+						<a href="<?php echo esc_url( $prev_data['url'] ); ?>" class="ci360-case-nav-btn prev">
 							<span class="nav-arrow">&larr;</span>
 							<div class="nav-content">
 								<small>Previous Case Study</small>
-								<strong><?php echo ci_e( $prev_proj['name'] ); ?></strong>
+								<strong><?php echo esc_html( $prev_data['name'] ); ?></strong>
 							</div>
 						</a>
 					<?php else : ?>
 						<div class="ci360-case-nav-btn prev disabled"></div>
 					<?php endif; ?>
 
-					<?php if ( $next_proj ) : ?>
-						<a href="<?php echo esc_url( $next_proj['url'] ); ?>" class="ci360-case-nav-btn next">
+					<?php if ( ! empty( $next_data ) ) : ?>
+						<a href="<?php echo esc_url( $next_data['url'] ); ?>" class="ci360-case-nav-btn next">
 							<div class="nav-content text-right">
 								<small>Next Case Study</small>
-								<strong><?php echo ci_e( $next_proj['name'] ); ?></strong>
+								<strong><?php echo esc_html( $next_data['name'] ); ?></strong>
 							</div>
 							<span class="nav-arrow">&rarr;</span>
 						</a>
+					<?php else : ?>
+						<div class="ci360-case-nav-btn next disabled"></div>
 					<?php endif; ?>
 				</nav>
 
