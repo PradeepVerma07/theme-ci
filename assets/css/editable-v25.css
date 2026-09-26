@@ -1100,6 +1100,152 @@ span.ci360-heading-accent {
   filter: saturate(0.9) contrast(1.02) !important;
 }
 
+/* Selected Work Homepage Section - Mobile Responsiveness Fixes */
+@media (max-width: 767px) {
+  .work-section {
+    padding-block: 40px !important;
+    overflow-x: hidden !important;
+  }
+
+  .work-section .wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding-inline: 16px !important;
+    overflow-x: hidden !important;
+  }
+
+  .work-stack {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .showcase {
+    position: relative !important;
+    top: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 12px !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+  }
+
+  .showcase-media {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1.15 / 1 !important;
+    max-height: 300px !important;
+    min-height: 200px !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .showcase-media .poster-scene {
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  .showcase-copy {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 20px 10px 14px !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+  }
+
+  .showcase-copy .small-label {
+    font-size: 11px !important;
+    margin-bottom: 12px !important;
+    display: block !important;
+  }
+
+  .showcase-copy h3 {
+    font-size: clamp(26px, 7vw, 36px) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.04em !important;
+    margin: 0 0 10px 0 !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .showcase-headline {
+    font-size: clamp(15px, 4.2vw, 19px) !important;
+    line-height: 1.35 !important;
+    margin-top: 10px !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .showcase-copy > p:not(.showcase-headline) {
+    font-size: clamp(13px, 3.6vw, 15px) !important;
+    line-height: 1.6 !important;
+    margin-top: 8px !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .showcase-copy .text-link {
+    font-size: 13px !important;
+    margin-top: 14px !important;
+    padding-top: 12px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+
+  .work-end {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 16px !important;
+    margin-top: 24px !important;
+    padding-top: 24px !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .showcase {
+    padding: 10px !important;
+    border-radius: 18px !important;
+  }
+
+  .showcase-media {
+    max-height: 260px !important;
+    aspect-ratio: 1.1 / 1 !important;
+    border-radius: 14px !important;
+  }
+
+  .showcase-copy {
+    padding: 16px 6px 10px !important;
+  }
+
+  .showcase-copy h3 {
+    font-size: clamp(24px, 7.5vw, 32px) !important;
+  }
+
+  .showcase-headline {
+    font-size: 15px !important;
+  }
+
+  .showcase-copy > p:not(.showcase-headline) {
+    font-size: 13px !important;
+  }
+}
+
 
 
 
