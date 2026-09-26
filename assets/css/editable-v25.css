@@ -3202,7 +3202,8 @@ span.ci360-heading-accent {
 
 .ci360-section-header {
   max-width: 680px;
-  margin: 0 auto 50px auto;
+  margin: 0 0 40px 0 !important;
+  text-align: left !important;
 }
 
 .ci360-section-sub {

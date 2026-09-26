@@ -56,6 +56,13 @@ function ci_render_service( $post_id ) {
 
 	$related_services_html = '';
 	if ( $rel_query->have_posts() ) {
+		$idx = 0;
+		$default_thumbs = array(
+			CI360_URI . '/assets/images/studio-detail.webp',
+			CI360_URI . '/assets/images/studio-hero.webp',
+			CI360_URI . '/assets/images/station.webp',
+			CI360_URI . '/assets/images/brand-icon.png',
+		);
 		while ( $rel_query->have_posts() ) {
 			$rel_query->the_post();
 			$rid       = get_the_ID();
@@ -64,8 +71,9 @@ function ci_render_service( $post_id ) {
 			$r_thumb   = get_the_post_thumbnail_url( $rid, 'medium_large' );
 			$r_summary = has_excerpt( $rid ) ? get_the_excerpt( $rid ) : wp_trim_words( get_the_content(), 15 );
 			if ( ! $r_thumb ) {
-				$r_thumb = CI360_URI . '/assets/images/studio-detail.webp';
+				$r_thumb = $default_thumbs[ $idx % count( $default_thumbs ) ];
 			}
+			$idx++;
 
 			$related_services_html .= '<div class="ci360-service-card-item">'
 				. '<div class="ci360-service-card-thumb"><img src="' . esc_url( $r_thumb ) . '" alt="' . esc_attr( $r_title ) . '" loading="lazy"></div>'
@@ -194,7 +202,7 @@ function ci_render_service( $post_id ) {
 
 		<!-- 3. WHAT'S INCLUDED SECTION -->
 		<section class="ci360-service-included wrap">
-			<div class="ci360-section-header text-center">
+			<div class="ci360-section-header">
 				<span class="ci360-sub-kicker">WHAT'S INCLUDED</span>
 				<h2 class="ci360-section-title">Everything You Need to <span class="ci360-title-gradient">Grow on Social</span></h2>
 				<p class="ci360-section-sub">From strategy to execution, we handle every part of your social media journey.</p>
@@ -322,7 +330,7 @@ function ci_render_service( $post_id ) {
 		<!-- 7. RELATED SERVICES SECTION -->
 		<?php if ( ! empty( $related_services_html ) ) : ?>
 			<section class="ci360-service-related wrap">
-				<div class="ci360-section-header text-center">
+				<div class="ci360-section-header">
 					<span class="ci360-sub-kicker">RELATED SERVICES</span>
 					<h2 class="ci360-section-title">Explore More Ways We <span class="ci360-title-gradient">Help Brands Grow</span></h2>
 				</div>
