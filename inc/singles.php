@@ -38,18 +38,8 @@ function ci_render_service( $post_id ) {
 		$thumb_url = CI360_URI . '/assets/images/studio-detail.webp';
 	}
 
-	// Content raw (WP editor or Elementor with 3-tier fallback)
+	// Check if post is built with Elementor
 	$is_elementor = class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is_built_with_elementor( $post_id );
-	$content_raw  = '';
-	if ( $is_elementor ) {
-		$content_raw = \Elementor\Plugin::$instance->frontend->get_builder_content_for_display( $post_id );
-	}
-	if ( empty( trim( wp_strip_all_tags( $content_raw ) ) ) ) {
-		$content_raw = apply_filters( 'the_content', $post->post_content );
-	}
-	if ( empty( trim( wp_strip_all_tags( $content_raw ) ) ) ) {
-		$content_raw = $post->post_content;
-	}
 
 	// Related 4 Services
 	$rel_query = new WP_Query( array(
@@ -330,13 +320,11 @@ function ci_render_service( $post_id ) {
 		</section>
 
 		<!-- 6. ELEMENTOR & WORDPRESS EDITABLE CONTENT -->
-		<?php if ( ! empty( trim( $content_raw ) ) ) : ?>
-			<section class="ci360-service-main-content wrap">
-				<div class="ci360-service-body entry-content">
-					<?php echo $content_raw; ?>
-				</div>
-			</section>
-		<?php endif; ?>
+		<section class="ci360-service-main-content">
+			<div class="ci360-service-body entry-content <?php echo $is_elementor ? '' : 'wrap'; ?>">
+				<?php the_content(); ?>
+			</div>
+		</section>
 
 		<!-- 7. RELATED SERVICES SECTION -->
 		<?php if ( ! empty( $related_services_html ) ) : ?>
@@ -556,7 +544,7 @@ function ci_render_project( $post_id ) {
 			<article class="ci360-case-article ci360-case-full-width">
 				<!-- WordPress / Elementor Main Content Area -->
 				<div class="ci360-case-body entry-content <?php echo $is_elementor ? '' : 'wrap'; ?>">
-					<?php echo $content_raw; ?>
+					<?php the_content(); ?>
 				</div>
 
 				<!-- Legacy Custom Story Blocks (if present) -->
@@ -764,7 +752,7 @@ function ci_render_modern_blog_post( $post_id ) {
 			<!-- LEFT: ARTICLE CONTENT & NAV -->
 			<main class="ci360-blog-main-content">
 				<div class="ci360-blog-body entry-content">
-					<?php echo apply_filters( 'the_content', $content_raw ); ?>
+					<?php the_content(); ?>
 				</div>
 
 				<!-- Social Share Bar -->
