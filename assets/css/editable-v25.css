@@ -2780,6 +2780,810 @@ span.ci360-heading-accent {
   text-align: right;
 }
 
+/* ==========================================================================
+   SINGLE SERVICE PAGE HIGH FIDELITY DESIGN STYLES
+   ========================================================================== */
+.ci360-single-service-page {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #0f172a;
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+.ci360-title-gradient {
+  background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.ci360-sub-kicker {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  color: #2563eb !important;
+  display: block !important;
+  margin-bottom: 12px !important;
+}
+
+.ci360-section-title {
+  font-size: 38px !important;
+  font-weight: 700 !important;
+  line-height: 1.25 !important;
+  color: #0f172a !important;
+  margin: 0 0 16px 0 !important;
+  letter-spacing: -0.02em !important;
+}
+
+@media (max-width: 768px) {
+  .ci360-section-title {
+    font-size: 28px !important;
+  }
+}
+
+/* 1. Hero Section */
+.ci360-service-hero {
+  position: relative;
+  background: radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.35) 0%, rgba(6, 15, 38, 1) 65%);
+  padding: 120px 0 90px 0;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.ci360-service-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.ci360-service-hero-wrap {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 50px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 992px) {
+  .ci360-service-hero-wrap {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.ci360-service-breadcrumb {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ci360-service-breadcrumb a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.ci360-service-breadcrumb a:hover {
+  color: #38bdf8;
+}
+
+.ci360-service-breadcrumb .sep {
+  color: #64748b;
+  font-size: 11px;
+}
+
+.ci360-service-breadcrumb .current {
+  color: #38bdf8;
+  font-weight: 500;
+}
+
+.ci360-service-kicker {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #38bdf8;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.ci360-service-hero-title {
+  font-size: 54px !important;
+  font-weight: 700 !important;
+  line-height: 1.15 !important;
+  color: #ffffff !important;
+  margin: 0 0 20px 0 !important;
+  letter-spacing: -0.02em !important;
+}
+
+@media (max-width: 768px) {
+  .ci360-service-hero-title {
+    font-size: 36px !important;
+  }
+}
+
+.ci360-service-hero-lead {
+  font-size: 18px !important;
+  line-height: 1.6 !important;
+  color: #cbd5e1 !important;
+  margin: 0 0 36px 0 !important;
+  max-width: 620px !important;
+}
+
+.ci360-service-hero-btns {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ci360-btn-pill-primary {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%) !important;
+  color: #ffffff !important;
+  padding: 14px 30px !important;
+  border-radius: 9999px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4) !important;
+  transition: all 0.3s ease !important;
+}
+
+.ci360-btn-pill-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.5) !important;
+}
+
+.ci360-btn-pill-outline {
+  background: rgba(15, 23, 42, 0.6) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  padding: 14px 30px !important;
+  border-radius: 9999px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.ci360-btn-pill-outline:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: #ffffff !important;
+}
+
+/* Hero Right 3D Visual Stage */
+.ci360-service-visual-stage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.ci360-hero-main-card {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #0f172a;
+}
+
+.ci360-hero-img-main {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.ci360-glass-badge {
+  position: absolute;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 12px 18px;
+  border-radius: 14px;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  z-index: 3;
+}
+
+.ci360-glass-badge .label {
+  font-size: 11px;
+  color: #94a3b8;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ci360-glass-badge .value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #38bdf8;
+  display: block;
+}
+
+.ci360-glass-badge .trend {
+  font-size: 11px;
+  font-weight: 600;
+  color: #4ade80;
+  display: inline-block;
+  margin-top: 2px;
+}
+
+.badge-followers { top: 20px; left: 20px; }
+.badge-engagement { top: 120px; left: -10px; }
+.badge-reach { bottom: 70px; left: 20px; }
+
+.ci360-platform-pills {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.8);
+  padding: 8px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.platform-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #3b82f6;
+  display: inline-block;
+}
+
+/* 2. Overview Section */
+.ci360-service-overview {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 60px;
+  padding: 90px 0;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .ci360-service-overview {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 60px 0;
+  }
+}
+
+.ci360-overview-copy {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #475569;
+  margin-bottom: 36px;
+}
+
+.ci360-overview-features {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.ci360-feat-item {
+  flex: 1;
+  min-width: 160px;
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+}
+
+.ci360-feat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+
+.ci360-feat-text h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 6px 0;
+}
+
+.ci360-feat-text p {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Highlights Dark Card */
+.ci360-highlights-card {
+  background: #060f26;
+  color: #ffffff;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(6, 15, 38, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ci360-highlights-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 24px 0;
+}
+
+.ci360-highlights-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ci360-highlights-list li {
+  font-size: 15px;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ci360-highlights-list li i {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 12px;
+  font-style: normal;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.ci360-btn-pill-card {
+  background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%) !important;
+  color: #ffffff !important;
+  width: 100% !important;
+  text-align: center !important;
+  padding: 14px 20px !important;
+  border-radius: 9999px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  box-shadow: 0 8px 20px rgba(2, 132, 199, 0.3) !important;
+  transition: all 0.3s ease !important;
+  box-sizing: border-box !important;
+}
+
+.ci360-btn-pill-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 28px rgba(2, 132, 199, 0.45) !important;
+}
+
+.ci360-card-subtext {
+  font-size: 12px;
+  color: #94a3b8;
+  display: block;
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* 3. What's Included Section */
+.ci360-service-included {
+  padding: 80px 0;
+  background: #f8fafc;
+  border-radius: 32px;
+  margin-bottom: 80px;
+}
+
+.ci360-section-header {
+  max-width: 680px;
+  margin: 0 auto 50px auto;
+}
+
+.ci360-section-sub {
+  font-size: 16px;
+  color: #64748b;
+  margin: 0;
+}
+
+.ci360-included-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 0 30px;
+}
+
+@media (max-width: 992px) {
+  .ci360-included-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .ci360-included-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ci360-inc-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.ci360-inc-card:hover {
+  transform: translateY(-4px);
+  border-color: #2563eb;
+  box-shadow: 0 16px 36px rgba(37, 99, 235, 0.12);
+}
+
+.ci360-inc-thumb {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.ci360-inc-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.ci360-inc-card:hover .ci360-inc-thumb img {
+  transform: scale(1.06);
+}
+
+.ci360-inc-icon {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 18px;
+}
+
+.ci360-inc-body {
+  padding: 24px;
+  flex: 1;
+}
+
+.ci360-inc-body h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 10px 0;
+}
+
+.ci360-inc-body p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #64748b;
+  margin: 0;
+}
+
+/* 4. Our Approach Section */
+.ci360-service-approach {
+  padding: 70px 0 90px 0;
+}
+
+.ci360-approach-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: end;
+  margin-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+  .ci360-approach-header {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.ci360-approach-intro {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #64748b;
+  margin: 0;
+}
+
+.ci360-approach-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 992px) {
+  .ci360-approach-timeline {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .ci360-approach-timeline {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ci360-step-item {
+  background: #f8fafc;
+  padding: 28px;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+}
+
+.step-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.step-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-icon {
+  font-size: 20px;
+}
+
+.step-arrow {
+  margin-left: auto;
+  color: #cbd5e1;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.ci360-step-item h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+}
+
+.ci360-step-item p {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* 5. Dark CTA Banner */
+.ci360-service-cta-banner {
+  margin-bottom: 90px;
+}
+
+.ci360-cta-banner-inner {
+  background: radial-gradient(circle at 90% 10%, rgba(37, 99, 235, 0.4) 0%, rgba(6, 15, 38, 1) 70%);
+  color: #ffffff;
+  padding: 60px 70px;
+  border-radius: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  box-shadow: 0 24px 60px rgba(6, 15, 38, 0.2);
+}
+
+@media (max-width: 992px) {
+  .ci360-cta-banner-inner {
+    flex-direction: column;
+    padding: 40px 30px;
+    text-align: center;
+  }
+}
+
+.ci360-cta-kicker {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #38bdf8;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.ci360-cta-text h2 {
+  font-size: 32px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  margin: 0 0 12px 0 !important;
+}
+
+.ci360-cta-text p {
+  font-size: 16px;
+  color: #cbd5e1;
+  margin: 0;
+  max-width: 580px;
+}
+
+.ci360-btn-cta-blue {
+  background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%) !important;
+  color: #ffffff !important;
+  padding: 14px 32px !important;
+  border-radius: 9999px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.4) !important;
+  white-space: nowrap !important;
+  transition: all 0.3s ease !important;
+}
+
+.ci360-btn-cta-blue:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 30px rgba(2, 132, 199, 0.55) !important;
+}
+
+.ci360-cta-sub {
+  font-size: 12px;
+  color: #94a3b8;
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* 6. Main Content Area */
+.ci360-service-main-content {
+  margin-bottom: 80px;
+}
+
+.ci360-service-body {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #334155;
+}
+
+/* 7. Related Services Section */
+.ci360-service-related {
+  padding-bottom: 100px;
+}
+
+.ci360-services-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 992px) {
+  .ci360-services-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .ci360-services-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ci360-service-card-item {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.ci360-service-card-item:hover {
+  transform: translateY(-4px);
+  border-color: #2563eb;
+  box-shadow: 0 16px 36px rgba(37, 99, 235, 0.12);
+}
+
+.ci360-service-card-thumb {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.ci360-service-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.ci360-service-card-item:hover .ci360-service-card-thumb img {
+  transform: scale(1.06);
+}
+
+.ci360-service-card-content {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.ci360-service-card-content h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 10px 0;
+  line-height: 1.3;
+}
+
+.ci360-service-card-content p {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ci360-service-card-link {
+  margin-top: auto;
+  font-size: 13px;
+  font-weight: 700;
+  color: #2563eb;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ci360-service-card-link:hover {
+  color: #0284c7;
+}
+
+
 
 
 

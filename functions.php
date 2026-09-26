@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'CI360_VERSION', '2.8.0' );
+define( 'CI360_VERSION', '2.9.0' );
 define( 'CI360_DIR', get_stylesheet_directory() );
 define( 'CI360_URI', get_stylesheet_directory_uri() );
 

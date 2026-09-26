@@ -9,45 +9,329 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function ci_render_service( $post_id ) {
 	ob_start();
-$s     = ci_service( $post_id );
-$ids   = ci_ids( 'ci_service' );
-$n     = count( $ids );
-$index = $s['index'];
 
-// Related services: chosen, or the prototype's pattern (+1, +3, +5).
-$related_ids = array_map( 'intval', (array) ci_get( 'service_related', $s['id'] ) );
-if ( ! array_filter( $related_ids ) && $n > 1 ) {
-	$related_ids = array( $ids[ ( $index + 1 ) % $n ], $ids[ ( $index + 3 ) % $n ], $ids[ ( $index + 5 ) % $n ] );
-}
-$related = '';
-foreach ( array_filter( $related_ids ) as $rid ) {
-	$related .= ci_service_card( ci_service( $rid ) );
-}
+	$post = get_post( $post_id );
+	if ( ! $post ) {
+		return '';
+	}
 
-// Related work: chosen, or two featured projects.
-$work_ids = array_map( 'intval', (array) ci_get( 'service_projects', $s['id'] ) );
-if ( ! array_filter( $work_ids ) ) {
-	$feat     = ci_featured_projects();
-	$work_ids = $feat ? array( $feat[ $index % count( $feat ) ], $feat[ ( $index + 1 ) % count( $feat ) ] ) : array();
-}
-$work = '';
-foreach ( array_filter( $work_ids ) as $pid ) {
-	$work .= ci_project_card( ci_project( $pid ) );
-}
+	$title       = get_the_title( $post_id );
+	$permalink   = get_permalink( $post_id );
+	$contact_url = get_permalink( ci_page_id( 'contact' ) );
+	if ( ! $contact_url ) {
+		$contact_url = home_url( '/contact/' );
+	}
 
-$deliverables = '';
-foreach ( $s['tags'] as $i => $t ) {
-	$deliverables .= '<div class="deliverable" data-reveal><span>' . ci_pad( $i + 1 ) . '</span><h3>' . ci_e( $t ) . '</h3>' . ci_arrow() . '</div>';
-}
-$steps = '';
-foreach ( $s['steps'] as $i => $r ) {
-	$steps .= '<article data-reveal><span class="step-num">0' . ( $i + 1 ) . '</span><h3>' . ci_e( $r['title'] ) . '</h3><p>' . ci_e( $r['text'] ) . '</p></article>';
-}
-$contact = get_permalink( ci_page_id( 'contact' ) );
-$sec     = function ( $p, $h2attr = ' data-reveal', $intro = false ) {
-	return '<div class="section-heading' . ( $intro ? ' heading-row' : '' ) . '">' . ci_sec_label( $p, 'option' ) . '<h2' . $h2attr . '>' . ci_html( ci_opt( $p . '_heading' ) ) . '</h2>' . ( $intro ? '<p>' . ci_e( ci_opt( $p . '_intro' ) ) . '</p>' : '' ) . '</div>';
-};
-?><section class="page-hero wrap service-detail-hero"><?php echo ci_breadcrumb( 'Services / ' . $s['title'] ); ?><div class="service-detail-grid"><div><?php echo ci_label( ci_opt( 'tpl_service_capability' ) . ' ' . $s['number'], ci_opt( 'tpl_service_label_2' ) ); ?><h1 class="detail-display" data-title><?php echo ci_e( $s['title'] ); ?></h1><p class="service-lead"><?php echo ci_e( $s['summary'] ); ?></p><?php echo ci_btn( sprintf( ci_opt( 'tpl_service_cta' ), mb_strtolower( $s['group'] ) ), add_query_arg( 'service', $s['slug'], $contact ) ); ?></div><div class="service-detail-art" data-reveal><?php echo ci_service_visual( $s ); ?></div></div></section><section class="section wrap service-intro"><div><?php echo ci_label( ci_opt( 'tpl_service_opportunity' ), mb_strtoupper( $s['group'] ) ); ?><h2 data-reveal><?php echo ci_e( $s['headline'] ); ?></h2></div><div><p class="large-copy"><?php echo ci_e( $s['body'] ); ?></p><p><?php echo ci_e( ci_opt( 'tpl_service_connected' ) ); ?></p></div></section><section class="deliverables-section section tone-<?php echo esc_attr( $s['tone'] ); ?>"><div class="wrap"><?php echo $sec( 'tpl_service_deliver' ); ?><div class="deliverables-grid"><?php echo $deliverables; ?></div><p class="scope-note"><?php echo ci_e( ci_opt( 'tpl_service_scope' ) ); ?></p></div></section><section class="section wrap"><?php echo $sec( 'tpl_service_steps' ); ?><div class="service-steps"><?php echo $steps; ?></div></section><section class="section dark-section"><div class="wrap"><?php echo $sec( 'tpl_service_related', '', true ); ?><div class="services-grid related-services"><?php echo $related; ?></div></div></section><section class="section wrap"><?php echo $sec( 'tpl_service_work' ); ?><div class="project-grid two-col"><?php echo $work; ?></div></section><?php echo ci_compact_cta( sprintf( ci_opt( 'tpl_service_cta_text' ), mb_strtolower( $s['title'] ) ) ); ?>
+	// Service Category
+	$cats     = get_the_terms( $post_id, 'ci_service_category' );
+	$cat_name = ( ! empty( $cats ) && ! is_wp_error( $cats ) ) ? $cats[0]->name : 'OUR SERVICE';
+
+	// Summary / Excerpt
+	$summary = has_excerpt( $post_id ) ? get_the_excerpt( $post_id ) : get_post_meta( $post_id, 'service_summary', true );
+	if ( empty( $summary ) ) {
+		$summary = 'Creating platform-led strategies and content that spark conversations, build communities, and strengthen brand engagement.';
+	}
+
+	// Featured Image
+	$thumb_url = get_the_post_thumbnail_url( $post_id, 'full' );
+	if ( ! $thumb_url ) {
+		$thumb_url = CI360_URI . '/assets/images/studio-detail.webp';
+	}
+
+	// Content raw (WP editor or Elementor)
+	$content_raw = '';
+	if ( class_exists( '\Elementor\Plugin' ) && \Elementor\Plugin::$instance->db->is_built_with_elementor( $post_id ) ) {
+		$content_raw = \Elementor\Plugin::$instance->frontend->get_builder_content_for_display( $post_id );
+	} else {
+		$content_raw = apply_filters( 'the_content', $post->post_content );
+	}
+
+	// Related 4 Services
+	$rel_query = new WP_Query( array(
+		'post_type'      => array( 'ci_service', 'post' ),
+		'posts_per_page' => 4,
+		'post__not_in'   => array( $post_id ),
+		'post_status'    => 'publish',
+	) );
+
+	$related_services_html = '';
+	if ( $rel_query->have_posts() ) {
+		while ( $rel_query->have_posts() ) {
+			$rel_query->the_post();
+			$rid       = get_the_ID();
+			$r_title   = get_the_title( $rid );
+			$r_url     = get_permalink( $rid );
+			$r_thumb   = get_the_post_thumbnail_url( $rid, 'medium_large' );
+			$r_summary = has_excerpt( $rid ) ? get_the_excerpt( $rid ) : wp_trim_words( get_the_content(), 15 );
+			if ( ! $r_thumb ) {
+				$r_thumb = CI360_URI . '/assets/images/studio-detail.webp';
+			}
+
+			$related_services_html .= '<div class="ci360-service-card-item">'
+				. '<div class="ci360-service-card-thumb"><img src="' . esc_url( $r_thumb ) . '" alt="' . esc_attr( $r_title ) . '" loading="lazy"></div>'
+				. '<div class="ci360-service-card-content">'
+				. '<h3>' . esc_html( $r_title ) . '</h3>'
+				. '<p>' . esc_html( $r_summary ) . '</p>'
+				. '<a href="' . esc_url( $r_url ) . '" class="ci360-service-card-link">Learn More ' . ci_arrow() . '</a>'
+				. '</div>'
+				. '</div>';
+		}
+		wp_reset_postdata();
+	}
+
+	// Title accent formatting (highlight last word or gradient word)
+	$words = explode( ' ', $title );
+	if ( count( $words ) > 1 ) {
+		$last_word       = array_pop( $words );
+		$formatted_title = esc_html( implode( ' ', $words ) ) . ' <span class="ci360-title-gradient">' . esc_html( $last_word ) . '</span>';
+	} else {
+		$formatted_title = esc_html( $title );
+	}
+
+	?>
+	<div id="ci360-single-service-root" class="ci360-single-service-page">
+		<!-- 1. HERO SECTION -->
+		<section class="ci360-service-hero">
+			<div class="ci360-service-hero-bg"></div>
+			<div class="ci360-service-hero-wrap wrap">
+				<div class="ci360-service-hero-left">
+					<nav class="ci360-service-breadcrumb" aria-label="Breadcrumb">
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
+						<span class="sep">&gt;</span>
+						<a href="<?php echo esc_url( home_url( '/services/' ) ); ?>">Services</a>
+						<span class="sep">&gt;</span>
+						<span class="current"><?php echo esc_html( $title ); ?></span>
+					</nav>
+					<div class="ci360-service-kicker">
+						<span><?php echo esc_html( mb_strtoupper( $cat_name ) ); ?></span>
+					</div>
+					<h1 class="ci360-service-hero-title"><?php echo $formatted_title; ?></h1>
+					<p class="ci360-service-hero-lead"><?php echo esc_html( $summary ); ?></p>
+					<div class="ci360-service-hero-btns">
+						<a href="<?php echo esc_url( $contact_url ); ?>" class="ci360-btn-pill-primary">Start a Conversation <?php echo ci_arrow(); ?></a>
+						<a href="<?php echo esc_url( $contact_url ); ?>" class="ci360-btn-pill-outline">Contact Us</a>
+					</div>
+				</div>
+
+				<div class="ci360-service-hero-right">
+					<div class="ci360-service-visual-stage">
+						<div class="ci360-hero-main-card">
+							<img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( $title ); ?>" class="ci360-hero-img-main">
+							<div class="ci360-glass-badge badge-followers">
+								<span class="label">Followers</span>
+								<span class="value">125K</span>
+								<span class="trend">+12%</span>
+							</div>
+							<div class="ci360-glass-badge badge-engagement">
+								<span class="label">Engagement</span>
+								<span class="value">+278%</span>
+							</div>
+							<div class="ci360-glass-badge badge-reach">
+								<span class="label">Reach</span>
+								<span class="value">2.4M</span>
+							</div>
+							<div class="ci360-platform-pills">
+								<span class="platform-icon ig"></span>
+								<span class="platform-icon fb"></span>
+								<span class="platform-icon tk"></span>
+								<span class="platform-icon li"></span>
+								<span class="platform-icon yt"></span>
+								<span class="platform-icon x"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 2. OVERVIEW SECTION -->
+		<section class="ci360-service-overview wrap">
+			<div class="ci360-overview-left">
+				<span class="ci360-sub-kicker">OVERVIEW</span>
+				<h2 class="ci360-section-title">Turn Conversations Into <span class="ci360-title-gradient">Communities</span></h2>
+				<p class="ci360-overview-copy">Social media is more than just posting — it's about people, conversations, and real connections. We help brands show up with purpose, create engaging content, and build communities that drive meaningful business results.</p>
+				
+				<div class="ci360-overview-features">
+					<div class="ci360-feat-item">
+						<div class="ci360-feat-icon icon-users"></div>
+						<div class="ci360-feat-text">
+							<h4>Stronger Brand Presence</h4>
+							<p>Be where your audience spends their time.</p>
+						</div>
+					</div>
+					<div class="ci360-feat-item">
+						<div class="ci360-feat-icon icon-chat"></div>
+						<div class="ci360-feat-text">
+							<h4>Real Engagement</h4>
+							<p>Turn followers into loyal advocates.</p>
+						</div>
+					</div>
+					<div class="ci360-feat-item">
+						<div class="ci360-feat-icon icon-chart"></div>
+						<div class="ci360-feat-text">
+							<h4>Measurable Growth</h4>
+							<p>Drive visibility, leads, and long-term impact.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="ci360-overview-right">
+				<div class="ci360-highlights-card">
+					<h3>Service Highlights</h3>
+					<ul class="ci360-highlights-list">
+						<li><i>✓</i> Platform-specific strategies</li>
+						<li><i>✓</i> Content creation & design</li>
+						<li><i>✓</i> Community management</li>
+						<li><i>✓</i> Influencer collaboration (optional)</li>
+						<li><i>✓</i> Performance tracking & reporting</li>
+					</ul>
+					<a href="<?php echo esc_url( $contact_url ); ?>" class="ci360-btn-pill-card">Discuss Your Goals <?php echo ci_arrow(); ?></a>
+					<span class="ci360-card-subtext">Get a tailored strategy for your brand.</span>
+				</div>
+			</div>
+		</section>
+
+		<!-- 3. WHAT'S INCLUDED SECTION -->
+		<section class="ci360-service-included wrap">
+			<div class="ci360-section-header text-center">
+				<span class="ci360-sub-kicker">WHAT'S INCLUDED</span>
+				<h2 class="ci360-section-title">Everything You Need to <span class="ci360-title-gradient">Grow on Social</span></h2>
+				<p class="ci360-section-sub">From strategy to execution, we handle every part of your social media journey.</p>
+			</div>
+
+			<div class="ci360-included-grid">
+				<div class="ci360-inc-card">
+					<div class="ci360-inc-thumb">
+						<img src="<?php echo esc_url( CI360_URI . '/assets/images/studio-detail.webp' ); ?>" alt="Content Strategy" loading="lazy">
+						<span class="ci360-inc-icon icon-target">🎯</span>
+					</div>
+					<div class="ci360-inc-body">
+						<h3>Content Strategy</h3>
+						<p>Tailored strategies for each platform to reach, engage, and convert your ideal audience.</p>
+					</div>
+				</div>
+				<div class="ci360-inc-card">
+					<div class="ci360-inc-thumb">
+						<img src="<?php echo esc_url( CI360_URI . '/assets/images/studio-hero.webp' ); ?>" alt="Content Creation" loading="lazy">
+						<span class="ci360-inc-icon icon-camera">📷</span>
+					</div>
+					<div class="ci360-inc-body">
+						<h3>Content Creation</h3>
+						<p>High-quality visuals, videos, and copy designed to stop the scroll and spark action.</p>
+					</div>
+				</div>
+				<div class="ci360-inc-card">
+					<div class="ci360-inc-thumb">
+						<img src="<?php echo esc_url( CI360_URI . '/assets/images/station.webp' ); ?>" alt="Community Management" loading="lazy">
+						<span class="ci360-inc-icon icon-group">👥</span>
+					</div>
+					<div class="ci360-inc-body">
+						<h3>Community Management</h3>
+						<p>Active engagement and meaningful interactions to build loyal communities.</p>
+					</div>
+				</div>
+				<div class="ci360-inc-card">
+					<div class="ci360-inc-thumb">
+						<img src="<?php echo esc_url( CI360_URI . '/assets/images/brand-icon.png' ); ?>" alt="Performance Reporting" loading="lazy">
+						<span class="ci360-inc-icon icon-report">📊</span>
+					</div>
+					<div class="ci360-inc-body">
+						<h3>Performance Reporting</h3>
+						<p>Transparent reports with clear insights to show what's working and what's next.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 4. OUR APPROACH SECTION -->
+		<section class="ci360-service-approach wrap">
+			<div class="ci360-approach-header">
+				<div>
+					<span class="ci360-sub-kicker">OUR APPROACH</span>
+					<h2 class="ci360-section-title">A Strategic, <span class="ci360-title-gradient">Results-Driven Process</span></h2>
+				</div>
+				<div>
+					<p class="ci360-approach-intro">We combine strategy, creativity, and data to create social media experiences that deliver real business impact.</p>
+				</div>
+			</div>
+
+			<div class="ci360-approach-timeline">
+				<div class="ci360-step-item">
+					<div class="step-head">
+						<span class="step-num">1</span>
+						<span class="step-icon">🔍</span>
+						<span class="step-arrow">&rarr;</span>
+					</div>
+					<h3>Discover & Plan</h3>
+					<p>Understand your goals, audience, and opportunities.</p>
+				</div>
+				<div class="ci360-step-item">
+					<div class="step-head">
+						<span class="step-num">2</span>
+						<span class="step-icon">💡</span>
+						<span class="step-arrow">&rarr;</span>
+					</div>
+					<h3>Create & Launch</h3>
+					<p>Develop strategies and compelling content.</p>
+				</div>
+				<div class="ci360-step-item">
+					<div class="step-head">
+						<span class="step-num">3</span>
+						<span class="step-icon">🤝</span>
+						<span class="step-arrow">&rarr;</span>
+					</div>
+					<h3>Engage & Grow</h3>
+					<p>Manage and optimize across platforms.</p>
+				</div>
+				<div class="ci360-step-item">
+					<div class="step-head">
+						<span class="step-num">4</span>
+						<span class="step-icon">📊</span>
+					</div>
+					<h3>Measure & Refine</h3>
+					<p>Track performance and continuously improve.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- 5. DARK CTA BANNER -->
+		<section class="ci360-service-cta-banner wrap">
+			<div class="ci360-cta-banner-inner">
+				<div class="ci360-cta-text">
+					<span class="ci360-cta-kicker">LET'S WORK TOGETHER</span>
+					<h2>Ready to grow your brand on social media?</h2>
+					<p>Our team is here to understand your goals and create a tailored strategy that drives real results.</p>
+				</div>
+				<div class="ci360-cta-action">
+					<a href="<?php echo esc_url( $contact_url ); ?>" class="ci360-btn-cta-blue">Contact Us <?php echo ci_arrow(); ?></a>
+					<span class="ci360-cta-sub">Talk to our social media experts today.</span>
+				</div>
+			</div>
+		</section>
+
+		<!-- 6. ELEMENTOR & WORDPRESS EDITABLE CONTENT -->
+		<?php if ( ! empty( trim( $content_raw ) ) ) : ?>
+			<section class="ci360-service-main-content wrap">
+				<div class="ci360-service-body entry-content">
+					<?php echo $content_raw; ?>
+				</div>
+			</section>
+		<?php endif; ?>
+
+		<!-- 7. RELATED SERVICES SECTION -->
+		<?php if ( ! empty( $related_services_html ) ) : ?>
+			<section class="ci360-service-related wrap">
+				<div class="ci360-section-header text-center">
+					<span class="ci360-sub-kicker">RELATED SERVICES</span>
+					<h2 class="ci360-section-title">Explore More Ways We <span class="ci360-title-gradient">Help Brands Grow</span></h2>
+				</div>
+				<div class="ci360-services-grid-4">
+					<?php echo $related_services_html; ?>
+				</div>
+			</section>
+		<?php endif; ?>
+	</div>
 	<?php
 	return ob_get_clean();
 }

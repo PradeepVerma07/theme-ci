@@ -1,10 +1,14 @@
 <?php
 /**
- * Single service.
+ * Template Name: Service Page Template
+ * Template Post Type: ci_service, post, page
+ *
+ * Custom Single Service Template matching high-fidelity design.
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
 get_header();
 
 while ( have_posts() ) {
