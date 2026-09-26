@@ -186,83 +186,61 @@ function ci_render_project( $post_id ) {
 			</div>
 		</section>
 
-		<!-- 2. Brand Connection & Impact Section -->
+		<!-- 2. TOP Navigation Bar (Previous & Next Case Study Buttons ONLY TOP) -->
+		<div class="wrap ci360-case-top-nav-container">
+			<nav class="ci360-case-nav-bar ci360-case-nav-bar-top" aria-label="Case Study Top Navigation">
+				<?php if ( $prev_proj ) : ?>
+					<a href="<?php echo esc_url( $prev_proj['url'] ); ?>" class="ci360-case-nav-btn prev">
+						<small>&larr; Previous Case Study</small>
+						<strong><?php echo ci_e( $prev_proj['name'] ); ?></strong>
+					</a>
+				<?php endif; ?>
+				<?php if ( $next_proj ) : ?>
+					<a href="<?php echo esc_url( $next_proj['url'] ); ?>" class="ci360-case-nav-btn next">
+						<small>Next Case Study &rarr;</small>
+						<strong><?php echo ci_e( $next_proj['name'] ); ?></strong>
+					</a>
+				<?php endif; ?>
+			</nav>
+		</div>
+
+		<!-- 3. Brand Connection & Impact Section -->
 		<?php echo ci_s_impact_brand( array( 'channels_title' => 'Brand Channels:', 'impact_title' => 'The Impact' ) ); ?>
 
-		<!-- 3. Challenge & Approach Section -->
+		<!-- 4. Challenge & Approach Section -->
 		<?php echo ci_s_challenge_approach( array() ); ?>
 
-		<!-- 4. Main 2-Column Section Layout -->
-		<section class="ci360-blog-layout-container wrap">
-			<div class="ci360-blog-layout">
-				<!-- Left Column: Main Story & Gallery -->
-				<div class="ci360-blog-main-content">
-					<article class="ci360-case-article">
-						<?php echo $story; ?>
-						<?php echo $gallery; ?>
-					</article>
+		<!-- 5. Main Case Study Story Content Area (NO SIDEBAR) -->
+		<section class="ci360-case-main-container wrap">
+			<article class="ci360-case-article ci360-case-full-width">
+				<?php echo $story; ?>
+				<?php echo $gallery; ?>
 
-					<!-- Next & Previous Buttons Bar -->
-					<nav class="ci360-case-nav-bar" aria-label="Case Study Navigation">
-						<?php if ( $prev_proj ) : ?>
-							<a href="<?php echo esc_url( $prev_proj['url'] ); ?>" class="ci360-case-nav-btn prev">
-								<small>&larr; Previous Case Study</small>
-								<strong><?php echo ci_e( $prev_proj['name'] ); ?></strong>
-							</a>
-						<?php endif; ?>
-						<?php if ( $next_proj ) : ?>
-							<a href="<?php echo esc_url( $next_proj['url'] ); ?>" class="ci360-case-nav-btn next">
-								<small>Next Case Study &rarr;</small>
-								<strong><?php echo ci_e( $next_proj['name'] ); ?></strong>
-							</a>
-						<?php endif; ?>
-					</nav>
-
-					<!-- Share Icons Bar -->
-					<div class="ci360-share-bar">
-						<span class="ci360-share-label">Share this Case Study:</span>
-						<div class="ci360-share-icons">
-							<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $encoded_url; ?>" target="_blank" rel="noopener noreferrer" class="ci360-share-icon fb" title="Share on Facebook">
-								<?php echo ci_social_icon_svg( 'facebook' ); ?>
-							</a>
-							<a href="https://twitter.com/intent/tweet?url=<?php echo $encoded_url; ?>&text=<?php echo $encoded_title; ?>" target="_blank" rel="noopener noreferrer" class="ci360-share-icon tw" title="Share on X">
-								<?php echo ci_social_icon_svg( 'twitter' ); ?>
-							</a>
-							<a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo $encoded_url; ?>" target="_blank" rel="noopener noreferrer" class="ci360-share-icon li" title="Share on LinkedIn">
-								<?php echo ci_social_icon_svg( 'linkedin' ); ?>
-							</a>
-							<a href="https://api.whatsapp.com/send?text=<?php echo $encoded_title; ?>%20<?php echo $encoded_url; ?>" target="_blank" rel="noopener noreferrer" class="ci360-share-icon wa" title="Share on WhatsApp">
-								<?php echo ci_social_icon_svg( 'whatsapp' ); ?>
-							</a>
-							<button type="button" class="ci360-share-icon copy" title="Copy Link" onclick="navigator.clipboard.writeText('<?php echo esc_url( $permalink ); ?>'); alert('Link copied to clipboard!');">
-								<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-							</button>
-						</div>
+				<!-- Share Icons Bar -->
+				<div class="ci360-share-bar">
+					<span class="ci360-share-label">Share this Case Study:</span>
+					<div class="ci360-share-icons">
+						<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $encoded_url; ?>" target="_blank" rel="noopener noreferrer" class="ci360-share-icon fb" title="Share on Facebook">
+							<?php echo ci_social_icon_svg( 'facebook' ); ?>
+						</a>
+						<a href="https://twitter.com/intent/tweet?url=<?php echo $encoded_url; ?>&text=<?php echo $encoded_title; ?>" target="_blank" rel="noopener noreferrer" class="ci360-share-icon tw" title="Share on X">
+							<?php echo ci_social_icon_svg( 'twitter' ); ?>
+						</a>
+						<a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo $encoded_url; ?>" target="_blank" rel="noopener noreferrer" class="ci360-share-icon li" title="Share on LinkedIn">
+							<?php echo ci_social_icon_svg( 'linkedin' ); ?>
+						</a>
+						<a href="https://api.whatsapp.com/send?text=<?php echo $encoded_title; ?>%20<?php echo $encoded_url; ?>" target="_blank" rel="noopener noreferrer" class="ci360-share-icon wa" title="Share on WhatsApp">
+							<?php echo ci_social_icon_svg( 'whatsapp' ); ?>
+						</a>
+						<button type="button" class="ci360-share-icon copy" title="Copy Link" onclick="navigator.clipboard.writeText('<?php echo esc_url( $permalink ); ?>'); alert('Link copied to clipboard!');">
+							<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+						</button>
 					</div>
 				</div>
-
-				<!-- Right Sidebar Column -->
-				<aside class="ci360-blog-sidebar">
-					<!-- Case Details Feature Box -->
-					<div class="ci360-sidebar-widget ci360-case-meta-box">
-						<h4 class="ci360-sidebar-title">Project Overview</h4>
-						<ul class="ci360-case-meta-list">
-							<li><strong>Client:</strong> <span><?php echo ci_e( $p['name'] ); ?></span></li>
-							<li><strong>Category:</strong> <span><?php echo ci_e( $cat_name ); ?></span></li>
-							<li><strong>Services:</strong> <span>Strategy, Branding, Web & Media</span></li>
-							<li><strong>Deliverable:</strong> <span>Full Brand & Platform Overhaul</span></li>
-						</ul>
-					</div>
-
-					<?php echo $cat_widget; ?>
-					<?php echo $feat_widget; ?>
-					<?php echo $services_widget; ?>
-					<?php echo $cta_widget; ?>
-				</aside>
-			</div>
+			</article>
 		</section>
 
-		<!-- 5. Related 4 Case Studies Box (4-in-a-row) -->
+		<!-- 6. Related 4 Case Studies Box (4-in-a-row) BELOW -->
 		<?php if ( $related_cards ) : ?>
 			<section class="wrap ci360-related-box-container">
 				<div class="ci360-related-box">
