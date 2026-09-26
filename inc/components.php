@@ -61,10 +61,26 @@ function ci_project( $post ) {
 	if ( ! $head ) {
 		$head = ( $term && ci_term_get( 'cat_headline', $term ) ) ? ci_term_get( 'cat_headline', $term ) : ci_opt( 'opt_sector_headline' );
 	}
+
+	$url = get_permalink( $id );
+	if ( 'ci_project' === $post->post_type ) {
+		$matching_posts = get_posts(
+			array(
+				'name'        => $post->post_name,
+				'post_type'   => 'post',
+				'post_status' => 'publish',
+				'numberposts' => 1,
+			)
+		);
+		if ( ! empty( $matching_posts ) ) {
+			$url = get_permalink( $matching_posts[0]->ID );
+		}
+	}
+
 	return array(
 		'id'         => $id,
 		'name'       => ci_title( $id ),
-		'url'        => get_permalink( $id ),
+		'url'        => $url,
 		'slug'       => $post->post_name,
 		'number'     => ci_pad( false === $index ? 1 : $index + 1 ),
 		'term'       => $term,
