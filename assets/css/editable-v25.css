@@ -782,6 +782,37 @@ a.nav-contact,
 }
 
 /* ================================================================
+   REUSABLE 3D PERSPECTIVE GRID BACKGROUND CLASS (.ci360-grid-bg)
+   Background only: zero layout, padding, or container size changes
+   ================================================================ */
+.ci360-grid-bg {
+  position: relative !important;
+  background: linear-gradient(135deg, #02083b 0%, #0617aa 58%, #0a50f2 100%) !important;
+  overflow: hidden !important;
+}
+
+.ci360-grid-bg::before {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 80px 80px;
+  transform: perspective(800px) rotateX(58deg) translateY(27%);
+  transform-origin: center bottom;
+  mask-image: linear-gradient(to bottom, transparent 9%, #000 72%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 9%, #000 72%);
+  z-index: 0;
+  pointer-events: none;
+  animation: gridDrift 16s linear infinite;
+}
+
+.ci360-grid-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ================================================================
    REUSABLE BLUE RADIAL GLOW CONTAINER BACKGROUND CLASS (.ci360-blue-glow-bg)
    ================================================================ */
 .ci360-blue-glow-bg,
