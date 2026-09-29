@@ -2233,28 +2233,37 @@ span.ci360-heading-accent {
 
 
 
-/* 90% Container Width Side Alignment */
+/* 95% Container Width Global Alignment */
+.wrap,
+.ci360-case-study-page .wrap,
+.ci360-single-service-page .wrap,
 .ci360-full-blog-single .wrap,
 .ci360-blog-hero-full .wrap,
 .ci360-blog-layout.wrap,
-.ci360-blog-related-section.wrap {
-  width: 90% !important;
-  max-width: 90% !important;
+.ci360-blog-related-section.wrap,
+.ci360-hero-full-content,
+.ci360-impact-brand-section,
+.ci360-challenge-approach-section,
+.ci360-case-story-blocks,
+.ci360-case-nav-pro,
+.ci360-share-bar-pro {
+  width: 95% !important;
+  max-width: 95% !important;
   margin-left: auto !important;
   margin-right: auto !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  box-sizing: border-box !important;
 }
 
-/* Hero Content Exact Left Alignment with Main Content Grid */
+/* Hero Content Alignment & Spacing */
 .ci360-hero-full-content {
   position: relative;
   z-index: 2;
-  display: grid !important;
-  grid-template-columns: 1fr 340px !important;
-  gap: 40px !important;
-  align-items: flex-end !important;
-  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  width: 95% !important;
+  max-width: 95% !important;
   box-sizing: border-box !important;
 }
 
@@ -2541,12 +2550,18 @@ span.ci360-heading-accent {
 }
 
 .ci360-case-hero {
-  height: 100vh !important;
-  min-height: 100vh !important;
+  min-height: clamp(340px, 38vh, 520px) !important;
+  height: auto !important;
+  padding-top: clamp(110px, 11vw, 160px) !important;
+  padding-bottom: clamp(55px, 6vw, 90px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   background-color: #0f172a !important;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 .ci360-case-body {
